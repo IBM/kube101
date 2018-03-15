@@ -1,2 +1,3 @@
-# Kube101
-Kubernetes 101 content
+# Introduction to Kubernetes
+
+This repository contains 

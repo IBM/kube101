@@ -1,0 +1,18 @@
+language: script
+
+env:
+  global:
+     CF_TARGET_URL="https://api.ng.bluemix.net"
+
+services:
+  - docker
+
+script: bash -n workshop/*.sh
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: workshop/deploy_rollup.sh
+    script: .verify-links.sh -v
+    on:
+      all_branches: true
