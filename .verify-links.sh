@@ -26,8 +26,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-REPO_ROOT=$(dirname "${BASH_SOURCE}")/..
-
 verbose=""
 debugFlag=""
 maxRetries="1"
@@ -103,7 +101,7 @@ done
 arg=""
 
 if [ "$*" == "" ]; then
-  arg="${REPO_ROOT}"
+  arg="."
 fi
 
 mdFiles=$(find $* $arg -name "*.md" | sort | grep -v vendor | grep -v glide)
