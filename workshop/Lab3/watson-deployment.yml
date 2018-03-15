@@ -1,0 +1,71 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: watson-pod
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: watson-pod
+      labels:
+        run: watson-demo
+    spec:
+      containers:
+        - name: watson
+          image: "registry.ng.bluemix.net/<namespace>/watson" # edit here!
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /opt/service-bind
+              name: service-bind-volume
+      volumes:
+        - name: service-bind-volume
+          secret:
+            defaultMode: 420
+            secretName: binding-tone
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: watson-service
+  labels:
+    run: watson-demo
+spec:
+  type: NodePort
+  selector:
+    run: watson-demo
+  ports:
+   - protocol: TCP
+     port: 8081
+     nodePort: 30081
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: watson-talk-pod
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: watson-talk-pod
+      labels:
+        run: watson-talk-demo
+    spec:
+      containers:
+        - name: watson-talk
+          image: "registry.ng.bluemix.net/<namespace>/watson-talk" # edit here!
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: watson-talk-service
+  labels:
+    run: watson-talk-demo
+spec:
+  type: NodePort
+  selector:
+    run: watson-talk-demo
+  ports:
+   - protocol: TCP
+     port: 8080
+     nodePort: 30080
