@@ -1,32 +1,30 @@
 #!/bin/bash
 
-source ./lab.sh
+source ./common.sh
 
-read -p "build the first version of our docker image"
+comment "Build the first version of our docker image"
+DIR=$(pwd)
+cd ../../workshop/Lab1
+doit docker build --tag ${IMAGE_NAME}:v1 .
+cd $DIR
 
-# build image
-set -v
-docker build --tag ${IMAGE_NAME}:v1 .
+# We're going to test the image locally with Docker before we run it on Kube.
+# This is to allow us ot see what the output looks like in advance.
+# Notice we're mapping port 8080 in the container to 32768 on the host.
+comment "First run/test locally"
+doit docker run -itd -p 32768:8080 ${IMAGE_NAME}:v1
+CID=$(cat out)  # Save the container ID
 
-read -p "Let us test the image locally with Docker before we run it on kube. This allows us to see what output we expect when running on the cluster."
+# Now that our image is running, we will use curl to access the content
+comment "Test it"
+doit curl -s localhost:32768
 
-CID=$(docker run -itd -p 32768:8080 ${IMAGE_NAME}:v1)
+comment "Clean up"
+doit docker rm -f ${CID}
 
-read -p "now that our image is running, we will use curl to access the content"
+# Push the image to the registry so Kubernetes wil find it
+comment "Push the image to the IBM Cloud registry"
+doit docker push ${IMAGE_NAME}:v1
 
-curl localhost:32768
-
-read -p ""
-
-docker rm -f ${CID}
-
-read -p "after building, we push to the container registry, 
-        so that our kubernetes cluster can pull it down to run it"
-
-# push it
-docker push ${IMAGE_NAME}:v1
-
-read -p "let's look at our images on the remote registry"
-
-bx cr images
-
+comment "Verify its there"
+doit bx cr images

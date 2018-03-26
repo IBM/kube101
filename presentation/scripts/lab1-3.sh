@@ -1,32 +1,28 @@
 #!/bin/bash
 
-source ./lab.sh
+source ./common.sh
 
-read -p "Our application is running inside of our kubernetes cluster, but it is not reachable."
+comment --nolf "Our app is running in our kubernetes cluster, but it is not reachable"
+comment "We need to EXPOSE it before it is useful."
 
-read -p "We need to EXPOSE it before it is useful."
+doit kubectl expose deployment ${DEPLOYMENT_NAME} --type="NodePort" --port=8080
 
-set -v
-kubectl expose deployment ${DEPLOYMENT_NAME} --type="NodePort" --port=8080
-set +v
+comment --nolf "Now that it is exposed, curl it like we did before with docker"
+comment "But first, get address of worker node"
+doit bx cs workers ${CLUSTER_NAME} --json
 
-read -p "now that it is exposed, we can can curl it like we did before with docker"
+WORKER_IP=$(cat out | grep publicIP | sed "s/.*\"\([0-9].*\)\".*/\1/g" )
 
-read -p "first we need to get the address of a worker node in our cluster"
+# In that output, we can see the public IP
+# Next we need the node port assignment of the applicationon the cluster.
+# It was automatically assigned by the kubernetes runtime"
 
-set -v
-bx cs workers ${CLUSTER_NAME}
-set +v
+comment --nolf "Notice the 'publicIP' field"
+comment "Get the nodePort of the service"
+doit kubectl get svc hello-world -ojson
 
-read -p "in that output, we can see the public IP"
+SERVICE_PORT=$(cat out | grep nodePort | sed "s/.*: *\([0-9]*\).*/\1/g")
 
-read -p "next we need the node port assignment of the applicationon the cluster. It was automatically assigned by the kubernetes runtime"
-
-kubectl get svc hello-world
-read -p "we can see the port assigned in the output, so like before, we can reach the application"
-
-SERVICE_PORT=$(kubectl get svc hello-world -ojson | jq '.spec.ports[0].nodePort')
-HELLO_CURL=${WORKER_IP}:${SERVICE_PORT}
-
-set -x
-curl -v ${HELLO_CURL}
+comment --nolf "Notice the 'nodePort' field"
+comment "Curl it..."
+doit curl -s ${WORKER_IP}:${SERVICE_PORT}
