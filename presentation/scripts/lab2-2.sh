@@ -1,19 +1,22 @@
 #!/bin/bash
 
-source ./lab.sh
+source ./common.sh
 
-read -p "now we'll build a version 2 of our image and push it"
-# build a new image
-docker build --tag ${IMAGE_NAME}:v2 .
+comment "Build a v2 of our image"
+DIR=$(pwd)
+cd ../../workshop/Lab1
+doit docker build --tag ${IMAGE_NAME}:v2 .
+cd $DIR
 
-read -p "push it"
-# push it
-docker push ${IMAGE_NAME}:v2
 
-read -p " now we'll ask kube to change to the new image"
-set +x
+comment "Push it to the IBM Cloud registry"
+doit docker push ${IMAGE_NAME}:v2
+
 # `kubectl set image` to change the underlying image
-kubectl set image deployment ${DEPLOYMENT_NAME} hello-world=${IMAGE_NAME}:v2
+comment "Update the deployment with the new image"
+doit kubectl set image deployment ${DEPLOYMENT_NAME} hello-world=${IMAGE_NAME}:v2
 
-
-
+doit kubectl describe deployment ${DEPLOYMENT_NAME}
+line=$(grep Image out)
+comment --nolf "Notice where is shows:"
+comment "$line"

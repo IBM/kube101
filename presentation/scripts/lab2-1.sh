@@ -1,28 +1,32 @@
 #!/bin/bash
 
-source ./lab.sh
+source ./common.sh
+
+SERVICE_PORT=$(kubectl get svc hello-world -ojson | grep nodePort | sed "s/.*: *\([0-9]*\).*/\1/g")
+WORKER_IP=$(bx cs workers ${CLUSTER_NAME} --json  | grep publicIP | sed "s/.*\"\([0-9].*\)\".*/\1/g" )
+
+HELLO_CURL=${WORKER_IP}:${SERVICE_PORT}
 
 # make sure the service works
-echo "We're starting with the same output as the previous lab"
-curl ${HELLO_CURL}
-echo we have the pods
-get_pods
+comment "We're starting with the same output as the previous lab"
+doit curl -s ${HELLO_CURL}
+
+comment we have the pods
+doit kubectl get pods -l run=hello-world
 
 # these pods come from the deployment
 # kubectl get deployment ${DEPLOYMENT_NAME}
 
-echo you should start this watch in a separate terminal 
-echo "   " watch -d -n 0.2 curl -ss ${HELLO_CURL}
-read -p 'ready to go? press enter to continues'
+comment --nolf "You should start this watch in a separate terminal"
+comment "    watch -d -n 0.2 curl -s ${HELLO_CURL}"
+comment --pause "Press ENTER when ready"
 
-read -p 'How many replicas? ' replicas
+replicas=$(( ( RANDOM % 5 )  + 2 ))
+comment --nocr --pause "How many replicas? "
+comment --nocomment $replicas
 
 # use `kubectl scale`
-kubectl scale deployment ${DEPLOYMENT_NAME} --replicas ${replicas}
+doit kubectl scale deployment ${DEPLOYMENT_NAME} --replicas ${replicas}
+
 # show the pods
-get_pods
-
-
-
-
-
+doit kubectl get pods -l run=hello-world

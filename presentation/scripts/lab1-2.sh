@@ -1,22 +1,16 @@
 #!/bin/bash
 
-source ./lab.sh
+source ./common.sh
 
-read -p "deploy our app on kubernetes, using the image in our registry"
+comment "Deploy our app on kubernetes, using the image in our registry"
+doit kubectl run ${DEPLOYMENT_NAME} --image=${IMAGE_NAME}:v1 
 
-set -v
-kubectl run ${DEPLOYMENT_NAME} --image=${IMAGE_NAME}:v1 
+comment "The result of our run command is a deployment."
+doit kubectl get deployment ${DEPLOYMENT_NAME}
 
-read -p "the result of our run command is a deployment."
+comment --nolf "Notice the desired & current states."
+comment --nolf "Kubernetes is reconciling to achieve our objective"
+comment  "The actual unit of work is running in a pod"
+doit kubectl get pods -l run=hello-world
 
-kubectl get deployment ${DEPLOYMENT_NAME}
-
-read -p " we can see the desired and current states. Kubernetes is reconciling to achieve our objective"
-
-read -p "the actual unit of work is running in a pod"
-
-get_pods
-
-read -p "we can see that it is ready and running"
-
-
+comment "We can see that it is ready and running"
