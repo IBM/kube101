@@ -11,7 +11,7 @@ doit kubectl get deployment ${DEPLOYMENT_NAME}
 comment --nolf "Notice the desired & current states."
 comment --nolf "Kubernetes is reconciling to achieve our objective"
 comment  "The actual unit of work is running in a pod"
-doit kubectl get pods -l run=hello-world
+doit kubectl get pods -l run=guestbook
 
 comment "We can see that it is ready and running"
 
