@@ -17,12 +17,16 @@ WORKER_IP=$(cat out | grep publicIP | sed "s/.*\"\([0-9].*\)\".*/\1/g" )
 # Next we need the node port assignment of the applicationon the cluster.
 # It was automatically assigned by the kubernetes runtime"
 
-comment --nolf "Notice the 'publicIP' field"
+comment --pauseafter "Notice the 'publicIP' field"
+
 comment "Get the nodePort of the service"
 doit kubectl get svc hello-world -ojson
 
 SERVICE_PORT=$(cat out | grep nodePort | sed "s/.*: *\([0-9]*\).*/\1/g")
 
-comment --nolf "Notice the 'nodePort' field"
+comment --pauseafter "Notice the 'nodePort' field"
+
 comment "Curl it..."
 doit curl -s ${WORKER_IP}:${SERVICE_PORT}
+
+comment --pauseafter "*** End of "$(basename $0)

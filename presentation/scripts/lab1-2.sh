@@ -14,3 +14,5 @@ comment  "The actual unit of work is running in a pod"
 doit kubectl get pods -l run=hello-world
 
 comment "We can see that it is ready and running"
+
+comment --pauseafter "*** End of "$(basename $0)

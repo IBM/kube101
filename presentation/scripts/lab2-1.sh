@@ -19,14 +19,16 @@ doit kubectl get pods -l run=hello-world
 
 comment --nolf "You should start this watch in a separate terminal"
 comment "    watch -d -n 0.2 curl -s ${HELLO_CURL}"
-comment --pause "Press ENTER when ready"
+comment --pauseafter "Press ENTER when ready"
 
 replicas=$(( ( RANDOM % 5 )  + 2 ))
-comment --nocr --pause "How many replicas? "
-comment --nocomment $replicas
+comment --nocr --nohash --pauseafter "How many replicas? "
+comment --nohash $replicas
 
 # use `kubectl scale`
 doit kubectl scale deployment ${DEPLOYMENT_NAME} --replicas ${replicas}
 
 # show the pods
 doit kubectl get pods -l run=hello-world
+
+comment --pauseafter "*** End of "$(basename $0)

@@ -20,3 +20,5 @@ doit kubectl describe deployment ${DEPLOYMENT_NAME}
 line=$(grep Image out)
 comment --nolf "Notice where is shows:"
 comment "$line"
+
+comment --pauseafter "*** End of "$(basename $0)
