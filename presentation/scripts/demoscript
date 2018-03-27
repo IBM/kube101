@@ -17,7 +17,7 @@ useSaved="$USESAVED"
 trap clean EXIT
 
 function clean {
-	rm out
+	rm -f out
 }
 
 if [[ "${useSaved}" != "" && "${useSaved}" != "2" && ! -e "${saveTar}" ]]; then
@@ -269,6 +269,7 @@ function comment() {
 	local CR=${LF}
 	local echoopt=""
 	local dopause=""
+	local dopauseafter=""
 	local nohash=""
 
 	while [[ "$1" == "--"* ]]; do
@@ -278,7 +279,8 @@ function comment() {
 		case "$opt" in
 			--nolf  ) LF="" ;;
 			--nocr  ) CR="" ; LF="" ;;
-			--pause ) dopause="1" ;;
+			--pause ) dopause="1" ; dopauseafter="1" ;;
+			--pauseafter ) dopauseafter="1" ;;
 			--nohash ) nohash="1" ;;
 		esac
 	done
@@ -289,7 +291,7 @@ function comment() {
 		pause
 	fi
 	echo -en ${echoopt} "$bold$*$normal"
-	if [[ "$dopause" == "1" ]]; then
+	if [[ "$dopause" == "1" || "$dopauseafter" == "1" ]]; then
 		pause
 	fi
 	echo -en ${echoopt} "${CR}${LF}"

@@ -1,9 +1,11 @@
 # Instructions for Running the Presentation Demo Scripts
 
-## The following executables are needed:
-- `bx`
+## The following are needed:
+- `bx` executable
 - `bx cr` plugin
 - `bx cs` plugin
+- `docker` installed
+- `kubectl`
 
 ## Prereq steps:
 - Pick a name for your cluster (e.g. `osscluster`)
