@@ -45,24 +45,20 @@ which your cluster has access.
 
    ```bx cr namespace-add <my_namespace>```
    
-6. Build the Docker image in this directory with a `1` tag:
+6. Pull the Docker image for guestbook app:
 
-   ```docker build --tag registry.ng.bluemix.net/<my_namespace>/hello-world:1 .```
+   ```docker pull ibmcom/guestbook:v1```
 
-7. Verify the image is built: 
+7. Verify the image is available locally: 
 
    ```docker images```
 
-8. Now push that image up to IBM Cloud Container Registry: 
-
-   ```docker push registry.ng.bluemix.net/<my_namespace>/hello-world:1```
-
-9. If you created your cluster at the beginning of this, make sure it's ready for use. 
+8. If you created your cluster at the beginning of this, make sure it's ready for use. 
    1. Run `bx cs clusters` and make sure that your cluster is in "Normal" state.  
    2. Use `bx cs workers <yourclustername>`, and make sure that all workers are in "Normal" state with "Ready" status.
    3. Make a note of the public IP of the worker.
 
-You are now ready to use Kubernetes to deploy the hello-world application.
+You are now ready to use Kubernetes to deploy the guestbook application.
 
 # 2. Deploy your application
 
@@ -70,8 +66,8 @@ You are now ready to use Kubernetes to deploy the hello-world application.
 
 2. Start by running your image as a deployment: 
 
-   ```kubectl run hello-world --image=registry.ng.bluemix.net/<my_namespace>/hello-world:1```
-
+   ```kubectl run guestbook --image=ibmcom/guestbook:v1```
+   
    This action will take a bit of time. To check the status of your deployment, you can use `kubectl get pods`.
 
    You should see output similar to the following:
@@ -79,12 +75,12 @@ You are now ready to use Kubernetes to deploy the hello-world application.
    ```
    => kubectl get pods
    NAME                          READY     STATUS              RESTARTS   AGE
-   hello-world-562211614-0g2kd   0/1       ContainerCreating   0          1m
+   guestbook-59bd679fdc-bxdg7    0/1       ContainerCreating   0          1m
    ```
 
 3. Once the status reads `Running`, expose that deployment as a service, accessed through the IP of the worker nodes.  The example for this course listens on port 8080.  Run:
 
-   ```kubectl expose deployment/hello-world --type="NodePort" --port=8080```
+   ```kubectl expose deployment/guestbook --type="NodePort" --port=3000```
 
 4. To find the port used on that worker node, examine your new service: 
 
@@ -94,9 +90,9 @@ You are now ready to use Kubernetes to deploy the hello-world application.
 
 5. Run `bx cs workers <name-of-cluster>`, and note the public IP as `<public-IP>`.
 
-6. You can now access your container/service using `curl <public-IP>:<nodeport>` (or your favorite web browser). If you see, "Hello world! Your app is up and running in a cluster!" you're done!
+6. You can now access your container/service using `curl <public-IP>:<nodeport>` (or your favorite web browser). You should see the html output from the guestbook application. 
 
 When you're all done, you can either use this deployment in the [next lab of this course](../Lab2/README.md), or you can remove the deployment and thus stop taking the course.
 
-1. To remove the deployment, use `kubectl delete deployment hello-world`. 
-2. To remove the service, use `kubectl delete service hello-world`.
+1. To remove the deployment, use `kubectl delete deployment guestbook`. 
+2. To remove the service, use `kubectl delete service guestbook`.
