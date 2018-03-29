@@ -9,16 +9,16 @@ spec:
       name: pod-liveness-http
       labels:
         run: hw-demo-health
-        test: hello-world-demo
+        test: guestbook-demo
     spec:
       containers:
         - name: hw-demo-container
-          image: "registry.ng.bluemix.net/<namespace>/hello-world:2"
+          image: "ibmcom/guestbook:v2"
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
               path: /healthz
-              port: 8080
+              port: 3000
             initialDelaySeconds: 5
             periodSeconds: 5
 ---
@@ -34,5 +34,5 @@ spec:
     run: hw-demo-health
   ports:
    - protocol: TCP
-     port: 8080
+     port: 3000
      nodePort: 30072
