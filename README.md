@@ -1,3 +1,3 @@
 # Introduction to Kubernetes
 
-This repository contains 
+This repository contains stuff. 
