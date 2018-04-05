@@ -8,7 +8,7 @@ if [ -z $CF_SPACE ]; then
 fi
 
 
-if [ -z "$BLUEMIX_API_KEY" || [ -z "$BLUEMIX_NAMESPACE" ]; then
+if [ -z "$BLUEMIX_API_KEY" ] || [ -z "$BLUEMIX_NAMESPACE" ]; then
   echo "Define all required environment variables and rerun the stage."
   exit 1
 fi

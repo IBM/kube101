@@ -14,6 +14,6 @@ script:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: workshop/deploy_rollup.sh
+    script: echo workshop/deploy_rollup.sh
     on:
       all_branches: true
