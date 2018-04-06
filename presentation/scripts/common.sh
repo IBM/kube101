@@ -8,6 +8,6 @@ NAMESPACE=${NAMESPACE:-kube101}
 CLUSTER_NAME=${CLUSTER_NAME:-osscluster}
 
 # Should not need to touch these
-DEPLOYMENT_NAME=hello-world
-IMAGE_NAME=registry.ng.bluemix.net/${NAMESPACE}/hello-world
+DEPLOYMENT_NAME=guestbook
+IMAGE_NAME=ibmcom/guestbook
 
