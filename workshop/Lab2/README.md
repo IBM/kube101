@@ -6,7 +6,7 @@ For this lab, you need a running deployment with a single replica. At
 the end of the previous lab, we cleaned up the running
 deployment. Let's first recreate that deployment with:
 ```
-kubectl run hello-world --image=registry.ng.bluemix.net/<my_namespace>/hello-world
+kubectl run guestbook --image=ibmcom/guestbook:v1
 ```
 
 # 1. Scale apps with replicas
@@ -18,20 +18,20 @@ A *replica* is how Kubernetes accomplishes scaling out a deployment. A replica i
    instance to 10 instances.
    
    ``` console 
-   $ kubectl scale --replicas=10 deployment hello-world
-   deployment "hello-world" scaled
+   $ kubectl scale --replicas=10 deployment guestbook
+   deployment "guestbook" scaled
    ```
 
     Kubernetes will now act according to the desired state model to
     try and make true, the condition of 10 replicas. It will do this
     by starting new pods with the same configuration.
 
-4. To see your changes being rolled out, you can run: `kubectl rollout status deployment/hello-world`.
+4. To see your changes being rolled out, you can run: `kubectl rollout status deployment/guestbook`.
 
    The rollout might occur so quickly that the following messages might _not_ display:
 
    ```
-   => kubectl rollout status deployment/hello-world
+   => kubectl rollout status deployment/guestbook
    Waiting for rollout to finish: 1 of 10 updated replicas are available...
    Waiting for rollout to finish: 2 of 10 updated replicas are available...
    Waiting for rollout to finish: 3 of 10 updated replicas are available...
@@ -41,7 +41,7 @@ A *replica* is how Kubernetes accomplishes scaling out a deployment. A replica i
    Waiting for rollout to finish: 7 of 10 updated replicas are available...
    Waiting for rollout to finish: 8 of 10 updated replicas are available...
    Waiting for rollout to finish: 9 of 10 updated replicas are available...
-   deployment "hello-world" successfully rolled out
+   deployment "guestbook" successfully rolled out
    ```
 
 5. Once the rollout has finished, ensure your pods are running by using: `kubectl get pods`.
@@ -50,17 +50,17 @@ A *replica* is how Kubernetes accomplishes scaling out a deployment. A replica i
 
    ```
    => kubectl get pods
-   NAME                          READY     STATUS    RESTARTS   AGE
-   hello-world-562211614-1tqm7   1/1       Running   0          1d
-   hello-world-562211614-1zqn4   1/1       Running   0          2m
-   hello-world-562211614-5htdz   1/1       Running   0          2m
-   hello-world-562211614-6h04h   1/1       Running   0          2m
-   hello-world-562211614-ds9hb   1/1       Running   0          2m
-   hello-world-562211614-nb5qp   1/1       Running   0          2m
-   hello-world-562211614-vtfp2   1/1       Running   0          2m
-   hello-world-562211614-vz5qw   1/1       Running   0          2m
-   hello-world-562211614-zksw3   1/1       Running   0          2m
-   hello-world-562211614-zsp0j   1/1       Running   0          2m
+   NAME                        READY     STATUS    RESTARTS   AGE
+   guestbook-562211614-1tqm7   1/1       Running   0          1d
+   guestbook-562211614-1zqn4   1/1       Running   0          2m
+   guestbook-562211614-5htdz   1/1       Running   0          2m
+   guestbook-562211614-6h04h   1/1       Running   0          2m
+   guestbook-562211614-ds9hb   1/1       Running   0          2m
+   guestbook-562211614-nb5qp   1/1       Running   0          2m
+   guestbook-562211614-vtfp2   1/1       Running   0          2m
+   guestbook-562211614-vz5qw   1/1       Running   0          2m
+   guestbook-562211614-zksw3   1/1       Running   0          2m
+   guestbook-562211614-zsp0j   1/1       Running   0          2m
    ```
    
 **Tip:** Another way to improve availability is to [add clusters and regions]( https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_cluster_config) to your deployment, as shown in the following diagram: 
@@ -71,30 +71,26 @@ A *replica* is how Kubernetes accomplishes scaling out a deployment. A replica i
 
 Kubernetes allows you to use a rollout to update an app deployment with a new Docker image.  This allows you to easily update the running image and also allows you to easily undo a rollout, if a problem is discovered after deployment.
 
-In the previous lab, we created an image with a `1` tag. Let's make a version of the image that includes new content and use a `2` tag. This lab also contains a `Dockerfile`. Let's build and push it up to our image registry.
+In the previous lab, we used an image with a `v1` tag. Let's make a version of the image that includes new content and use a `v2` tag. Let's pull the image from public registry.
 
 To update and roll back:
-1. Build the new docker image with a `2` tag:
+1. Pull the new docker image with a `v2` tag:
 
-   ```docker build --tag registry.ng.bluemix.net/<my_namespace>/hello-world:2 .```
+   ```docker pull ibmcom/guestbook:v2```
 
-2. Push the image to the IBM Cloud Container Registry:
-
-   ```docker push registry.ng.bluemix.net/<my_namespace>/hello-world:2```
-
-3. Using `kubectl`, you can now update your deployment to use the
+2. Using `kubectl`, you can now update your deployment to use the
    latest image. `kubectl` allows you to change details about existing
    resources with the `set` subcommand. We can use it to change the
    image being used.
 
-    ```kubectl set image deployment/hello-world hello-world=registry.ng.bluemix.net/<namespace>/hello-world:2```
+    ```kubectl set image deployment/guestbook guestbook=ibmcom/guestbook:v2```
 
     Note that a pod could have multiple containers, in which case each container will have its own name.  Multiple containers can be updated at the same time.  ([More information](https://kubernetes.io/docs/user-guide/kubectl/kubectl_set_image/).)
 
-4. Run `kubectl rollout status deployment/hello-world` or `kubectl get replicasets` to check the status of the rollout. The rollout might occur so quickly that the following messages might _not_ display:
+3. Run `kubectl rollout status deployment/guestbook` or `kubectl get replicasets` to check the status of the rollout. The rollout might occur so quickly that the following messages might _not_ display:
 
    ```
-   => kubectl rollout status deployment/hello-world
+   => kubectl rollout status deployment/guestbook
    Waiting for rollout to finish: 2 out of 10 new replicas have been updated...
    Waiting for rollout to finish: 3 out of 10 new replicas have been updated...
    Waiting for rollout to finish: 3 out of 10 new replicas have been updated...
@@ -127,28 +123,28 @@ To update and roll back:
    Waiting for rollout to finish: 9 of 10 updated replicas are available...
    Waiting for rollout to finish: 9 of 10 updated replicas are available...
    Waiting for rollout to finish: 9 of 10 updated replicas are available...
-   deployment "hello-world" successfully rolled out
+   deployment "guestbook" successfully rolled out
    ```
 
    ```
    => kubectl get replicasets
    NAME                   DESIRED   CURRENT   READY     AGE
-   hello-world-1663871401   9         9         9         1h
-   hello-world-3254495675   2         2         0         <invalid>
+   guestbook-1663871401   9         9         9         1h
+   guestbook-3254495675   2         2         0         <invalid>
    => kubectl get replicasets
    NAME                   DESIRED   CURRENT   READY     AGE
-   hello-world-1663871401   7         7         7         1h
-   hello-world-3254495675   4         4         2         <invalid>
+   guestbook-1663871401   7         7         7         1h
+   guestbook-3254495675   4         4         2         <invalid>
    ...
    => kubectl get replicasets
    NAME                   DESIRED   CURRENT   READY     AGE
-   hello-world-1663871401   0         0         0         1h
-   hello-world-3254495675   10        10        10        1m
+   guestbook-1663871401   0         0         0         1h
+   guestbook-3254495675   10        10        10        1m
    ```
 
-5. Perform a `curl <public-IP>:<nodeport>` to confirm your new code is active.
+4. Perform a `curl <public-IP>:<nodeport>` to confirm your new code is active.
 
-6. If you decide to undo your latest rollout, call: `kubectl rollout undo deployment/<name-of-deployment>`.
+5. If you decide to undo your latest rollout, call: `kubectl rollout undo deployment/<name-of-deployment>`.
 
 # 3. Check the health of apps
 
@@ -163,7 +159,7 @@ In this example, we have defined a HTTP liveness probe to check health of the co
    1. Update the details for the image in your private registry namespace:
 
       ```
-      image: "registry.<region>.bluemix.net/<namespace>/hello-world:2"
+      image: "ibmcom/guestbook:v2"
       ```
 
    2. Note the HTTP liveness probe that checks the health of the container every five seconds.
@@ -172,7 +168,7 @@ In this example, we have defined a HTTP liveness probe to check health of the co
       livenessProbe:
                   httpGet:
                     path: /healthz
-                    port: 8080
+                    port: 3000
                   initialDelaySeconds: 5
                   periodSeconds: 5
       ```
