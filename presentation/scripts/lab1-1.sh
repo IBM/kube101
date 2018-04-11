@@ -22,11 +22,4 @@ doit curl -s localhost:32768
 comment "Clean up container"
 doit docker rm -f ${CID}
 
-# Push the image to the registry so Kubernetes wil find it
-comment "Push the image to the IBM Cloud registry"
-doit docker push ${IMAGE_NAME}:v1
-
-comment "Verify it's there"
-doit bx cr images
-
 comment --pauseafter "*** End of "$(basename $0)
