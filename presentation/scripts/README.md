@@ -2,7 +2,6 @@
 
 ## The following are needed:
 - `bx` executable
-- `bx cr` plugin
 - `bx cs` plugin
 - `docker` installed
 - `kubectl`
