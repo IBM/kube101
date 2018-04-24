@@ -27,6 +27,6 @@ SERVICE_PORT=$(cat out | grep nodePort | sed "s/.*: *\([0-9]*\).*/\1/g")
 comment --pauseafter "Notice the 'nodePort' field"
 
 comment "Curl it..."
-doit curl -s ${WORKER_IP}:${SERVICE_PORT}
+doit curl -s ${WORKER_IP}:${SERVICE_PORT}/hello
 
 comment --pauseafter "*** End of "$(basename $0)
