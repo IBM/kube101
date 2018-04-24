@@ -165,10 +165,3 @@ IBM Cloud provides the capability to run applications in containers on Kubernete
 [Lab 1](Lab1): This lab walks through creating and deploying a simple "hello world" app in Node.JS, then accessing that app.
 
 [Lab 2](Lab2): Builds on lab 1 to expand to a more resilient setup which can survive having containers fail and recover. Lab 2 will also walk through basic services you need to get started with Kubernetes and the IBM Cloud Container Service
-
-[Lab 3](Lab3): This lab covers adding external services to a cluster. It walks through adding integration to a Watson service, and discusses storing credentials of external services to the cluster.
-
-[Lab 4](Lab4) (Under Construction, Paid Only, Optional): This lab will outline how to create a highly available application, and build on the knowledge you have learned in Labs 1 - 3 to deploy clusters simultaneously to multiple availability zones. As this requires a paid IBM Cloud account, skip this lab if you are sticking to the free tier.
-
-[Lab 5](Lab5): This lab walks through securing your cluster and applications using network policies, and will later add leveraging tools like Vulnerability Advisor to secure images and manage security in your image registry.
-
