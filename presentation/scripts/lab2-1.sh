@@ -5,7 +5,7 @@ source ./common.sh
 SERVICE_PORT=$(kubectl get svc guestbook -ojson | grep nodePort | sed "s/.*: *\([0-9]*\).*/\1/g")
 WORKER_IP=$(bx cs workers ${CLUSTER_NAME} --json  | grep publicIP | sed "s/.*\"\([0-9].*\)\".*/\1/g" )
 
-GUESTBOOK_CURL=${WORKER_IP}:${SERVICE_PORT}
+GUESTBOOK_CURL=${WORKER_IP}:${SERVICE_PORT}/hello
 
 # make sure the service works
 comment "We're starting with the same output as the previous lab"
@@ -18,7 +18,7 @@ doit kubectl get pods -l run=guestbook
 # kubectl get deployment ${DEPLOYMENT_NAME}
 
 comment --nolf "You should start this watch in a separate terminal"
-comment "    watch -d -n 0.2 curl -s ${GUESTBOOK_CURL}/env"
+comment "    watch -d -n 0.2 curl -s ${GUESTBOOK_CURL}"
 comment --pauseafter "Press ENTER when ready"
 
 replicas=$(( ( RANDOM % 5 )  + 2 ))

@@ -17,7 +17,7 @@ CID=$(cat out)  # Save the container ID
 
 # Now that our image is running, we will use curl to access the content
 comment "Test it"
-doit curl -s localhost:32768
+doit curl -s localhost:32768/hello
 
 comment "Clean up container"
 doit docker rm -f ${CID}
