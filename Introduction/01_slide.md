@@ -14,5 +14,5 @@
 
 # Who Else is Here
 
-* Rizchel Dayao - Developer Advocate
-* Cullen Taylor - Developer Advocate
+* Rizchel Dayao - Developer Advocate, IBM
+* Cullen Taylor - Developer Advocate, IBM
