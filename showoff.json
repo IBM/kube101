@@ -1,17 +1,26 @@
 {
-  "name": "My Preso",
+  "name": "K8s and Istio",
   "sections": [
     {
-      "section": "introduction"
+      "section": "Introduction"
     },
     {
-      "section": "hello"
+      "section": "Account Setup"
     },
     {
-      "section": "world"
+      "section": "Kubernetes Concepts"
     },
     {
-      "section": "conclusion"
+      "section": "Kubernetes Deployment"
+    },
+    {
+      "section": "Istio Concepts"
+    },
+    {
+      "section": "Istio Deployment"
+    },
+    {
+      "section": "Conclusion"
     }
   ]
 }
