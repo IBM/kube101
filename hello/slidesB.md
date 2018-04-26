@@ -1,5 +1,12 @@
-!SLIDE
-.notes notes for my slide
+!SLIDE[bg=_images/backgrounds/white_bg.png]
+
+# Code samples!
+
+~~~SECTION:notes~~~
+
+This is a presenter note example.
+
+~~~ENDSECTION~~~
 
 	@@@ javascript
 	function setupPreso() {
@@ -16,13 +23,17 @@
 	  document.onkeydown = keyDown
 	}
 
-!SLIDE commandline incremental
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
+
+# Terminal replay!
 
 	$ git commit -am 'incremental bullet points working'
 	[master ac5fd8a] incremental bullet points working
 	 2 files changed, 32 insertions(+), 5 deletions(-)
 
-!SLIDE commandline incremental
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
+
+# Sequential Terminal Replay!
 
 	$ git commit -am 'incremental bullet points working'
 	[bmaster ac5fd8a] incremental bullet points working
@@ -32,7 +43,9 @@
 	[cmaster ac5fd8a] incremental bullet points working
 	 2 files changed, 32 insertions(+), 5 deletions(-)
 
-!SLIDE commandline incremental
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
+
+# Even More Terminal Replay!
 
     # root command
     some output

@@ -1,4 +1,4 @@
-<!SLIDE >
+!SLIDE[bg=_images/backgrounds/white_bg.png]
 # Hey Check out Code
 
     @@@ shell
@@ -6,7 +6,7 @@
         echo hello world
 
 
-<!SLIDE >
+!SLIDE[bg=_images/backgrounds/white_bg.png]
 # Hey Check out Console output
 
 

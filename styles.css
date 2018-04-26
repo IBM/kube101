@@ -10,6 +10,18 @@
   width: 70%;
 }
 
+.teal {
+  color: #5dc6ca;
+}
+
+.huge {
+  font-size: 105px;
+}
+
+.narrow {
+  width: 60%;
+}
+
 #preso,
 .slide {
   height: 1080px !important;
@@ -30,6 +42,16 @@
 .content {
   font-family: 'IBM Plex Sans';
 }
+
 .content h1 {
-  font-family: 'IBM Plex Sans Bold';
+  font-family: 'IBM Plex Sans';
+  font-size: 72px;
+}
+
+.content li {
+  font-size: 50px;
+}
+
+.content code {
+  font-size: 50px;
 }
