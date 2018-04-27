@@ -12,7 +12,7 @@
 
 # What is a container
 
-* Usually, just a Bocker container
+* Usually, just a Docker container
 * Strictly, the Open Container Initiative manages this definition
 * Process on Linux\*, subject to some sandboxing and restrictions
 
@@ -114,8 +114,8 @@
 
 # Deployment
 
-* Deployments manage *replication controllers*
-* Replication controllers manage pods
+* Deployments manage *replicasets*
+* Replicasets manage pods
 * Entrypoint for more advanced rollout strategies
 
 
