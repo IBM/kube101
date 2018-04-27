@@ -1,4 +1,4 @@
-<img src="https://ace-docs-production-red.ng.bluemix.net/docs/api/content/homepage/images/containerServiceIcon.svg" width="200"> <img src="https://kubernetes.io/images/favicon.png" width="200">
+<img src="https://kubernetes.io/images/favicon.png" width="200">
 # IBM Cloud Container Service lab
 
 # An introduction to containers
