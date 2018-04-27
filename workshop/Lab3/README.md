@@ -302,7 +302,7 @@ Describe command gives you more information about a pod or deployment
 	$kubectl describe <deployment>
 ```
 
-Endpoint rresource can be used to see all the service endpoints.
+Endpoint resource can be used to see all the service endpoints.
 ```
 	$kubectl get endpoints <service>
 ``` 
