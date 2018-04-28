@@ -421,10 +421,23 @@
 
     $ curl -v https://details:9080/details/0  --cacert /etc/certs/root-cert.pem  --key /etc/certs/key.pem --cert /etc/certs/cert-chain.pem -k
 
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
+
+# Two teams!
+
+* One on Grafana Dashboard
+
+* One on Traffic control
+
+
+   @@@ Shell
+
+   https://istio.io/docs/guides/intelligent-routing.html
+   https://istio.io/docs/guides/telemetry.html
+
+
 
 # Delete Everything
 
 
     $ kubectl delete -f .
-    deployment.apps "redis-master" deleted
-    service "redis-master" deleted

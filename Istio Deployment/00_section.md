@@ -1,6 +1,6 @@
 !SLIDE[bg=_images/backgrounds/black_bg.png]
 
-.blockwhite Kubernetes Deployments
+.blockwhite Deploying Istio
 
 .blockteal On the IBM Cloud
 
