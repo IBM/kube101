@@ -129,7 +129,8 @@
 ``Hint! Use kubectl describe``
 
 
-!SLIDE[bg=_images/backgrounds/white_bg.png]
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
+
 
 # Deploy a service for the redis master
 
@@ -137,7 +138,7 @@
     services/redis-master
 
 
-!SLIDE[bg=_images/backgrounds/white_bg.png]
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
 
 # Verify service
 
@@ -149,7 +150,7 @@
 
 
 
-!SLIDE[bg=_images/backgrounds/white_bg.png]
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
 
 # Deploy redis downstream servers
 
@@ -159,7 +160,7 @@
 
 
 
-!SLIDE[bg=_images/backgrounds/white_bg.png]
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
 
 # Deploy redis downstream servers
 
@@ -174,7 +175,7 @@
     redis-slave-564b7bd5d9    2         2         2         30s
 
 
-!SLIDE[bg=_images/backgrounds/white_bg.png]
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
 
 # Validate everything
 
@@ -197,3 +198,64 @@
 * Why does this work?
 
 * Service Discovery!
+
+
+!SLIDE[bg=_images/backgrounds/white_bg.png] incremental
+
+# Service Discovery
+
+* Every k8s ``service`` creates a ``cluster-ip``
+* Every container running in k8s can see all these ips
+* The name of the service is injected into DNS and environment variables
+* How can we explore/verify this?
+
+
+!SLIDE[bg=_images/backgrounds/white_bg.png] incremental
+
+# Get a shell inside the cluster
+
+
+    @@@ Console
+    kubectl run -i --tty --rm debug \
+    --image=busybox --restart=Never -- sh
+
+
+
+
+!SLIDE[bg=_images/backgrounds/black_bg.png]
+
+.blockwhite Pause and Inquire!
+
+.blockteal Use the shell example to get a working debug pod
+
+.blockteal Extra: Run ``kubectl get pod`` in another terminal to see your debug pod
+
+``Hint!  kubectl run -i --tty --rm debug --image=busybox --restart=Never -- sh``
+
+
+!SLIDE[bg=_images/backgrounds/black_bg.png]
+
+.blockwhite Pause and Inquire!
+
+.blockteal Use ``env`` and ``ping`` to verify that service discovery works
+
+.blockteal Extra: If you ``kubectl delete`` the redis-server pod, what happens?
+
+``Hint!  kubectl run -i --tty --rm debug --image=busybox --restart=Never -- sh``
+
+
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
+
+# Deploy the 'guestbook' application
+
+    $ kubectl get deploy
+    NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+    redis-master   1         1         1            1           23m
+    redis-slave    2         2         2            0           15s
+
+    $ kubectl get rs
+    NAME                      DESIRED   CURRENT   READY     AGE
+    redis-master-6767cf65c7   1         1         1         23m
+    redis-slave-564b7bd5d9    2         2         2         30s
+
+
