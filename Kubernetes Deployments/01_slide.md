@@ -248,6 +248,15 @@
 
 # Deploy the 'guestbook' application
 
+    $ kubectl create -f guestbook-deployment.yaml
+    deployment.apps "guestbook" created
+
+
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
+
+# Verify installation
+
+
     $ kubectl get deploy
     NAME           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
     redis-master   1         1         1            1           23m
@@ -259,3 +268,62 @@
     redis-slave-564b7bd5d9    2         2         2         30s
 
 
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
+
+# View Pods
+
+    $ kubectl get pods
+    NAME                           READY     STATUS    RESTARTS   AGE
+    guestbook-3crgn                1/1       Running   0          2m
+    guestbook-gv7i6                1/1       Running   0          2m
+    guestbook-x405a                1/1       Running   0          2m
+    redis-master-xx4uv             1/1       Running   0          23m
+    redis-slave-b6wj4              1/1       Running   0          6m
+    redis-slave-iai40              1/1       Running   0          6m
+
+
+
+
+
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
+
+
+# Create guestbook service
+
+    $ kubectl create -f guestbook-service.yaml
+
+
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
+
+
+# View all services
+
+
+    $ kubectl get services
+    NAME              CLUSTER_IP       EXTERNAL_IP       PORT(S)       SELECTOR               AGE
+    guestbook         10.0.217.218     146.148.81.8      3000/TCP      app=guestbook          1h
+    redis-master      10.0.136.3       <none>            6379/TCP      app=redis,role=master  1h
+    redis-slave       10.0.21.92       <none>            6379/TCP      app-redis,role=slave   1h
+    ...
+
+
+!SLIDE[bg=_images/backgrounds/white_bg.png] incremental
+
+
+# Use app!
+
+http://\<EXTERNAL_IP>:3000
+
+
+![Guestbook](../_images/guestbook-page.png)
+
+
+!SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
+
+
+# Delete Everything
+
+
+    $ kubectl delete -f .
+    deployment.apps "redis-master" deleted
+    service "redis-master" deleted
