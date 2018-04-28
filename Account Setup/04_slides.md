@@ -1,22 +1,3 @@
-!SLIDE[bg=_images/backgrounds/white_bg.png]
-# Hey Check out Code
-
-    @@@ shell
-    curl -sL https://ibm.biz/idt-installer | bash
-    [main] --==[ IBM Cloud Developer Tools for Linux/MacOS - Installer, v1.2.3 ]==--
-    [install] Starting Update...
-    [install_deps] Checking for and updating 'apt-get' support on Linux
-
-
-!SLIDE[bg=_images/backgrounds/white_bg.png]
-# Hey Check out Console output
-
-
-    @@@ Console
-    curl -sL https://ibm.biz/idt-installer | bash
-    [main] --==[ IBM Cloud Developer Tools for Linux/MacOS - Installer, v1.2.3 ]==--
-    [install] Starting Update...
-    [install_deps] Checking for and updating 'apt-get' support on Linux
 
 
 !SLIDE[bg=_images/backgrounds/white_bg.png] commandline incremental
@@ -40,6 +21,7 @@ https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#gett
 https://clis.ng.bluemix.net/download/bluemix-cli/latest/osx
 https://clis.ng.bluemix.net/download/bluemix-cli/latest/win64
 https://clis.ng.bluemix.net/download/bluemix-cli/latest/linux64
+https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl
 
 ~~~ENDSECTION~~~
 
