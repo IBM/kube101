@@ -10,7 +10,7 @@ Before we work with the application we need to clone a github repo from which we
 all our configuration files.
 
 ``` 
-	$git clone git@github.com:IBM/guestbook.git
+	$git clone https://github.com/IBM/guestbook.git
 ```
 Change directory by running the command `cd guestbook`. You will find all the configurations files for this exercise under the directory `v1`.
 
