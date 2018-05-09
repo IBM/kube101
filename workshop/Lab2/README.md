@@ -151,6 +151,7 @@ To update and roll back:
    and
    `$ bx cs workers <name-of-cluster>`
 
+<<<<<<< Updated upstream
    To verify that you're running "v2" of guestbook, look for the
    HTML "title" element: `<title>Guestbook - v2</title>` near the top
    of the output.
@@ -168,129 +169,6 @@ a different way to achieve the same results:
 
  To remove the service, use `kubectl delete service guestbook`.
 
-# 3. Check the health of apps
-
-Kubernetes uses availability checks (liveness probes) to know when to restart
-a container. For example, liveness probes could catch a deadlock, where an
-application is running, but unable to make progress. Restarting a container in
-such a state can help to make the application more available despite bugs.
-
-Also, Kubernetes uses readiness checks to know when a container is ready to
-start accepting traffic. A pod is considered ready when all of its containers
-are ready. One use of this check is to control which pods are used as backends
-for services. When a pod is not ready, it is removed from load balancers.
-
-In this example, we have defined a HTTP liveness probe to check health of the
-container every five seconds. For the first 10-15 seconds the `/healthz`
-endpoint will return a `200` response and will fail afterward. Upon detecting
-this, Kubernetes will automatically restart the service.
-
-In the previous sections we deployed our applications using helper
-utilities provided to us via the `kubectl` cli tool.  For example,
-`kubectl run` will create a new Deployment resource for us automatically
-so we don't need to be concerned with all of the details normally
-associated with those that resource. This is nice, however, is it limiting
-since it only allows us to modify a subset of the full set of configuration
-settings associated with Deployments.
-
-In order to use more advanced features, such as liveness probes, we'll
-need to switch from using the `kubectl` utilities and instead specify
-the full descriptions of the resources we want to create in a more
-programmatic way.
-
-In Lab3 we'll dive more into these configuration files and the structure
-of Kubernetes resources, but for now we'll just focus on the availability
-checking aspects of it.
-
-1. Open the `healthcheck.yml` file with a text editor. This configuration
-   file defines two resources, a Deployment and a Service within the same
-   file. When we as Kubernetes to process this file it will create both
-   resources for us at the same time.
-
-   1. Notice tht the `image:` line references `ibmcom/guestbook:v2`. That
-      tells Kubernetes to create a container with that image.
-
-   2. Note the HTTP liveness probe that checks the health of the container
-      (at the `/healthz` endpoint) every five seconds, after waiting 5 seconds.
-
-      ```
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 3000
-            initialDelaySeconds: 5
-            periodSeconds: 5
-      ```
-
-   3. In the **Service** section, note the `NodePort`. Rather than generating
-      a random NodePort like you did in the previous section, you can specify
-      a port in the 30000 - 32767 range. This example uses 30072.
-
-2. Run the configuration script in the cluster. When the Deployment and the
-   Service are created, the app is available for anyone to see:
-
-   ```
-   $ kubectl apply -f healthcheck.yml
-   ```
-
-   Now that all the deployment work is done, check how everything turned out.
-   You can do this using the same `curl` command as before but use port
-   `30072` instead this time.
-   You might notice that because more instances are running, things might run
-   a bit slower.
-
-3. Launch your Kubernetes dashboard:
-
-   1. Get your credentials for Kubernetes.
-
-      ```
-      $ kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
-      ```
-
-   2. Copy the **id-token** value that is shown in the output.
-
-   3. Set the proxy with the default port number.
-
-      ```
-      $ kubectl proxy
-      ```
-
-      Output:
-
-      ```
-      Starting to serve on 127.0.0.1:8001
-      ```
-
-   4. Sign in to the dashboard.
-
-      1. Open the following URL in a web browser.
-
-         ```
-         http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-         ```
-
-      2. In the sign-on page, select the **Token** authentication method.
-
-      3. Then, paste the **id-token** value that you previously copied into the **Token** field and click **SIGN IN**.
-
-   In the **Workloads** tab, you can see the resources that you created.
-   From this tab, you can continually refresh and see that the health check is
-   working. In the **Pods** section, you can see how many times the pods are
-   restarted when the containers in them are re-created. You might happen to
-   catch errors in the dashboard, indicating that the health check caught a
-   problem. Give it a few minutes and refresh again. You see the number of
-   restarts changes for each pod.
-
-4. Ready to delete what you created before you continue? This time, you can
-   use the same configuration script to delete both of the resources you
-   created.
-
-   ```$ kubectl delete -f healthcheck.yml```
-
-5. When you are done exploring the Kubernetes dashboard, in your CLI, enter
-   `CTRL-C` to exit the `proxy` command.
-
-
-Congratulations! You deployed the second version of the app. You had to use
-fewer commands, learned how health check works, and edited a deployment,
-which is great! Lab 2 is now complete.
+Congratulations! You deployed the second version of the app. You had
+to use fewer commands and edited a deployment, which is great! Lab 2
+is now complete.
