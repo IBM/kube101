@@ -151,7 +151,6 @@ To update and roll back:
    and
    `$ bx cs workers <name-of-cluster>`
 
-<<<<<<< Updated upstream
    To verify that you're running "v2" of guestbook, look for the
    HTML "title" element: `<title>Guestbook - v2</title>` near the top
    of the output.
