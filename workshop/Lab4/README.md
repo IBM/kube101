@@ -1,6 +1,6 @@
 # *** UNDER CONSTRUCTION ***
 
-# 3. Check the health of apps
+# 1. Check the health of apps
 
 Kubernetes uses availability checks (liveness probes) to know when to restart a container. For example, liveness probes could catch a deadlock, where an application is running, but unable to make progress. Restarting a container in such a state can help to make the application more available despite bugs.
 
