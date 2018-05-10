@@ -30,7 +30,7 @@ that has already been built and uploaded to DockerHub under the name
 
    ```$ kubectl run guestbook --image=ibmcom/guestbook:v1```
 
-   This action will take a bit of time. To check the status of the running pplication,
+   This action will take a bit of time. To check the status of the running application,
    you can use `$ kubectl get pods`.
 
    You should see output similar to the following:
@@ -50,7 +50,7 @@ that has already been built and uploaded to DockerHub under the name
    
    The end result of our the run command is not just the pod containing our application containers,
    but a Deployment resource that manages the lifecycle of those pods.
-   We can look the details of the deployment with `kubectl describe deployment guestbook`.   
+   We can look at the details of the deployment with `kubectl describe deployment guestbook`.   
    
 3. Once the status reads `Running`, we need to expose that deployment as a
    service so we can access it through the IP of the worker nodes.
