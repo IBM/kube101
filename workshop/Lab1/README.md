@@ -48,9 +48,9 @@ that has already been built and uploaded to DockerHub under the name
    guestbook-59bd679fdc-bxdg7    1/1       Running             0          1m
    ```
    
-   The end result of our the run command is not just the pod containing our application containers,
+   The end result of the run command is not just the pod containing our application containers,
    but a Deployment resource that manages the lifecycle of those pods.
-   We can look at the details of the deployment with `kubectl describe deployment guestbook`.   
+ 
    
 3. Once the status reads `Running`, we need to expose that deployment as a
    service so we can access it through the IP of the worker nodes.
@@ -69,10 +69,9 @@ that has already been built and uploaded to DockerHub under the name
    guestbook   NodePort   10.10.10.253   <none>        3000:31208/TCP   1m
    ```
    
-   We can see that our `<nodeport>` is `31208`.
-   
-   We can see in the output the port mapping from 3000 inside the pod exposed to the cluster on port 31208.
-   This port in the 31000 range is automatically chosen, and could be different for you.
+   We can see that our `<nodeport>` is `31208`. We can see in the output the port mapping from 3000 inside 
+   the pod exposed to the cluster on port 31208. This port in the 31000 range is automatically chosen, 
+   and could be different for you.
 
 5. `guestbook` is now running on your cluster, and exposed to the internet. We need to find out where it is accessible.
    The worker nodes running in the container service get external IP addresses.
