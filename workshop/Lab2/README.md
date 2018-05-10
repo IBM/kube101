@@ -31,13 +31,13 @@ resources to handle increasing load on your application.
    the first.
 
 4. To see your changes being rolled out, you can run:
-   `kubectl rollout status deployment/guestbook`.
+   `kubectl rollout status deployment guestbook`.
 
    The rollout might occur so quickly that the following messages might
    _not_ display:
 
    ```console
-   $ kubectl rollout status deployment/guestbook
+   $ kubectl rollout status deployment guestbook
    Waiting for rollout to finish: 1 of 10 updated replicas are available...
    Waiting for rollout to finish: 2 of 10 updated replicas are available...
    Waiting for rollout to finish: 3 of 10 updated replicas are available...
@@ -153,10 +153,26 @@ To update and roll back:
    it should now be `Guestbook - v2`
 
 5. If you want to undo your latest rollout, use:
-   `$ kubectl rollout undo deployment/guestbook`.
+   ```console
+   $ kubectl rollout undo deployment guestbook
+   deployment "guestbook"
+   ```
 
    You can then use `kubectl rollout status deployment/guestbook` to see
    the status.
+   
+6. When doing a rollout, you see references to *old* replicas and *new* replicas.
+   The *old* replicas are the original 10 pods deployed when we scaled the application.
+   The *new* replicas come from the newly created pods with the different image.
+   All of these pods are owned by the Deployment.
+   The deployment manages these two sets of pods with a resource called a ReplicaSet.
+   We can see the guestbook ReplicaSets with:
+   ```console
+   $ kubectl get replicasets -l run=guestbook
+   NAME                   DESIRED   CURRENT   READY     AGE
+   guestbook-5f5548d4f    10        10        10        21m
+   guestbook-768cc55c78   0         0         0         3h
+   ```
 
 Before we continue, let's delete the application so we can learn about
 a different way to achieve the same results:
@@ -165,6 +181,5 @@ a different way to achieve the same results:
 
  To remove the service, use `kubectl delete service guestbook`.
 
-Congratulations! You deployed the second version of the app. You had
-to use fewer commands and edited a deployment, which is great! Lab 2
+Congratulations! You deployed the second version of the app. Lab 2
 is now complete.
