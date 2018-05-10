@@ -7,9 +7,7 @@ This lab includes the information for installing the following CLIs and plug-ins
 
 * IBM Cloud CLI, Version 0.5.0 or later
 * IBM Cloud Container Service plug-in
-* IBM Cloud Container Registry plug-in
 * Kubernetes CLI, Version 1.7.4 or later
-* Optional: Docker, Version 1.9. or later
 
 If you already have the CLIs and plug-ins, you can skip this lab and proceed to the next one.
 
@@ -22,7 +20,6 @@ If you already have the CLIs and plug-ins, you can skip this lab and proceed to 
    **Note:** If you have a federated ID, use `bx login --sso` to log in to the IBM Cloud CLI. Enter your user name, and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
 # Install the IBM Cloud Container Service plug-in
-
 1. To create Kubernetes clusters and manage worker nodes, install the IBM Cloud Container Service plug-in:
    ```bx plugin install container-service -r Bluemix```
    
@@ -32,21 +29,6 @@ If you already have the CLIs and plug-ins, you can skip this lab and proceed to 
 ```bx plugin list```
 
    The IBM Cloud Container Service plug-in is displayed in the results as `container-service`.
-
-# Download the IBM Cloud Container Registry plug-in
-
-1. To manage a private image repository, install the IBM Cloud Container Registry plug-in:
-```
-bx plugin install container-registry -r Bluemix
-```
-   
-   Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster. 
-   
-   **Note:** The prefix for running registry commands is `bx cr`.
-
-2. To verify that the plug-in is installed properly, run `bx plugin list`
-
-   The plug-in is displayed in the results as `container-registry`.
 
 # Download the Kubernetes CLI
 
@@ -70,7 +52,15 @@ $echo $PATH
 
 3. Convert the binary file to an executable: `chmod +x /usr/local/bin/kubectl`
 
-# Install Docker
-To locally build images and push them to your registry namespace, [install Docker](https://www.docker.com/community-edition#/download). The Docker CLI is used to build apps into images. 
+# Download the Workshop Source Code
+Repo `guestbook` has the application that we'll be deploying. 
+While we're not going to build it we will use the deployment configuration files from that repo. 
+Guestbook application has two versions v1 and v2 which we will use to demonstrate some rollout 
+functionality later. All the configuration files we use are under the directory guestbook/v1.
 
-**Note:** The prefix for running commands by using the Docker CLI is `docker`.
+Repo `kube101` contains the step by step instructions to run the workshop.
+
+```console
+$ git clone https://github.com/IBM/guestbook.git
+$ git clone https://github.com/IBM/kube101.git
+```
