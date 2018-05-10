@@ -19,7 +19,7 @@ If you already have the CLIs and plug-ins, you can skip this lab and proceed to 
 
    **Note:** If you have a federated ID, use `bx login --sso` to log in to the IBM Cloud CLI. Enter your user name, and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
-# Install the IBM Cloud Container Service plug
+# Install the IBM Cloud Container Service plug-in
 1. To create Kubernetes clusters and manage worker nodes, install the IBM Cloud Container Service plug-in:
    ```bx plugin install container-service -r Bluemix```
    
