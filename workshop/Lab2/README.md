@@ -18,7 +18,7 @@ multiple replicas of a pod, you can ensure your deployment has the available
 resources to handle increasing load on your application.
 
 1. `kubectl` provides a `scale` subcommand to change the size of an
-   existing deployment. Let's change our single running instance of
+   existing deployment. Let's increase our capacity from a single running instance of
    `guestbook` up to 10 instances:
 
    ``` console
@@ -79,10 +79,8 @@ to your deployment, as shown in the following diagram:
 # 2. Update and roll back apps
 
 Kubernetes allows you to do rolling upgrade of your application to a new
-Docker image. This means that it will go through each of your application's
-pods, one at a time, and replace the pod with a new pod running the new image.
-This allows you to easily update the running image and also allows you to
-easily undo a rollout, if a problem is discovered during or after deployment.
+container image. This allows you to easily update the running image and also allows you to
+easily undo a rollout if a problem is discovered during or after deployment.
 
 In the previous lab, we used an image with a `v1` tag. For our upgrade
 we'll use the image with the `v2` tag.
@@ -95,9 +93,10 @@ To update and roll back:
 
     ```$ kubectl set image deployment/guestbook guestbook=ibmcom/guestbook:v2```
 
-   Note that a pod could have multiple containers, in which case each
-   container will have its own name.  Multiple containers can be updated at
-   the same time.
+   Note that a pod could have multiple containers, each with its own name.
+   Each image can be changed individually or all at once by referring to the name.
+   In the case of our `guestbook` Deployment, the container name is also `guestbook`.
+   Multiple containers can be updated at the same time.
    ([More information](https://kubernetes.io/docs/user-guide/kubectl/kubectl_set_image/).)
 
 3. Run `kubectl rollout status deployment/guestbook` to check the status of
@@ -141,8 +140,8 @@ To update and roll back:
    deployment "guestbook" successfully rolled out
    ```
 
-4. Now perform a `curl <public-IP>:<nodeport>` to confirm your new code is
-   active.
+4. Test the application as before, by accessing `<public-IP>:<nodeport>` 
+   in the browser to confirm your new code is active.
 
    Remember, to get the "nodeport" and "public-ip" use:
 
@@ -150,9 +149,8 @@ To update and roll back:
    and
    `$ bx cs workers <name-of-cluster>`
 
-   To verify that you're running "v2" of guestbook, look for the
-   HTML "title" element: `<title>Guestbook - v2</title>` near the top
-   of the output.
+   To verify that you're running "v2" of guestbook, look at the title of the page,
+   it should now be `Guestbook - v2`
 
 5. If you want to undo your latest rollout, use:
    `$ kubectl rollout undo deployment/guestbook`.
