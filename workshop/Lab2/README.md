@@ -1,17 +1,16 @@
-# Lab 2: Scale and update apps -- services and health checks
+# Lab 2: Scale and Update Deployments
 
-In this lab, you'll learn how to update the number of instances (or "replicas")
+In this lab, you'll learn how to update the number of instances
 a deployment has and how to safely roll out an update of your application
-on Kubernetes. You'll also learn, how to perform a simple health check.
+on Kubernetes. 
 
 For this lab, you need a running deployment of the `guestbook` application
 from the previous lab. If you deleted it, recreate it using:
-    ```
-    $ kubectl run guestbook --image=ibmcom/guestbook:v1
-    ```
 
-First, let's change into the `Lab2` directory: `cd Lab`.
-
+```console
+$ kubectl run guestbook --image=ibmcom/guestbook:v1
+```
+    
 # 1. Scale apps with replicas
 
 A *replica* is a copy of a pod that contains a running service. By having
@@ -37,7 +36,7 @@ resources to handle increasing load on your application.
    The rollout might occur so quickly that the following messages might
    _not_ display:
 
-   ```
+   ```console
    $ kubectl rollout status deployment/guestbook
    Waiting for rollout to finish: 1 of 10 updated replicas are available...
    Waiting for rollout to finish: 2 of 10 updated replicas are available...
@@ -56,7 +55,7 @@ resources to handle increasing load on your application.
 
    You should see output listing 10 replicas of your deployment:
 
-   ```
+   ```console
    $ kubectl get pods
    NAME                        READY     STATUS    RESTARTS   AGE
    guestbook-562211614-1tqm7   1/1       Running   0          1d
@@ -105,7 +104,7 @@ To update and roll back:
    the rollout. The rollout might occur so quickly that the following messages
    might _not_ display:
 
-   ```
+   ```console
    $ kubectl rollout status deployment/guestbook
    Waiting for rollout to finish: 2 out of 10 new replicas have been updated...
    Waiting for rollout to finish: 3 out of 10 new replicas have been updated...
