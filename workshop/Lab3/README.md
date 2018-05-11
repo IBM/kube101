@@ -13,8 +13,8 @@ Before we work with the application we need to clone a github repo:
 $ git clone https://github.com/IBM/guestbook.git
 ```
 
-This repo will container multiple versions of the guestbook application
-as well as the configuration files we'll use to deploy them.
+This repo contains multiple versions of the guestbook application
+as well as the configuration files we'll use to deploy the pieces of the application.
 
 Change directory by running the command `cd guestbook`. You will find all the
 configurations files for this exercise under the directory `v1`.
@@ -23,10 +23,9 @@ configurations files for this exercise under the directory `v1`.
 
 Kubernetes can deploy an individual pod to run an application but when you
 need to scale it to handle a large number of requests a `Deployment` is the
-resource you want to use. A Deployment manages a collection of similar pods
-(images) and based on the number of copies ("replicas") you ask for, the
-Deployment will try to ensure that you always have exactly that many copies
-of your pod running.
+resource you want to use.
+A Deployment manages a collection of similar pods. When you ask for a specific number of replicas
+the Kubernetes Deployment Controller will attempt to maintain that number of replicas at all times.
 
 Every Kubernetes object we create should provide two nested object fields
 that govern the object’s configuration: the object `spec` and the object
@@ -44,7 +43,7 @@ Consider the following deployment configuration for guestbook application
 
 **guestbook-deployment.yaml**
 
-```
+```yaml
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -71,8 +70,8 @@ Consider the following deployment configuration for guestbook application
 
 The above configuration file create a deployment object named 'guestbook'
 with a pod containing a single container running the image
-'ibmcom/guestbook:v1'.  Also the configuration specifies replicas set to 3
-and Kubernetes tries to make sure that at least three active pods running at
+`ibmcom/guestbook:v1`.  Also the configuration specifies replicas set to 3
+and Kubernetes tries to make sure that at least three active pods are running at
 all times.
 
 - Create guestbook deployment
@@ -80,7 +79,10 @@ all times.
    To create a Deployment using this configuration file we use the
    following command:
 
-   ``` $ kubectl create -f guestbook-deployment.yaml ```
+   ``` console
+   $ kubectl create -f guestbook-deployment.yaml
+   deployment "guestbook" created
+   ```
 
 - List the pod with label app=guestbook
 
@@ -89,13 +91,17 @@ all times.
   the labels defined above in the yaml file in the
   `spec.template.metadata.labels` section.
 
-   ``` $ kubectl get pods -l app=guestbook ```
+   ```console 
+   $ kubectl get pods -l app=guestbook
+   ```
 
 When you change the number of replicas in the configuration, Kubernetes will
 try to add, or remove, pods from the system to match your request. To can
 make these modifications by using the following command:
 
-   ``` $ kubectl edit deployment guestbook ```
+   ```console
+   $ kubectl edit deployment guestbook
+   ```
 
 This will retrieve the latest configuration for the Deployment from the
 Kubernetes server and then load it into an editor for you. You'll notice
@@ -109,7 +115,9 @@ You can also edit the deployment file we used to create the Deployment
 to make changes. You should use the following command to make the change
 effective when you edit the deployment locally.
 
-   ``` $ kubectl apply -f guestbook-deployment.yaml ```
+   ```console
+   $ kubectl apply -f guestbook-deployment.yaml
+   ```
 
 This will ask Kubernetes to "diff" our yaml file with the current state
 of the Deployment and apply just those changes.
@@ -119,7 +127,7 @@ clients.
 
 **guestbook-service.yaml**
 
-```
+```yaml
     apiVersion: v1
     kind: Service
     metadata:
@@ -180,7 +188,7 @@ to persist data and read data from. This application runs the image
 
 **redis-master-deployment.yaml**
 
-```
+```yaml
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -247,7 +255,7 @@ port 6379 onto redis master deployment by using selectors "app=redis" and
 
 **redis-master-service.yaml**
 
-```
+```yaml
     apiVersion: v1
     kind: Service
     metadata:
@@ -289,7 +297,7 @@ instances to read. Redis slave deployments is configured to run two replicas.
 
 **redis-slave-deployment.yaml**
 
-```
+```yaml
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -321,7 +329,7 @@ instances to read. Redis slave deployments is configured to run two replicas.
  ``` $ kubectl create -f redis-slave-deployment.yaml ```
 
  - Check if all the slave replicas are running
- ```
+ ```console
     $ kubectl get pods -lapp=redis,role=slave
     NAME                READY     STATUS    RESTARTS   AGE
     redis-slave-kd7vx   1/1       Running   0          2d
