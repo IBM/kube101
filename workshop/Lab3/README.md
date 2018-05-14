@@ -282,10 +282,14 @@ one database server to process each request coming though guestbook. One
 simple solution is to separate the reads and write such that they go to
 different databases that are replicated properly to achieve data consistency.
 
+![rw_to_master](../images/Master.png)
+
 Create a deployment named 'redis-slave' that can talk to redis database to
 manage data reads. In order to scale the database we use the pattern where
 we can scale the reads using redis slave deployment which can run several
 instances to read. Redis slave deployments is configured to run two replicas.
+
+![w_to_master-r_to_slave](../images/Master-Slave.png)
 
 **redis-slave-deployment.yaml**
 
