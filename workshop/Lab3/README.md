@@ -44,28 +44,28 @@ Consider the following deployment configuration for guestbook application
 **guestbook-deployment.yaml**
 
 ```yaml
-    apiVersion: apps/v1
-    kind: Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guestbook
+  labels:
+    app: guestbook
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: guestbook
+  template:
     metadata:
-      name: guestbook
       labels:
         app: guestbook
     spec:
-      replicas: 3
-      selector:
-        matchLabels:
-          app: guestbook
-      template:
-        metadata:
-          labels:
-            app: guestbook
-        spec:
-          containers:
-          - name: guestbook
-            image: ibmcom/guestbook:v1
-            ports:
-            - name: http-server
-              containerPort: 3000
+      containers:
+      - name: guestbook
+        image: ibmcom/guestbook:v1
+        ports:
+        - name: http-server
+          containerPort: 3000
 ```
 
 The above configuration file create a deployment object named 'guestbook'
@@ -128,19 +128,19 @@ clients.
 **guestbook-service.yaml**
 
 ```yaml
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: guestbook
-      labels:
-        app: guestbook
-    spec:
-      ports:
-      - port: 3000
-        targetPort: http-server
-      selector:
-        app: guestbook
-      type: LoadBalancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: guestbook
+  labels:
+    app: guestbook
+spec:
+  ports:
+  - port: 3000
+    targetPort: http-server
+  selector:
+    app: guestbook
+  type: LoadBalancer
 ```
 
 The above configuration creates a Service resource named guestbook. A Service
@@ -180,31 +180,31 @@ cluster. This instance of redis will be defined in a similar manner to the guest
 **redis-master-deployment.yaml**
 
 ```yaml
-    apiVersion: apps/v1
-    kind: Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-master
+  labels:
+    app: redis
+    role: master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+      role: master
+  template:
     metadata:
-      name: redis-master
       labels:
         app: redis
         role: master
     spec:
-      replicas: 1
-      selector:
-        matchLabels:
-          app: redis
-          role: master
-      template:
-        metadata:
-          labels:
-            app: redis
-            role: master
-        spec:
-          containers:
-          - name: redis-master
-            image: redis:2.8.23
-            ports:
-            - name: redis-server
-              containerPort: 6379
+      containers:
+      - name: redis-master
+        image: redis:2.8.23
+        ports:
+        - name: redis-server
+          containerPort: 6379
 ```
 
 This yaml creates a redis database in a Deployment named 'redis-master'.
@@ -221,9 +221,9 @@ The image running in the container is 'redis:2.8.23' and exposes the standard re
 - Check to see that redis server pod is running:
 
     ```console
-        $ kubectl get pods -lapp=redis,role=master
-        NAME                 READY     STATUS    RESTARTS   AGE
-        redis-master-q9zg7   1/1       Running   0          2d
+    $ kubectl get pods -lapp=redis,role=master
+    NAME                 READY     STATUS    RESTARTS   AGE
+    redis-master-q9zg7   1/1       Running   0          2d
     ```
 
 - Let us test the redis standalone:
@@ -251,20 +251,20 @@ guestbook application can connect to it through DNS lookup.
 **redis-master-service.yaml**
 
 ```yaml
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: redis-master
-      labels:
-        app: redis
-        role: master
-    spec:
-      ports:
-      - port: 6379
-        targetPort: redis-server
-      selector:
-        app: redis
-        role: master
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-master
+  labels:
+    app: redis
+    role: master
+spec:
+  ports:
+  - port: 6379
+    targetPort: redis-server
+  selector:
+    app: redis
+    role: master
 ```
 
 This creates a Service object named 'redis-master' and configures it to target
@@ -298,31 +298,31 @@ instances to read. Redis slave deployments is configured to run two replicas.
 **redis-slave-deployment.yaml**
 
 ```yaml
-    apiVersion: apps/v1
-    kind: Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-slave
+  labels:
+    app: redis
+    role: slave
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: redis
+      role: slave
+  template:
     metadata:
-      name: redis-slave
       labels:
         app: redis
         role: slave
     spec:
-      replicas: 2
-      selector:
-        matchLabels:
-          app: redis
-          role: slave
-      template:
-        metadata:
-          labels:
-            app: redis
-            role: slave
-        spec:
-          containers:
-          - name: redis-slave
-            image: kubernetes/redis-slave:v2
-            ports:
-            - name: redis-server
-              containerPort: 6379
+      containers:
+      - name: redis-slave
+        image: kubernetes/redis-slave:v2
+        ports:
+        - name: redis-server
+          containerPort: 6379
 ```
 
 - Create the pod  running redis slave deployment.
@@ -330,23 +330,23 @@ instances to read. Redis slave deployments is configured to run two replicas.
 
  - Check if all the slave replicas are running
  ```console
-    $ kubectl get pods -lapp=redis,role=slave
-    NAME                READY     STATUS    RESTARTS   AGE
-    redis-slave-kd7vx   1/1       Running   0          2d
-    redis-slave-wwcxw   1/1       Running   0          2d
+$ kubectl get pods -lapp=redis,role=slave
+NAME                READY     STATUS    RESTARTS   AGE
+redis-slave-kd7vx   1/1       Running   0          2d
+redis-slave-wwcxw   1/1       Running   0          2d
  ```
 
 - And then go into one of those pods and look at the database to see
   that everything looks right:
 
  ```console
-    $ kubectl exec -it redis-slave-kd7vx  redis-cli
-    127.0.0.1:6379> keys *
-    1) "guestbook"
-    127.0.0.1:6379> lrange guestbook 0 10
-    1) "hello world"
-    2) "welcome to the Kube workshop"
-    127.0.0.1:6379> exit
+$ kubectl exec -it redis-slave-kd7vx  redis-cli
+127.0.0.1:6379> keys *
+1) "guestbook"
+127.0.0.1:6379> lrange guestbook 0 10
+1) "hello world"
+2) "welcome to the Kube workshop"
+127.0.0.1:6379> exit
 ```
 
 Deploy redis slave service so we can access it by DNS name. Once redeployed,
@@ -356,20 +356,20 @@ the application will send "read" operations to the `redis-slave` pods while
 **redis-slave-service.yaml**
 
 ```yaml
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: redis-slave
-      labels:
-        app: redis
-        role: slave
-    spec:
-      ports:
-      - port: 6379
-        targetPort: redis-server
-      selector:
-        app: redis
-        role: slave
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-slave
+  labels:
+    app: redis
+    role: slave
+spec:
+  ports:
+  - port: 6379
+    targetPort: redis-server
+  selector:
+    app: redis
+    role: slave
 ```
 
 - Create the service to access redis master.
