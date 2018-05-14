@@ -283,6 +283,11 @@ port 6379 on the pods selected by the selectors "app=redis" and "role=master".
 
 - Test guestbook app using a browser of your choice using the url:
   `<your-cluster-ip>:<node-port>`
+  
+You can see now that if you open up multiple browsers and refresh the page
+to access the different copies of guestbook that they all have a consistent state.
+All instances write to the same backing persistent storage, and all instances
+read from that storage to display the guestbook entries that have been stored.
 
 We have our simple 3-tier application running but we need to scale the
 application if traffic increases. Our main bottleneck is that we only have
@@ -372,15 +377,15 @@ spec:
     role: slave
 ```
 
-- Create the service to access redis master.
+- Create the service to access redis slaves.
     ``` $ kubectl create -f redis-slave-service.yaml ```
 
-- Restart guestbook so that it will find the redis service to use database.
+- Restart guestbook so that it will find the slave service to read from.
     ```console
     $ kubectl delete deploy guestbook
     $ kubectl create -f guestbook-deployment.yaml
     ```
-
+    
 - Test guestbook app using a browser of your choice using the url `<your-cluster-ip>:<node-port>`.
 
 That's the end of the lab. Now let's clean-up our environment:
