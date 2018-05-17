@@ -383,21 +383,3 @@ $ kubectl delete -f redis-slave-deployment.yaml
 $ kubectl delete -f redis-master-service.yaml 
 $ kubectl delete -f redis-master-deployment.yaml
 ```
-
-//TODO
-Advanced debugging techniques to reach your pods.
-
-You can look at the logs of any of the pods running under your deployments as follows
-```
-    $ kubectl logs <podname>
-```
-
-Describe command gives you more information about a pod or deployment
-```
-    $ kubectl describe <deployment>
-```
-
-Endpoint resource can be used to see all the service endpoints.
-```
-    $ kubectl get endpoints <service>
-```
