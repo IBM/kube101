@@ -1,0 +1,26 @@
+{
+  "name": "K8s and Istio",
+  "sections": [
+    {
+      "section": "Introduction"
+    },
+    {
+      "section": "Account Setup"
+    },
+    {
+      "section": "Kubernetes Concepts"
+    },
+    {
+      "section": "Kubernetes Deployments"
+    },
+    {
+      "section": "Istio Concepts"
+    },
+    {
+      "section": "Istio Deployment"
+    },
+    {
+      "section": "Conclusion"
+    }
+  ]
+}

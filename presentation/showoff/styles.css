@@ -1,0 +1,57 @@
+.blockwhite {
+  color: white;
+  font-size: 72px;
+  width: 70%;
+}
+
+.blockteal {
+  color: #5dc6ca;
+  font-size: 72px;
+  width: 70%;
+}
+
+.teal {
+  color: #5dc6ca;
+}
+
+.huge {
+  font-size: 105px;
+}
+
+.narrow {
+  width: 60%;
+}
+
+#preso,
+.slide {
+  height: 1080px !important;
+  width: 1920px !important;
+}
+
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: URL('_files/share/fonts/IBM-Plex-Sans/IBMPlexSans-Regular.ttf') format ('ttf');
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans Bold';
+    src: URL('_files/share/fonts/IBM-Plex-Sans/IBMPlexSans-Bold.ttf') format ('ttf');
+}
+
+.content {
+  font-family: 'IBM Plex Sans';
+}
+
+.content h1 {
+  font-family: 'IBM Plex Sans';
+  font-size: 72px;
+}
+
+.content li {
+  font-size: 50px;
+}
+
+.content code {
+  font-size: 50px;
+}
