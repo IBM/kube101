@@ -1,8 +1,8 @@
 !SLIDE[bg=_images/backgrounds/black_bg.png]
 # IBM Code Presentation
-.blockwhite Introduction to Kubernetes and Istio // LFNW
+.blockwhite Kubernetes 101
 
-.blockteal Spencer Krum // IBM
+.blockteal IBM Developer Advocacy
 
 
 ![IBM Code Logo](../_images/ibm_code_big.png)
