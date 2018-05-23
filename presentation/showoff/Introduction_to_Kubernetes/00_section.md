@@ -1,9 +1,5 @@
 !SLIDE[bg=_images/backgrounds/white_bg.png]
 
 
+.huge Kubernetes manages containers. <span class="teal">Users of kubernetes</span> Manage higher level abstracted <span class="teal">resources.</span>
 
-#
-
-## 
-
-.huge Add a <span class="teal">thought provoking</span> question or statement, and highlight <span class="teal">key words.</span>
