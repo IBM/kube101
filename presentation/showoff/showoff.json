@@ -1,26 +1,35 @@
 {
-  "name": "K8s and Istio",
+  "name": "Kubernetes 101",
   "sections": [
     {
       "section": "Introduction"
     },
     {
-      "section": "Account Setup"
+      "section": "Introduction_to_Containers"
     },
     {
-      "section": "Kubernetes Concepts"
+      "section": "Introduction_to_Kubernetes"
     },
     {
-      "section": "Kubernetes Deployments"
+      "section": "Account_Setup"
     },
     {
-      "section": "Istio Concepts"
+      "section": "Lab_0"
     },
     {
-      "section": "Istio Deployment"
+      "section": "Lab_1"
     },
     {
-      "section": "Conclusion"
+      "section": "Lab_2"
+    },
+    {
+      "section": "Lab_3"
+    },
+    {
+      "section": "Lab_4"
+    },
+    {
+      "section": "Lab_D"
     }
   ]
 }
