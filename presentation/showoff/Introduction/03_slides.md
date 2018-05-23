@@ -2,9 +2,13 @@
 
 # Agenda
 
+* Intro to Containers
+* Intro to Kubernetes
 * Account Setup
-* Kubernetes Concepts
-* Kubernetes Hands On
-* Istio Concepts
-* Istio Hands On
-* Wrap up
+* Install IBM Cloud Utilities
+* First Deployment
+* Scale and Update Deployment
+* Native Kubernetes
+* Healthchecks
+* Debugging
+* Outro

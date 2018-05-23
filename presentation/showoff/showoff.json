@@ -14,22 +14,22 @@
       "section": "Account_Setup"
     },
     {
-      "section": "Lab_0"
+      "section": "Install IBM Cloud Utilities"
     },
     {
-      "section": "Lab_1"
+      "section": "First Deployment"
     },
     {
-      "section": "Lab_2"
+      "section": "Scale and Update Deployment"
     },
     {
-      "section": "Lab_3"
+      "section": "Native Kubernetes"
     },
     {
-      "section": "Lab_4"
+      "section": "Healthchecks"
     },
     {
-      "section": "Lab_D"
+      "section": "Debugging"
     }
   ]
 }
