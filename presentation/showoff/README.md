@@ -1,11 +1,7 @@
-ibm-showoff theme
-=================
+ibm-showoff talk
+================
 
-
-This is a theme for showoff (actually a showoff project that you can fork) using the IBM Developer images, colors, and style.
-
-
-It uses [showoff](https://github.com/puppetlabs/showoff). 
+This presentation uses  [showoff](https://github.com/puppetlabs/showoff). 
 
 
 Quickstart
@@ -18,3 +14,4 @@ showoff serve
 ```
 
 
+Further [instructions](https://github.ibm.com/skrum/ibm-showoff/blob/master/README.md)
