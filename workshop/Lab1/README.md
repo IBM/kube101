@@ -3,7 +3,7 @@
 Learn how to deploy an application to a Kubernetes cluster hosted within
 the IBM Cloud Kubernetes Service.
 
-##1. Install the prerequisite CLIs and provision a Kubernetes cluster
+## 1. Install the prerequisite CLIs and provision a Kubernetes cluster
 
 If you haven't already:
 1. Install the IBM Cloud CLIs and log in, as described in [Lab 0](../Lab0/README.md).
@@ -19,7 +19,7 @@ If you haven't already:
 
    Once your client is configured, you are ready to deploy your first application, `guestbook`.
 
-##2. Deploy your application
+## 2. Deploy your application
 
 In this part of the lab, we deploy an application called `guestbook`
 that was built and uploaded to DockerHub under the name
