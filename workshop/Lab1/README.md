@@ -60,7 +60,7 @@ that was built and uploaded to DockerHub under the name
    service "guestbook" exposed
    ```
 
-4. To find the port used on that worker node, examine your new service:
+4. To find the port that was used on that worker node, examine your new service:
 
    ```console
    $ kubectl get service guestbook
@@ -68,12 +68,13 @@ that was built and uploaded to DockerHub under the name
    guestbook   NodePort   10.10.10.253   <none>        3000:31208/TCP   1m
    ```
    
-   We can see that our `<nodeport>` is `31208`. We can see in the output the port mapping from 3000 inside 
-   the pod exposed to the cluster on port 31208. This port in the 31000 range is automatically chosen, 
-   and could be different for you.
+   Our `<nodeport>` is `31208`. We can see in the output that the port mapping from 3000 inside 
+   the pod exposed it to the cluster on port 31208. This port in the 31000 range is automated 
+   and may be different for you.
 
-5. `guestbook` is now running on your cluster, and exposed to the internet. We need to find out where it is accessible.
-   The worker nodes running in the container service get external IP addresses.
+5. `guestbook` is now running on your cluster and exposed to the Internet. 
+   We need to find out where it is accessible.
+   The worker nodes that are running in the container service get external IP addresses.
    Run `$ bx cs workers <name-of-cluster>`, and note the public IP listed on the `<public-IP>` line.
    
    ```console
@@ -83,20 +84,20 @@ that was built and uploaded to DockerHub under the name
    kube-hou02-pa1e3ee39f549640aebea69a444f51fe55-w1   173.193.99.136   10.76.194.30   free           normal   Ready    hou02   1.5.6_1500*
    ```
    
-   We can see that our `<public-IP>` is `173.193.99.136`.
+   Our `<public-IP>` is `173.193.99.136`.
    
-6. Now that you have both the address and the port, you can now access the application in the web browser
-   at `<public-IP>:<nodeport>`. In the example case this is `173.193.99.136:31208`.
+6. Now that you have both the address and the port, you can access the application in the web browser
+   at `<public-IP>:<nodeport>`. In the example, this is `173.193.99.136:31208`.
    
 Congratulations, you've now deployed an application to Kubernetes!
 
 When you're all done, you can either use this deployment in the
 [next lab of this course](../Lab2/README.md), or you can remove the deployment
-and thus stop taking the course.
+and stop the course.
 
   1. To remove the deployment, use `$ kubectl delete deployment guestbook`.
 
   2. To remove the service, use `$ kubectl delete service guestbook`.
 
-You should now go back up to the root of the repository in preparation
+If you decide to continue with the course, go back up to the root of the repository in preparation
 for the next [Lab 2](../Lab2/README.md), by running: `$ cd ..`.
