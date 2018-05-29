@@ -1,46 +1,45 @@
 # Lab 1. Set up and deploy your first application
 
 Learn how to deploy an application to a Kubernetes cluster hosted within
-the IBM Container Service.
+the IBM Cloud Kubernetes Service.
 
-# 0. Install Prerequisite CLIs and Provision a Kubernetes Cluster
+## 1. Install the prerequisite CLIs and provision a Kubernetes cluster
 
 If you haven't already:
-1. Install the IBM Cloud CLIs and login, as described in [Lab 0](../Lab0/README.md).
+1. Install the IBM Cloud CLIs and log in, as described in [Lab 0](../Lab0/README.md).
 2. Provision a cluster:
 
    ```$ bx cs cluster-create --name <name-of-cluster>```
 
-Once the cluster is provisioned, the kubernetes client CLI `kubectl` needs to be
-configured to talk to the provisioned cluster.
-
-1. Run `$ bx cs cluster-config <name-of-cluster>`, and set the `KUBECONFIG`
-   environment variable based on the output of the command. This will
+   Once the cluster is provisioned, you need to configure the Kubernetes client CLI `kubectl`.
+   
+3. Run `$ bx cs cluster-config <name-of-cluster>` and set the `KUBECONFIG`
+   environment variable that is based on the output of the command. This will
    make your `kubectl` client point to your new Kubernetes cluster.
 
-Once your client is configured, you are ready to deploy your first application, `guestbook`.
+   Once your client is configured, you are ready to deploy your first application, `guestbook`.
 
-# 1. Deploy your application
+## 2. Deploy your application
 
-In this part of the lab we will deploy an application called `guestbook`
-that has already been built and uploaded to DockerHub under the name
+In this part of the lab, we deploy an application called `guestbook`
+that was built and uploaded to DockerHub under the name
 `ibmcom/guestbook:v1`.
 
-1. Start by running `guestbook`:
+1. Run `guestbook`by running the command:
 
    ```$ kubectl run guestbook --image=ibmcom/guestbook:v1```
 
    This action will take a bit of time. To check the status of the running application,
    you can use `$ kubectl get pods`.
 
-   You should see output similar to the following:
+   Once complete, you should see an output similar to:
 
    ```console
    $ kubectl get pods
    NAME                          READY     STATUS              RESTARTS   AGE
    guestbook-59bd679fdc-bxdg7    0/1       ContainerCreating   0          1m
    ```
-   Eventually, the status should show up as `Running`.
+   Eventually, the status will display as `Running`.
    
    ```console
    $ kubectl get pods
@@ -49,11 +48,11 @@ that has already been built and uploaded to DockerHub under the name
    ```
    
    The end result of the run command is not just the pod containing our application containers,
-   but a Deployment resource that manages the lifecycle of those pods.
+   but a deployment resource that manages the lifecycle of those pods.
  
    
-3. Once the status reads `Running`, we need to expose that deployment as a
-   service so we can access it through the IP of the worker nodes.
+3. Once the status is `Running`, we need to expose that deployment as a
+   service so that we can access it through the IP of the worker nodes.
    The `guestbook` application listens on port 3000.  Run:
 
    ```console
@@ -100,4 +99,4 @@ and thus stop taking the course.
   2. To remove the service, use `$ kubectl delete service guestbook`.
 
 You should now go back up to the root of the repository in preparation
-for the next lab: `$ cd ..`.
+for the next [Lab 2](../Lab2/README.md), by running: `$ cd ..`.
