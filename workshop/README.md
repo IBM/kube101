@@ -1,4 +1,4 @@
-# IBM Cloud Container Service lab
+# IBM Cloud Container Service Lab
 
 <img src="https://kubernetes.io/images/favicon.png" width="200">
 
