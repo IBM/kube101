@@ -1,5 +1,6 @@
-<img src="https://kubernetes.io/images/favicon.png" width="200">
 # IBM Cloud Container Service lab
+
+![Kubernetes Icon](https://kubernetes.io/images/favicon.png)
 
 # An introduction to containers
 
