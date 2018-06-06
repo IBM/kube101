@@ -91,13 +91,11 @@ that was already built and uploaded to DockerHub under the name
    
 Congratulations, you just deployed an application to Kubernetes!
 
-When you're all done, you can either use this deployment in the
-[next lab of this course](../Lab2/README.md). You can also remove the deployment
-and stop taking the course.
+You can now continue onto [Lab 2](../Lab2/README.md). Go back to the root of the repository in preparation
+of the next lab: `$ cd ..`.
+
+If you want to stop here and continue later, you can remove the deployment for now:
 
   1. To remove the deployment, use `$ kubectl delete deployment guestbook`.
 
   2. To remove the service, use `$ kubectl delete service guestbook`.
-
-If you decide to continue to Lab 2, go back to the root of the repository in preparation
-of the next lab: `$ cd ..`.
