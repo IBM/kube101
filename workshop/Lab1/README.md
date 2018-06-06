@@ -73,7 +73,7 @@ that was already built and uploaded to DockerHub under the name
    the pod exposed to the cluster on port 31208. This port in the 31000 range is automatically chosen, 
    and could be different for you.
 
-5. `guestbook` is now running on your cluster, and exposed to the internet. We need to find out where it is accessible.
+5. `guestbook` is now running on your cluster, and exposed to the Interne, so we need to find out where it is accessible.
    The worker nodes running in the container service get external IP addresses.
    Run `$ bx cs workers <name-of-cluster>`, and note the public IP listed on the `<public-IP>` line.
    
@@ -84,10 +84,10 @@ that was already built and uploaded to DockerHub under the name
    kube-hou02-pa1e3ee39f549640aebea69a444f51fe55-w1   173.193.99.136   10.76.194.30   free           normal   Ready    hou02   1.5.6_1500*
    ```
    
-   We can see that our `<public-IP>` is `173.193.99.136`.
+   We can see here that our `<public-IP>` is `173.193.99.136`.
    
-6. Now that you have both the address and the port, you can access the application in the web browser
-   at `<public-IP>:<nodeport>`. In the example case this is `173.193.99.136:31208`.
+6. Now that you have both the address and the port, you can access the application in your web browser
+   at `<public-IP>:<nodeport>`. In the example, this is `173.193.99.136:31208`.
    
 Congratulations, you just deployed an application to Kubernetes!
 
