@@ -1,9 +1,9 @@
 # Lab 1. Set up and deploy your first application
 
 Learn how to deploy an application to a Kubernetes cluster hosted within
-the IBM Container Service.
+the IBM Cloud Kubernetes Service.
 
-# 0. Install Prerequisite CLIs and Provision a Kubernetes Cluster
+## 1. Install prerequisite CLIs and provision a Kubernetes cluster
 
 If you haven't already:
 1. Install the IBM Cloud CLIs and login, as described in [Lab 0](../Lab0/README.md).
@@ -11,7 +11,7 @@ If you haven't already:
 
    ```$ bx cs cluster-create --name <name-of-cluster>```
 
-Once the cluster is provisioned, the kubernetes client CLI `kubectl` needs to be
+Once the cluster is provisioned, the Kubernetes client CLI `kubectl` needs to be
 configured to talk to the provisioned cluster.
 
 1. Run `$ bx cs cluster-config <name-of-cluster>`, and set the `KUBECONFIG`
@@ -20,10 +20,10 @@ configured to talk to the provisioned cluster.
 
 Once your client is configured, you are ready to deploy your first application, `guestbook`.
 
-# 1. Deploy your application
+## 2. Deploy your application
 
-In this part of the lab we will deploy an application called `guestbook`
-that has already been built and uploaded to DockerHub under the name
+In this part of the lab, we will deploy an application called `guestbook`
+that was already built and uploaded to DockerHub under the name
 `ibmcom/guestbook:v1`.
 
 1. Start by running `guestbook`:
@@ -33,7 +33,7 @@ that has already been built and uploaded to DockerHub under the name
    This action will take a bit of time. To check the status of the running application,
    you can use `$ kubectl get pods`.
 
-   You should see output similar to the following:
+   You will see an output similar to the following:
 
    ```console
    $ kubectl get pods
@@ -86,18 +86,18 @@ that has already been built and uploaded to DockerHub under the name
    
    We can see that our `<public-IP>` is `173.193.99.136`.
    
-6. Now that you have both the address and the port, you can now access the application in the web browser
+6. Now that you have both the address and the port, you can access the application in the web browser
    at `<public-IP>:<nodeport>`. In the example case this is `173.193.99.136:31208`.
    
-Congratulations, you've now deployed an application to Kubernetes!
+Congratulations, you just deployed an application to Kubernetes!
 
 When you're all done, you can either use this deployment in the
-[next lab of this course](../Lab2/README.md), or you can remove the deployment
-and thus stop taking the course.
+[next lab of this course](../Lab2/README.md). You can also remove the deployment
+and stop taking the course.
 
   1. To remove the deployment, use `$ kubectl delete deployment guestbook`.
 
   2. To remove the service, use `$ kubectl delete service guestbook`.
 
-You should now go back up to the root of the repository in preparation
-for the next lab: `$ cd ..`.
+If you decide to continue to Lab 2, go back to the root of the repository in preparation
+of the next lab: `$ cd ..`.
