@@ -2,8 +2,7 @@
 
 ## What you'll need before starting Lab 1:
 1. An IBM Cloud account. [Get your free account here](https://console.bluemix.net/dashboard/apps/).
-2. The IBM Cloud Kubernetes Service. 
-3. A basic understanding of Linux.
+2. A basic understanding of Linux.
 
 ## Get the IBM Cloud Kubernetes Service
 Before you begin the Kube101 labs, you will need to install the required CLIs to create and manage your Kubernetes clusters in the IBM Cloud Kubernetes Service and to deploy containerized apps to your cluster.
