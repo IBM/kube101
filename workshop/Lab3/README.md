@@ -1,45 +1,47 @@
 # Lab 3: Scale and update apps natively by building multi-tier applications
 
-In this lab, you'll learn how to deploy the same guestbook application we
-deployed in the previous labs. However, instead of using `kubectl`,
-we'll be deploying the application by using
+In this lab, you learn how to deploy the same guestbook application from 
+previous labs in a different way. However, instead of using `kubectl`,
+you will deploy the application by using
 configuration files. The configuration file mechanism allows you to have more
 fine-grained control over all of resources being created within the
 Kubernetes cluster.
 
-Before we work with the application we need to clone a github repo:
+Before we work with the application, we need to clone a github repo:
 
 ```
 $ git clone https://github.com/IBM/guestbook.git
 ```
 
 This repo contains multiple versions of the guestbook application
-as well as the configuration files we'll use to deploy the pieces of the application.
+as well as the configuration files that we'll use to deploy the pieces of the application.
 
-Change directory by running the command `cd guestbook`. You will find all the
+Change the directory by running the command `cd guestbook`. You will find all the
 configurations files for this exercise under the directory `v1`.
 
-# 1. Scale apps natively
+## 1. Scale apps natively
 
-Kubernetes can deploy an individual pod to run an application but when you
+Kubernetes can deploy an individual pod to run an application, but when you
 need to scale it to handle a large number of requests a `Deployment` is the
 resource you want to use.
-A Deployment manages a collection of similar pods. When you ask for a specific number of replicas
-the Kubernetes Deployment Controller will attempt to maintain that number of replicas at all times.
+A Deployment manages a collection of similar pods. When you ask for a specific number of replicas,
+the Kubernetes Deployment Controller will attempt to maintain that replica number at all times.
 
-Every Kubernetes object we create should provide two nested object fields
-that govern the object’s configuration: the object `spec` and the object
+### Objects
+
+Every Kubernetes object that we create should provide two nested object fields
+that govern the object’s configuration: The object `spec` and the object
 `status`. Object `spec` defines the desired state, and object `status`
-contains Kubernetes system provided information about the actual state of the
-resource. As described before, Kubernetes will attempt to reconcile
+contains the information about the actual state of the
+resource, which the Kubernetes system provided. 
+As described before, Kubernetes will attempt to reconcile
 your desired state with the actual state of the system.
 
-For Object that we create we need to provide the `apiVersion` you are using
-to create the object, `kind` of the object we are creating and the `metadata`
-about the object such as a `name`, set of `labels` and optionally `namespace`
-that this object should belong.
+To create the Object, you need the `apiVersion`,
+the `kind`, and the `metadata`
+about the Object (such as a `name`, set of `labels`, and optionally the `namespace`).
 
-Consider the following deployment configuration for guestbook application
+Consider the following deployment configuration for the guestbook application:
 
 **guestbook-deployment.yaml**
 
@@ -68,15 +70,16 @@ spec:
           containerPort: 3000
 ```
 
-The above configuration file create a deployment object named 'guestbook'
+The above configuration file creates a deployment object named 'guestbook'
 with a pod containing a single container running the image
-`ibmcom/guestbook:v1`.  Also the configuration specifies replicas set to 3
-and Kubernetes tries to make sure that at least three active pods are running at
+`ibmcom/guestbook:v1`. The configuration also specifies a replica number
+that is set to "3."
+Kubernetes tries to run three active pods at
 all times.
 
-- Create guestbook deployment
+### Create the guestbook deployment
 
-   To create a Deployment using this configuration file we use the
+   To create a Deployment by using this configuration file, use the
    following command:
 
    ``` console
@@ -84,19 +87,21 @@ all times.
    deployment "guestbook" created
    ```
 
-- List the pod with label app=guestbook
+### List the pod
 
-  We can then list the pods it created by listing all pods that
-  have a label of "app" with a value of "guestbook". This matches
-  the labels defined above in the yaml file in the
-  `spec.template.metadata.labels` section.
+  Now you can list the pods that Kubernetes created by label name.
+  Use the label "app" with a value of "guestbook." This matches
+  the labels that were defined above in the yaml file in the
+  `spec.template.metadata.labels` section:
 
    ```console 
    $ kubectl get pods -l app=guestbook
    ```
 
+### Change the number of replicas
+
 When you change the number of replicas in the configuration, Kubernetes will
-try to add, or remove, pods from the system to match your request. To can
+try to add or remove pods from the system to match your request. You can
 make these modifications by using the following command:
 
    ```console
@@ -108,12 +113,14 @@ Kubernetes server and then load it into an editor for you. You'll notice
 that there are a lot more fields in this version than the original yaml
 file we used. This is because it contains all of the properties about the
 Deployment that Kubernetes knows about, not just the ones we chose to
-specify when we create it. Also notice that it now contains the `status`
+specify when we created it. Also notice that it now contains the `status`
 section mentioned previously.
 
-You can also edit the deployment file we used to create the Deployment
-to make changes. You should use the following command to make the change
-effective when you edit the deployment locally.
+### Edit the Deployment file
+
+You can also edit the Deployment file that we used to create the Deployment
+to make changes. Use the following command to make the change 
+when you edit the deployment locally.
 
    ```console
    $ kubectl apply -f guestbook-deployment.yaml
@@ -163,7 +170,7 @@ Deployment container spec.
   and
   `$ bx cs workers <name-of-cluster>`
 
-# 2. Connect to a back-end service.
+## 2. Connect to a back-end service.
 
 If you look at the guestbook source code, under the `guestbook/v1/guestbook`
 directory, you'll notice that it is written to support a variety of data
