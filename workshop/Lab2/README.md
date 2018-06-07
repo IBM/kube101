@@ -1,7 +1,7 @@
 # Lab 2: Scale and update deployments on Kubernetes
 
-In this lab, you learn how to update the number of instances
-that a deployment has and how to safely roll out an update of your application
+In this lab, learn how to update the number of instances
+that a deployment has and how you can safely roll out an update of your application
 on Kubernetes. 
 
 For this lab, you need a running deployment of the `guestbook` application
@@ -84,7 +84,7 @@ undo a rollout if you discover a problem during or after deployment.
 In the previous lab, we used an image with a `v1` tag. For our upgrade,
 we'll use the image with the `v2` tag.
 
-To update and roll back your app:
+### To update and roll back your app:
 1. Update your deployment to use the
    `v2` image. Use `kubectl`, which allows you to change details about existing
    resources with the `set` subcommand. We can use it to change the
@@ -92,11 +92,12 @@ To update and roll back your app:
 
     ```$ kubectl set image deployment/guestbook guestbook=ibmcom/guestbook:v2```
 
-   Note that a pod could have multiple containers, each with its own name.
+   Note that a pod can have multiple containers, each with its own name.
    Each image can be changed individually or all at once by referring to the name.
-   In the case of our `guestbook` Deployment, the container name is also `guestbook`.
-   Multiple containers can be updated at the same time.
-   ([More information](https://kubernetes.io/docs/user-guide/kubectl/kubectl_set_image/).)
+   In the case of our `guestbook` deployment, the container name is also `guestbook`.
+   You can also update multiple containers simultaneously. Visit the [Kubernetes guide
+   on how to update multiple containers]().
+   ([Read more information on how to update multiple containers](https://kubernetes.io/docs/user-guide/kubectl/kubectl_set_image/).)
 
 1. Run `kubectl rollout status deployment/guestbook` to check the status of
    the rollout. The rollout might occur so quickly that the following messages
@@ -172,13 +173,12 @@ To update and roll back your app:
    guestbook-5f5548d4f    10        10        10        21m
    guestbook-768cc55c78   0         0         0         3h
    ```
+Congratulations! You deployed the second version of the app. Lab 2
+is now complete.
 
-Before we continue, let's delete the application so we can learn about
-a different way to achieve the same results:
+Before we continue to the next lab, delete the application. Don't worry, you'll
+learn about a different way to deploy the same guestbook application:
 
  To remove the deployment, use `kubectl delete deployment guestbook`.
 
  To remove the service, use `kubectl delete service guestbook`.
-
-Congratulations! You deployed the second version of the app. Lab 2
-is now complete.
