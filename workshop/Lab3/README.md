@@ -1,8 +1,8 @@
-# Lab 3: Scale and update apps natively, building multi-tier applications.
+# Lab 3: Scale and update apps natively by building multi-tier applications
 
-In this lab you'll learn how to deploy the same guestbook application we
-deployed in the previous labs, however, instead of using the `kubectl`
-command line helper functions we'll be deploying the application using
+In this lab, you'll learn how to deploy the same guestbook application we
+deployed in the previous labs. However, instead of using `kubectl`,
+we'll be deploying the application by using
 configuration files. The configuration file mechanism allows you to have more
 fine-grained control over all of resources being created within the
 Kubernetes cluster.
