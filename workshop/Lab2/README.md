@@ -84,7 +84,8 @@ undo a rollout if you discover a problem during or after deployment.
 In the previous lab, we used an image with a `v1` tag. For our upgrade,
 we'll use the image with the `v2` tag.
 
-### To update and roll back your app:
+Follow these steps to update and roll back your app:
+
 1. Update your deployment to use the
    `v2` image. Use `kubectl`, which allows you to change details about existing
    resources with the `set` subcommand. We can use it to change the
