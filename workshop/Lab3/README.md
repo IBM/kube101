@@ -171,6 +171,7 @@ Deployment container spec.
       and
       `$ bx cs workers <name-of-cluster>`
 
+
 ## 2. Connect to a backend service
 
 If you look at the guestbook source code under the `guestbook/v1/guestbook`
@@ -180,17 +181,16 @@ which is ok for testing purposes. As you get into a more "real" environment
 where you scale your application, that model will not work.
 Based on which instance of the application where users are routed, they'll see
 very different results.
-
-### Redis database
-
 To solve this, we need to have all instances of our app share the same data
-store - in this case, we're going to use a redis database that we deploy to our
-cluster. This instance of redis will be defined in a similar manner to the guestbook.
+store. In this case, we're going to use a Redis database that we deploy to our
+cluster. This instance of Redis will be defined in a similar manner to the guestbook.
 
-For this lab, you'll use this yaml to create a Redis database in a Deployment, "redis-master."
-It will create a single instance with replicas set to "1," and the guestbook app instances
-will connect to it to persist data, as well as read the persisted data back.
-The image running in the container is "redis:2.8.23" and exposes the standard redis port 6379.
+### Create a Redis database
+
+For this lab, you'll use the below yaml to create a Redis database in a Deployment, `redis-master`.
+It will create a single instance with replicas set to `1`, and the guestbook app instances
+will connect it to persist data, as well as read the persisted data back.
+The image running in the container is `redis:2.8.23` and exposes the standard Redis port 6379.
 
 1. Create a Redis database.
 
@@ -238,14 +238,14 @@ The image running in the container is "redis:2.8.23" and exposes the standard re
     redis-master-q9zg7   1/1       Running   0          2d
     ```
 
-4. Test the redis standalone:
+4. Test the Redis standalone:
 
     ` $ kubectl exec -it redis-master-q9zg7 redis-cli `
 
-    The kubectl exec command will start a secondary process in the specified
+    The `kubectl exec` command will start a secondary process in the specified
     container. In this case, we're asking for the `redis-cli` command to be
     executed in the container named `redis-master-q9zg7`.  When this process
-    ends, the "kubectl exec" command will also exit but the other processes in
+    ends, the `kubectl exec` command will also exit but the other processes in
     the container will not be impacted.
 
     Once in the container, we can use the `redis-cli` command to make sure the
@@ -301,7 +301,7 @@ to access the different copies of guestbook, that they all have a consistent sta
 All instances write to the same backing persistent storage, and all instances
 read from that storage to display the guestbook entries that were stored.
 
-### Scale Redis 
+### Scale Redis
 
 We have a simple 3-tier application running, but we do need to scale the
 application if traffic increases. Our main bottleneck is that we only have
@@ -309,7 +309,7 @@ one database server to process each request coming though guestbook. One
 simple solution is to separate the reads and writes, so that they go to
 different databases that are replicated properly to achieve data consistency.
 
-![rw_to_master](../images/Master.png)
+  ![rw_to_master](../images/Master.png)
 
 1. Create a deployment named `redis-slave` that can talk to the Redis database to
   manage data reads. Use the pattern where
@@ -348,7 +348,7 @@ different databases that are replicated properly to achieve data consistency.
             containerPort: 6379
 ```
 
-2. Create the pod  running redis slave deployment.
+2. Create the pod that will run `redis slave deployment`:
    ``` $ kubectl create -f redis-slave-deployment.yaml ```
 
 3. Check if all the slave replicas are running:
@@ -360,8 +360,8 @@ different databases that are replicated properly to achieve data consistency.
   redis-slave-wwcxw   1/1       Running   0          2d
  ```
 
-4. Then go into one of the pods and look at the database to see
-  that everything looks right:
+4. Go into one of the pods and look at the database to see
+  that everything looks correct:
 
   ```
   console
@@ -375,8 +375,8 @@ different databases that are replicated properly to achieve data consistency.
   ```
 
 5. Deploy `redis slave service` so that we can access it by DNS name. Once redeployed,
-the application will send "read" operations to the `redis-slave` pods while
-"write" operations will go to the `redis-master` pods.
+  the application will send "read" operations to the `redis-slave` pods while
+  "write" operations will go to the `redis-master` pods.
 
   **redis-slave-service.yaml**
 
@@ -401,15 +401,14 @@ the application will send "read" operations to the `redis-slave` pods while
   ``` $ kubectl create -f redis-slave-service.yaml ```
 
 7. Restart guestbook so that it will find the slave service to read from.
-    ```console
-    $ kubectl delete deploy guestbook
-    $ kubectl create -f guestbook-deployment.yaml
-    ```
+  ```console
+  $ kubectl delete deploy guestbook
+  $ kubectl create -f guestbook-deployment.yaml
+  ```
     
 8. Test the guestbook app by using the url `<your-cluster-ip>:<node-port>`.
 
-
-9. Now let's clean up our environment:
+9. Clean up your environment:
 
   ```console
   $ kubectl delete -f guestbook-deployment.yaml
@@ -419,3 +418,5 @@ the application will send "read" operations to the `redis-slave` pods while
   $ kubectl delete -f redis-master-service.yaml 
   $ kubectl delete -f redis-master-deployment.yaml
   ```
+
+You may now proceed to Lab 4. 
