@@ -1,7 +1,7 @@
 # Lab 3: Scale and update apps natively by building multi-tier applications
 
-In this lab, you'll learn how to deploy the same guestbook application from 
-previous labs in a different way. However, instead of using `kubectl`,
+In this lab, you'll deploy the same guestbook application from the 
+previous lab by using a different method. Instead of using `kubectl`,
 you will deploy the application by using
 configuration files. The configuration file mechanism allows you to have more
 fine-grained control over all of resources being created within the
@@ -27,7 +27,7 @@ resource you want to use.
 A Deployment manages a collection of similar pods. When you ask for a specific number of replicas,
 the Kubernetes Deployment Controller will attempt to maintain that replica number at all times.
 
-### Objects
+### Create objects
 
 Every Kubernetes object that we create should provide two nested object fields
 that govern the object’s configuration: The object `spec` and the object
@@ -70,13 +70,13 @@ spec:
           containerPort: 3000
 ```
 
-The above configuration file creates a deployment object named 'guestbook'
+The above configuration file creates a deployment object named `guestbook`
 with a pod containing a single container running the image
 `ibmcom/guestbook:v1`. The configuration also specifies a replica number
-that is set to "3," so Kubernetes will run three active pods at
+that is set to `3`, so Kubernetes will run three active pods at
 all times.
 
-### Create the guestbook deployment
+### Create the guestbook Deployment
 
    To create a Deployment by using this configuration file, use the
    following command:
@@ -89,7 +89,7 @@ all times.
 ### List the pod
 
   Now you can list the pods that Kubernetes created by label name.
-  Use the label "app" with a value of "guestbook." This matches
+  Use the label `app` with a value of `guestbook`. This matches
   the labels that were defined above in the yaml file in the
   `spec.template.metadata.labels` section:
 
@@ -149,9 +149,9 @@ spec:
   type: LoadBalancer
 ```
 
-### Services
+### Setting up routes
 
-The above configuration creates a Service resource named "guestbook." A Service
+The above configuration creates a Service resource named `guestbook`. A Service
 creates a network path for incoming traffic to your running
 application. In this case, we are setting up a route from port 3000 on the
 cluster to the "http-server" port on our app, which is port 3000 per the
