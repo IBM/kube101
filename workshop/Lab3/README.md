@@ -192,7 +192,7 @@ It will create a single instance with replicas set to `1`, and the guestbook app
 will connect it to persist data, as well as read the persisted data back.
 The image running in the container is `redis:2.8.23` and exposes the standard Redis port 6379.
 
-1. Create a Redis database.
+1. Create a Redis database:
 
   **redis-master-deployment.yaml**
 
@@ -245,7 +245,7 @@ The image running in the container is `redis:2.8.23` and exposes the standard Re
     The `kubectl exec` command will start a secondary process in the specified
     container. In this case, we're asking for the `redis-cli` command to be
     executed in the container named `redis-master-q9zg7`.  When this process
-    ends, the `kubectl exec` command will also exit but the other processes in
+    ends, the `kubectl exec` command will also exit, but the other processes in
     the container will not be impacted.
 
     Once in the container, we can use the `redis-cli` command to make sure the
@@ -280,7 +280,7 @@ The image running in the container is `redis:2.8.23` and exposes the standard Re
 ```
 
   This creates a Service object named `redis-master` and configures it to target
-  port 6379 on the pods selected by the selectors "app=redis" and`role=master`.
+  port 6379 on the pods selected by the selectors `app=redis` and`role=master`.
 
 6. Create the service to access `redis master`:
 
@@ -351,7 +351,7 @@ different databases that are replicated properly to achieve data consistency.
 2. Create the pod that will run `redis slave deployment`:
    ``` $ kubectl create -f redis-slave-deployment.yaml ```
 
-3. Check if all the slave replicas are running:
+3. Check whether all the slave replicas are running:
   ```
   console
   $ kubectl get pods -lapp=redis,role=slave
