@@ -311,7 +311,7 @@ different databases that are replicated properly to achieve data consistency.
 
   ![rw_to_master](../images/Master.png)
 
-1. Create a deployment named `redis-slave` that can talk to the Redis database to
+1. Create a deployment named [`redis-slave`](https://redis.io/topics/replication) that can talk to the Redis database to
   manage data reads. Use the pattern where
   we can scale the reads using `redis slave deployment`, which can run several
   instances to read. Here, `redis slave deployment` is configured to run two replicas.
@@ -349,7 +349,9 @@ different databases that are replicated properly to achieve data consistency.
 ```
 
 2. Create the pod that will run `redis slave deployment`:
-   ``` $ kubectl create -f redis-slave-deployment.yaml ```
+   ``` 
+   $ kubectl create -f redis-slave-deployment.yaml 
+   ```
 
 3. Check whether all the slave replicas are running:
   ```
