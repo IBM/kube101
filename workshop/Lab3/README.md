@@ -1,6 +1,6 @@
 # Lab 3: Scale and update apps natively by building multi-tier applications
 
-In this lab, you learn how to deploy the same guestbook application from 
+In this lab, you'll learn how to deploy the same guestbook application from 
 previous labs in a different way. However, instead of using `kubectl`,
 you will deploy the application by using
 configuration files. The configuration file mechanism allows you to have more
