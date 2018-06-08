@@ -1,16 +1,16 @@
-# IBM Cloud Container Service Lab
+# Kubernetes 101 Lab
 
 <img src="https://kubernetes.io/images/favicon.png" width="200">
 
-# An introduction to containers
+## An introduction to containers
 
-Hey, are you looking for a containers 101 course? Check out our [Docker Essentials](https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/).
+Hey, are you looking for a containers 101 course? Make sure to check out our [Docker Essentials](https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/).
 
-Containers allow you to run securely isolated applications with quotas on system resources. Containers started out as an individual feature delivered with the linux kernel. Docker launched with making containers easy to use and developers quickly latched onto that idea. Containers have also sparked an interest in microservice architecture, a design pattern for developing applications in which complex applications are down into smaller, composable pieces which work together.
+Containers allow you to run securely isolated applications with quotas on system resources. Containers started out as an individual feature delivered with the Linux kernel. Docker launched with making containers easy to use and developers quickly latched onto that idea. Containers have also sparked an interest in microservice architecture, a design pattern for developing applications in which complex applications are down into smaller, composable pieces which work together.
 
 Watch this [video](https://www.youtube.com/watch?v=wlBhtc31I8c) to learn about production uses of containers.
 
-# Objectives
+## Objectives
 
 This lab is an introduction to using Docker containers on Kubernetes in the IBM Cloud Container Service. By the end of the course, you'll achieve these objectives:
 * Understand core concepts of Kubernetes
@@ -19,14 +19,14 @@ This lab is an introduction to using Docker containers on Kubernetes in the IBM 
 * Add AI services to extend your app 
 * Secure and monitor your cluster and app
 
-# Prerequisites 
+## Prerequisites 
 * A Pay-As-You-Go or Subscription [IBM Cloud account](https://console.bluemix.net/registration/)
 
-# Virtual machines
+## Virtual machines
 
 Prior to containers, most infrastructure ran not on bare metal, but atop hypervisors managing multiple virtualized operating systems (OSes). This arrangement allowed isolation of applications from one another on a higher level than that provided by the OS. These virtualized operating systems see what looks like their own exclusive hardware. However, this also means that each of these virtual operating systems are replicating an entire OS, taking up disk space.
 
-# Containers
+## Containers
 
 Containers provide isolation similar to VMs, except provided by the OS and at the process level. Each container is a process or group of processes run in isolation. Typical containers explicitly run only a single process, as they have no need for the standard system services. What they usually need to do can be provided by system calls to the base OS kernel.
 
@@ -41,7 +41,7 @@ This is a list of some of the namespaces that are commonly used and visible to t
 * NET - network devices, stacks, and ports
 * CGROUPS - control limits and monitoring of resources
 
-# VM vs container
+## VM vs container
 
 Traditional applications are run on native hardware. A single application does not typically use the full resources of a single machine. We try to run multiple applications on a single machine to avoid wasting resources. We could run multiple copies of the same application, but to provide isolation we use VMs to run multiple application instances (VMs) on the same hardware. These VMs have full operating system stacks which make them relatively large and inefficient due to duplication both at runtime and on disk.
 
@@ -49,7 +49,7 @@ Traditional applications are run on native hardware. A single application does n
 
 Containers allow you to share the host OS. This reduces duplication while still providing the isolation. Containers also allow you to drop unneeded files such as system libraries and binaries to save space and reduce your attack surface. If SSHD or LIBC are not installed, they cannot be exploited.
 
-# Get set up
+## Get set up
 
 Before we dive into Kubernetes, you need to provision a cluster for your containerized app. Then you won't have to wait for it to be ready for the subsequent labs. 
 
@@ -58,7 +58,7 @@ Before we dive into Kubernetes, you need to provision a cluster for your contain
 3. After creation, before using the cluster, make sure it has completed provisioning and is ready for use. Run `bx cs clusters` and make sure that your cluster is in state "deployed".  
 4. Then use `bx cs workers <name-of-cluster>` and make sure that all worker nodes are in state "normal" with Status "Ready".
 
-# Kubernetes and containers: an overview
+## Kubernetes and containers: An overview
 
 Let's talk about Kubernetes orchestration for containers before we build an application on it. We need to understand the following facts about it:
 
@@ -69,7 +69,7 @@ Let's talk about Kubernetes orchestration for containers before we build an appl
 * Kubernetes at IBM
 * Let's get started
 
-# What is Kubernetes?
+## What is Kubernetes?
 
 Now that we know what containers are, let's define what Kubernetes is. Kubernetes is a container orchestrator to provision, manage, and scale applications. In other words, Kubernetes allows you to manage the lifecycle of containerized applications within a cluster of nodes (which are a collection of worker machines, for example, VMs, physical machines etc.).
 
@@ -81,13 +81,13 @@ The key paradigm of kubernetes is it’s Declarative model. The user provides th
 
 **Fun to know:** Kubernetes goes by many names. Sometimes it is shortened to _k8s_ (losing the internal 8 letters), or _kube_. The word is rooted in ancient Greek and means "Helmsman". A helmsman is the person who steers a ship. We hope you can seen the analogy between directing a ship and the decisions made to orchestrate containers on a cluster.
 
-# How was Kubernetes created?
+## How was Kubernetes created?
 
 Google wanted to open source their knowledge of creating and running the internal tools Borg & Omega. It adopted Open Governance for Kubernetes by starting the Cloud Native Computing Foundation (CNCF) and giving Kubernetes to that foundation, therefore making it less influenced by Google directly. Many companies such as RedHat, Microsoft, IBM and Amazon quickly joined the foundation.
 
 Main entry point for the kubernetes project is at [http://kubernetes.io](http://kubernetes.io) and the source code can be found at [https://github.com/kubernetes](https://github.com/kubernetes).
 
-# Kubernetes architecture
+## Kubernetes architecture
 
 At its core, Kubernetes is a data store (etcd). The declarative model is stored in the data store as objects, that means when you say I want 5 instances of a container then that request is stored into the data store. This information change is watched and delegated to Controllers to take action. Controllers then react to the model and attempt to take action to achieve the desired state. The power of Kubernetes is in its simplistic model.
 
@@ -95,7 +95,7 @@ As shown, API server is a simple HTTP server handling create/read/update/delete(
 
 ![architecture diagram](images/kubernetes_arch.png)
 
-# Kubernetes resource model
+## Kubernetes resource model
 
 Kubernetes Infrastructure defines a resource for every purpose. Each resource is monitored and processed by a controller. When you define your application, it contains a collection of these resources. This collection will then be read by Controllers to build your applications actual backing instances. Some of resources that you may work with are listed below for your reference, for a full list you should go to [https://kubernetes.io/docs/concepts/](https://kubernetes.io/docs/concepts/). In this class we will only use a few of them, like Pod, Deployment, etc.
 
@@ -122,7 +122,7 @@ Kubernetes Infrastructure defines a resource for every purpose. Each resource is
 
 Kubernetes does not have the concept of an application. It has simple building blocks that you are required to compose. Kubernetes is a cloud native platform where the internal resource model is the same as the end user resource model.
 
-# Key resources
+## Key resources
 
 A Pod is the smallest object model that you can create and run. You can add labels to a pod to identify a subset to run operations on. When you are ready to scale your application you can use the label to tell Kubernetes which Pod you need to scale. A Pod typically represent a process in your cluster. Pods contain at least one container that runs the job and additionally may have other containers in it called sidecars for monitoring, logging, etc. Essentially a Pod is a group of containers.
 
@@ -135,7 +135,7 @@ The user directly manipulates resources via yaml:
 
 Kubernetes provides us with a client interface through ‘kubectl’. Kubectl commands allow you to manage your applications, manage cluster and cluster resources, by modifying the model in the data store.
 
-# Kubernetes application deployment workflow
+## Kubernetes application deployment workflow
 
 ![deployment workflow](images/app_deploy_workflow.png)
 
@@ -148,7 +148,7 @@ Kubernetes provides us with a client interface through ‘kubectl’. Kubectl co
 7. Kubeproxy manages network traffic for the pods – including service discovery and load-balancing. Kubeproxy is responsible for communication between Pods that want to interact.
 
 
-# Lab information
+## Lab information
 
 IBM Cloud provides the capability to run applications in containers on Kubernetes. The IBM Cloud Container Service runs Kubernetes clusters which deliver the following:
 
@@ -159,7 +159,7 @@ IBM Cloud provides the capability to run applications in containers on Kubernete
 * Capability to manage dedicated cluster resources for both stateless applications and stateful workloads
 
 
-#  Lab overview
+## Lab overview
 
 [Lab 0](Lab0) (Optional): Provides a walkthrough for installing IBM Cloud command-line tools and the Kubernetes CLI. You can skip this lab if you have the IBM Cloud CLI, the container-service plugin, the containers-registry plugin, and the kubectl CLI already installed on your machine.
 
