@@ -1,4 +1,4 @@
-# Lab 3: Scale and update apps natively by building multi-tier applications
+# Lab 3: Scale and update apps natively, build multi-tier applications
 
 In this lab, you'll deploy the same guestbook application from the 
 previous lab by using a different method. Instead of using `kubectl`,
@@ -24,16 +24,11 @@ configurations files for this exercise under the directory `v1`.
 Kubernetes can deploy an individual pod to run an application, but when you
 need to scale it to handle a large number of requests a `Deployment` is the
 resource you want to use.
-A Deployment manages a collection of similar pods. When you ask for a specific number of replicas,
-the Kubernetes Deployment Controller will attempt to maintain that replica number at all times.
+A Deployment manages a collection of similar pods. When you ask for a specific number of replicas, the Kubernetes Deployment Controller will attempt to maintain that number of replicas at all times.
 
 ### Create objects
 
-Every Kubernetes object that we create should provide two nested object fields
-that govern the object’s configuration: The object `spec` and the object
-`status`. Object `spec` defines the desired state, and object `status`
-contains the information about the actual state of the
-resource, which the Kubernetes system provided. 
+Every Kubernetes object that is created will have two nested object fields: `spec` and `status`. `spec` defines the desired state (as specified by the person managing the object), and the `status` contains the information about the actual state of the resource, which the Kubernetes system provided. 
 As described before, Kubernetes will attempt to reconcile
 your desired state with the actual state of the system.
 
@@ -72,7 +67,7 @@ spec:
 
 The above configuration file creates a deployment object named `guestbook`
 with a pod containing a single container running the image
-`ibmcom/guestbook:v1`. The configuration also specifies a replica number
+`ibmcom/guestbook:v1`. The configuration also specifies a number of replicas
 that is set to `3`, so Kubernetes will run three active pods at
 all times.
 
