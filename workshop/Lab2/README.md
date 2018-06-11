@@ -96,9 +96,8 @@ Follow these steps to update and roll back your app:
    Note that a pod can have multiple containers, each with its own name.
    Each image can be changed individually or all at once by referring to the name.
    In the case of our `guestbook` deployment, the container name is also `guestbook`.
-   You can also update multiple containers simultaneously. Visit the [Kubernetes guide
-   on how to update multiple containers]().
-   ([Read more information on how to update multiple containers](https://kubernetes.io/docs/user-guide/kubectl/kubectl_set_image/).)
+   You can also update multiple containers simultaneously. Read the [Kubernetes guide
+   on how to update multiple containers](https://kubernetes.io/docs/user-guide/kubectl/kubectl_set_image/).
 
 1. Run `kubectl rollout status deployment/guestbook` to check the status of
    the rollout. The rollout might occur so quickly that the following messages
