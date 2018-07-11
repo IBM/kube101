@@ -161,7 +161,7 @@ Deployment container spec.
 
   `$ kubectl describe service guestbook`
   and
-  `$ bx cs workers <name-of-cluster>`
+  `$ ibmcloud cs workers <name-of-cluster>`
 
 # 2. Connect to a back-end service.
 

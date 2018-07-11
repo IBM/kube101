@@ -1,19 +1,19 @@
 # Instructions for Running the Presentation Demo Scripts
 
 ## The following are needed:
-- `bx` executable
-- `bx cs` plugin
+- `ibmcloud` executable
+- `ibmcloud cs` plugin
 - `docker` installed
 - `kubectl`
 
 ## Prereq steps:
 - Pick a name for your cluster (e.g. `osscluster`)
 - Pick a name for your Registry namespace (e.g. `kube101`)
-- Log into IBM Cloud: `bx login` or if you use sso: `bx login --sso`
-- Log into the IBM Registry: `bx cr login`
-- Create a Kubernetes cluster: `bx cs cluster-create --name osscluster`, if
+- Log into IBM Cloud: `ibmcloud login` or if you use sso: `ibmcloud login --sso`
+- Log into the IBM Registry: `ibmcloud cr login`
+- Create a Kubernetes cluster: `ibmcloud cs cluster-create --name osscluster`, if
   it doesn't already exist
-- Create the registry namespace: `bx cr namespace-add kube101`, if it doesn't
+- Create the registry namespace: `ibmcloud cr namespace-add kube101`, if it doesn't
   already exist
 
 ## Running the demo scripts

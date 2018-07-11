@@ -14,24 +14,24 @@ if [ -z "$BLUEMIX_API_KEY" ] || [ -z "$BLUEMIX_NAMESPACE" ]; then
 fi
 echo "Deploy pods"
 
-echo "bx login -a $CF_TARGET_URL"
-bx login -a "$CF_TARGET_URL" -o "$CF_ORG" -s "$CF_SPACE" --apikey "$BLUEMIX_API_KEY"
+echo "ibmcloud login -a $CF_TARGET_URL"
+ibmcloud login -a "$CF_TARGET_URL" -o "$CF_ORG" -s "$CF_SPACE" --apikey "$BLUEMIX_API_KEY"
 if [ $? -ne 0 ]; then
   echo "Failed to authenticate to IBM Cloud"
   exit 1
 fi
 
 # Init container clusters
-echo "bx cs init"
-bx cs init
+echo "ibmcloud cs init"
+ibmcloud cs init
 if [ $? -ne 0 ]; then
   echo "Failed to initialize to IBM Cloud Container Service"
   exit 1
 fi
 
 # Init container registry
-echo "bx cr login"
-bx cr login
+echo "ibmcloud cr login"
+ibmcloud cr login
 if [ $? -ne 0 ]; then
   echo "Failed to login to the IBM Cloud Container Registry"
   exit 1

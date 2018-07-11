@@ -9,12 +9,12 @@ If you haven't already:
 1. Install the IBM Cloud CLIs and login, as described in [Lab 0](../Lab0/README.md).
 2. Provision a cluster:
 
-   ```$ bx cs cluster-create --name <name-of-cluster>```
+   ```$ ibmcloud cs cluster-create --name <name-of-cluster>```
 
 Once the cluster is provisioned, the kubernetes client CLI `kubectl` needs to be
 configured to talk to the provisioned cluster.
 
-1. Run `$ bx cs cluster-config <name-of-cluster>`, and set the `KUBECONFIG`
+1. Run `$ ibmcloud cs cluster-config <name-of-cluster>`, and set the `KUBECONFIG`
    environment variable based on the output of the command. This will
    make your `kubectl` client point to your new Kubernetes cluster.
 
@@ -38,14 +38,14 @@ that has already been built and uploaded to DockerHub under the name
    ```console
    $ kubectl get pods
    NAME                          READY     STATUS              RESTARTS   AGE
-   guestbook-59bd679fdc-bxdg7    0/1       ContainerCreating   0          1m
+   guestbook-59bd679fdc-ibmclouddg7    0/1       ContainerCreating   0          1m
    ```
    Eventually, the status should show up as `Running`.
    
    ```console
    $ kubectl get pods
    NAME                          READY     STATUS              RESTARTS   AGE
-   guestbook-59bd679fdc-bxdg7    1/1       Running             0          1m
+   guestbook-59bd679fdc-ibmclouddg7    1/1       Running             0          1m
    ```
    
    The end result of the run command is not just the pod containing our application containers,
@@ -75,10 +75,10 @@ that has already been built and uploaded to DockerHub under the name
 
 5. `guestbook` is now running on your cluster, and exposed to the internet. We need to find out where it is accessible.
    The worker nodes running in the container service get external IP addresses.
-   Run `$ bx cs workers <cluster-name>`, and note the public IP listed on the `<public-IP>` line.
+   Run `$ ibmcloud cs workers <cluster-name>`, and note the public IP listed on the `<public-IP>` line.
    
    ```console
-   $ bx cs workers <cluster-name>
+   $ ibmcloud cs workers <cluster-name>
    OK
    ID                                                 Public IP        Private IP     Machine Type   State    Status   Zone    Version  
    kube-hou02-pa1e3ee39f549640aebea69a444f51fe55-w1   173.193.99.136   10.76.194.30   free           normal   Ready    hou02   1.5.6_1500*
