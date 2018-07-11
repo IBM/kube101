@@ -1,13 +1,13 @@
 #!/bin/bash
 echo "Install IBM Cloud CLI"
-. workshop/install_bx.sh
+. workshop/install_ibmcloud.sh
 if [ $? -ne 0 ]; then
   echo "Failed to install IBM Cloud Container Service CLI prerequisites"
   exit 1
 fi
 
 echo "Login to IBM Cloud"
-. workshop/bx_login.sh
+. workshop/ibmcloud_login.sh
 if [ $? -ne 0 ]; then
   echo "Failed to authenticate to IBM Cloud Container Service"
   exit 1

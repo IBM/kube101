@@ -3,7 +3,7 @@
 source ./common.sh
 
 SERVICE_PORT=$(kubectl get svc guestbook -ojson | grep nodePort | sed "s/.*: *\([0-9]*\).*/\1/g")
-WORKER_IP=$(bx cs workers ${CLUSTER_NAME} --json  | grep publicIP | sed "s/.*\"\([0-9].*\)\".*/\1/g" )
+WORKER_IP=$(ibmcloud cs workers ${CLUSTER_NAME} --json  | grep publicIP | sed "s/.*\"\([0-9].*\)\".*/\1/g" )
 
 GUESTBOOK_CURL=${WORKER_IP}:${SERVICE_PORT}/hello
 

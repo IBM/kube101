@@ -13,20 +13,20 @@ If you already have the CLIs and plug-ins, you can skip this lab and proceed to 
 
 # Install the IBM Cloud command-line interface
 
-1. As a prerequisite for the IBM Cloud Container Service plug-in, install the [IBM Cloud command-line interface](https://clis.ng.bluemix.net/ui/home.html). Once installed, you can access IBM Cloud from your command-line with the prefix `bx`.
-2. Log in to the IBM Cloud CLI: `bx login`. 
+1. As a prerequisite for the IBM Cloud Container Service plug-in, install the [IBM Cloud command-line interface](https://clis.ng.bluemix.net/ui/home.html). Once installed, you can access IBM Cloud from your command-line with the prefix `ibmcloud`.
+2. Log in to the IBM Cloud CLI: `ibmcloud login`. 
 3. Enter your IBM Cloud credentials when prompted.
 
-   **Note:** If you have a federated ID, use `bx login --sso` to log in to the IBM Cloud CLI. Enter your user name, and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+   **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the IBM Cloud CLI. Enter your user name, and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
 # Install the IBM Cloud Container Service plug-in
 1. To create Kubernetes clusters and manage worker nodes, install the IBM Cloud Container Service plug-in:
-   ```bx plugin install container-service -r Bluemix```
+   ```ibmcloud plugin install container-service -r Bluemix```
    
-   **Note:** The prefix for running commands by using the IBM Cloud Container Service plug-in is `bx cs`.
+   **Note:** The prefix for running commands by using the IBM Cloud Container Service plug-in is `ibmcloud cs`.
 
 2. To verify that the plug-in is installed properly, run the following command:
-```bx plugin list```
+```ibmcloud plugin list```
 
    The IBM Cloud Container Service plug-in is displayed in the results as `container-service`.
 
