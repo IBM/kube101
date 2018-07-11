@@ -9,7 +9,7 @@ doit kubectl expose deployment ${DEPLOYMENT_NAME} --type="NodePort" --port=3000
 
 comment --nolf "Now that it is exposed, curl it like we did before with docker"
 comment "But first, get address of worker node"
-doit bx cs workers ${CLUSTER_NAME} --json
+doit ibmcloud cs workers ${CLUSTER_NAME} --json
 
 WORKER_IP=$(cat out | grep publicIP | sed "s/.*\"\([0-9].*\)\".*/\1/g" )
 
