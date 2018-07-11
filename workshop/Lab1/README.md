@@ -75,10 +75,10 @@ that has already been built and uploaded to DockerHub under the name
 
 5. `guestbook` is now running on your cluster, and exposed to the internet. We need to find out where it is accessible.
    The worker nodes running in the container service get external IP addresses.
-   Run `$ bx cs workers <name-of-cluster>`, and note the public IP listed on the `<public-IP>` line.
+   Run `$ bx cs workers <cluster-name>`, and note the public IP listed on the `<public-IP>` line.
    
    ```console
-   $ bx cs workers osscluster
+   $ bx cs workers <cluster-name>
    OK
    ID                                                 Public IP        Private IP     Machine Type   State    Status   Zone    Version  
    kube-hou02-pa1e3ee39f549640aebea69a444f51fe55-w1   173.193.99.136   10.76.194.30   free           normal   Ready    hou02   1.5.6_1500*

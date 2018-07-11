@@ -149,8 +149,8 @@ To update and roll back:
    and
    `$ bx cs workers <name-of-cluster>`
 
-   To verify that you're running "v2" of guestbook, look at the title of the page,
-   it should now be `Guestbook - v2`
+   To verify that you're running "v2" of guestbook, look at the title of the page, which is
+   now `Guestbook - v2`. You might need to press `shift` and refresh the page.
 
 5. If you want to undo your latest rollout, use:
    ```console

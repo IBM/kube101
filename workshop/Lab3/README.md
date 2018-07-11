@@ -80,7 +80,7 @@ all times.
    following command:
 
    ``` console
-   $ kubectl create -f guestbook-deployment.yaml
+   $ kubectl apply -f guestbook-deployment.yaml
    deployment "guestbook" created
    ```
 
@@ -100,7 +100,7 @@ try to add, or remove, pods from the system to match your request. To can
 make these modifications by using the following command:
 
    ```console
-   $ kubectl edit deployment guestbook
+   $ kubectl edit deployment guestbook-v1
    ```
 
 This will retrieve the latest configuration for the Deployment from the
@@ -221,7 +221,7 @@ The image running in the container is 'redis:2.8.23' and exposes the standard re
 - Check to see that redis server pod is running:
 
     ```console
-    $ kubectl get pods -lapp=redis,role=master
+    $ kubectl get pods -l app=redis,role=master
     NAME                 READY     STATUS    RESTARTS   AGE
     redis-master-q9zg7   1/1       Running   0          2d
     ```
