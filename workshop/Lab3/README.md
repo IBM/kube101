@@ -221,7 +221,7 @@ The image running in the container is 'redis:2.8.23' and exposes the standard re
 - Check to see that redis server pod is running:
 
     ```console
-    $ kubectl get pods -lapp=redis,role=master
+    $ kubectl get pods -l app=redis,role=master
     NAME                 READY     STATUS    RESTARTS   AGE
     redis-master-q9zg7   1/1       Running   0          2d
     ```
