@@ -2,7 +2,7 @@
 
 In this lab, you'll learn how to update the number of instances
 a deployment has and how to safely roll out an update of your application
-on Kubernetes. 
+on Kubernetes.
 
 For this lab, you need a running deployment of the `guestbook` application
 from the previous lab. If you deleted it, recreate it using:
@@ -10,7 +10,7 @@ from the previous lab. If you deleted it, recreate it using:
 ```console
 $ kubectl run guestbook --image=ibmcom/guestbook:v1
 ```
-    
+
 # 1. Scale apps with replicas
 
 A *replica* is a copy of a pod that contains a running service. By having
@@ -140,7 +140,7 @@ To update and roll back:
    deployment "guestbook" successfully rolled out
    ```
 
-4. Test the application as before, by accessing `<public-IP>:<nodeport>` 
+4. Test the application as before, by accessing `<public-IP>:<nodeport>`
    in the browser to confirm your new code is active.
 
    Remember, to get the "nodeport" and "public-ip" use:
@@ -160,7 +160,7 @@ To update and roll back:
 
    You can then use `kubectl rollout status deployment/guestbook` to see
    the status.
-   
+
 6. When doing a rollout, you see references to *old* replicas and *new* replicas.
    The *old* replicas are the original 10 pods deployed when we scaled the application.
    The *new* replicas come from the newly created pods with the different image.
@@ -183,3 +183,5 @@ a different way to achieve the same results:
 
 Congratulations! You deployed the second version of the app. Lab 2
 is now complete.
+
+[Next Lab (Lab 3)](../Lab3/README.md)

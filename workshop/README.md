@@ -49,15 +49,6 @@ Traditional applications are run on native hardware. A single application does n
 
 Containers allow you to share the host OS. This reduces duplication while still providing the isolation. Containers also allow you to drop unneeded files such as system libraries and binaries to save space and reduce your attack surface. If SSHD or LIBC are not installed, they cannot be exploited.
 
-# Get set up
-
-Before we dive into Kubernetes, you need to provision a cluster for your containerized app. Then you won't have to wait for it to be ready for the subsequent labs.
-
-1. You must install the CLIs per https://console.ng.bluemix.net/docs/containers/cs_cli_install.html. If you do not yet have these CLIs and the Kubernetes CLI, do [lab 0](Lab0) before starting the course.
-2. If you haven't already, provision a cluster. This can take a few minutes, so let it start first: `bx cs cluster-create --name <name-of-cluster>`
-3. After creation, before using the cluster, make sure it has completed provisioning and is ready for use. Run `bx cs clusters` and make sure that your cluster is in state "deployed".  
-4. Then use `bx cs workers <name-of-cluster>` and make sure that all worker nodes are in state "normal" with Status "Ready".
-
 # Kubernetes and containers: an overview
 
 Let's talk about Kubernetes orchestration for containers before we build an application on it. We need to understand the following facts about it:

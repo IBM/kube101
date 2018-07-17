@@ -20,4 +20,5 @@ If you already have the CLIs and plug-ins, you can skip this lab and proceed to 
 
    **Note:** If you have a federated ID, use `bx login --sso` to log in to the IBM Cloud CLI. Enter your user name, and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
+Once you are all set up you can move straight on to [Lab 1](../Lab1/README.md)
 
