@@ -6,7 +6,7 @@
 
 Hey, are you looking for a containers 101 course? Check out our [Docker Essentials](https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/).
 
-Containers allow you to run securely isolated applications with quotas on system resources. Containers started out as an individual feature delivered with the linux kernel. Docker launched with making containers easy to use and developers quickly latched onto that idea. Containers have also sparked an interest in microservice architecture, a design pattern for developing applications in which complex applications are down into smaller, composable pieces which work together.
+Containers allow you to run securely isolated applications with quotas on system resources. Containers started out as an individual feature delivered with the linux kernel. Docker launched with making containers easy to use and developers quickly latched onto that idea. Containers have also sparked an interest in microservice architecture, a design pattern for developing applications in which complex applications are broken down into smaller, composable pieces which work together.
 
 Watch this [video](https://www.youtube.com/watch?v=wlBhtc31I8c) to learn about production uses of containers.
 
@@ -14,10 +14,8 @@ Watch this [video](https://www.youtube.com/watch?v=wlBhtc31I8c) to learn about p
 
 This lab is an introduction to using Docker containers on Kubernetes in the IBM Cloud Container Service. By the end of the course, you'll achieve these objectives:
 * Understand core concepts of Kubernetes
-* Build a Docker image and deploy an application on Kubernetes in the IBM Cloud Container Service
+* Use a Docker image and deploy an application on Kubernetes in the IBM Cloud Container Service
 * Control application deployments, while minimizing your time with infrastructure management
-* Add AI services to extend your app
-* Secure and monitor your cluster and app
 
 # Prerequisites
 * A Pay-As-You-Go or Subscription [IBM Cloud account](https://console.bluemix.net/registration/). If you weren't able to sign up for the credit accounts before this meetup please ask an instructor for help - they will help you activate a promo code for your account.
