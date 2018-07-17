@@ -14,7 +14,7 @@ If you already have the CLIs and plug-ins, you can skip this lab and proceed to 
 
 # Install the IBM Cloud command-line interface
 
-1. As a prerequisite for the IBM Cloud Container Service plug-in, install the [IBM Cloud command-line interface](https://console.bluemix.net/docs/cli/index.html). Once installed, you can access IBM Cloud from your command-line with the prefix `bx`.
+1. Install the [IBM Cloud command-line interface from this link](https://console.bluemix.net/docs/cli/index.html). Once installed, you can access IBM Cloud from your command-line with the prefix `bx`.
 2. Log in to the IBM Cloud CLI: `bx login`.
 3. Enter your IBM Cloud credentials when prompted.
 
