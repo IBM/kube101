@@ -14,13 +14,13 @@ Watch this [video](https://www.youtube.com/watch?v=wlBhtc31I8c) to learn about p
 
 This lab is an introduction to using Docker containers on Kubernetes in the IBM Cloud Container Service. By the end of the course, you'll achieve these objectives:
 * Understand core concepts of Kubernetes
-* Build a Docker image and deploy an application on Kubernetes in the IBM Cloud Container Service 
+* Build a Docker image and deploy an application on Kubernetes in the IBM Cloud Container Service
 * Control application deployments, while minimizing your time with infrastructure management
-* Add AI services to extend your app 
+* Add AI services to extend your app
 * Secure and monitor your cluster and app
 
-# Prerequisites 
-* A Pay-As-You-Go or Subscription [IBM Cloud account](https://console.bluemix.net/registration/)
+# Prerequisites
+* A Pay-As-You-Go or Subscription [IBM Cloud account](https://console.bluemix.net/registration/). If you weren't able to sign up for the credit accounts before this meetup please ask an instructor for help - they will help you activate a promo code for your account.
 
 # Virtual machines
 
@@ -51,7 +51,7 @@ Containers allow you to share the host OS. This reduces duplication while still 
 
 # Get set up
 
-Before we dive into Kubernetes, you need to provision a cluster for your containerized app. Then you won't have to wait for it to be ready for the subsequent labs. 
+Before we dive into Kubernetes, you need to provision a cluster for your containerized app. Then you won't have to wait for it to be ready for the subsequent labs.
 
 1. You must install the CLIs per https://console.ng.bluemix.net/docs/containers/cs_cli_install.html. If you do not yet have these CLIs and the Kubernetes CLI, do [lab 0](Lab0) before starting the course.
 2. If you haven't already, provision a cluster. This can take a few minutes, so let it start first: `bx cs cluster-create --name <name-of-cluster>`
@@ -171,4 +171,4 @@ IBM Cloud provides the capability to run applications in containers on Kubernete
 
 [Lab 4](Lab4): How to enable your application so Kubernetes can automatically monitor and recover your applications with no user intervention.
 
-[Lab D](LabD): Debugging tips and tricks to help you along your Kubernetes journey. This lab is useful reference that does not follow in a specific sequence of the other labs. 
+[Lab D](LabD): Debugging tips and tricks to help you along your Kubernetes journey. This lab is useful reference that does not follow in a specific sequence of the other labs.
