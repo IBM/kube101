@@ -1,13 +1,12 @@
 # Introduction to Kubernetes
 
-[![Build Status](https://travis-ci.org/IBM/kube101.svg?branch=master)](https://travis-ci.org/IBM/kube101)
+This repository contains the material for the Kubernetes 101 workshop run by IBM Code.
 
-This repository contains introductory material for Kubernetes.
+The host-guided [workshop], with detailed explanations about the principles of operating an application in a Kubernetes environment, should take 2-4 hours (including some time for set-up) so don't feel bad if you don't finish everything. The plan is to leave you with some extra content you can take away to work on if you wish.
 
-There is a presenter-run [meetup], including [automated scripts] for running a demonstration of Kubernetes as provided by IBM Cloud Kubernetes Service. This should take from 45 minutes to an hour and a half based on the style of the presenter as well as audience participation.
+- [presentation]
+- [workshop]
+- [IBM Code London Meetup](https://www.meetup.com/IBM-Code-London/)
 
-There is a self-guided or host-guided [workshop], with detailed explanations about the principles of operating an application in a Kubernetes environment. Including some time for setup, this should take between 2-4 hours. 
-
-[meetup]: ./presentation/meetup.pptx
-[automated scripts]: ./presentation/scripts
+[presentation]: ./presentation/slides.pdf
 [workshop]: ./workshop/README.md
