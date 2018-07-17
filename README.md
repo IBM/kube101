@@ -2,7 +2,9 @@
 
 This repository contains the material for the Kubernetes 101 workshop run by IBM Code.
 
-The host-guided [workshop], with detailed explanations about the principles of operating an application in a Kubernetes environment, should take 2-4 hours (including some time for set-up) so don't feel bad if you don't finish everything. The plan is to leave you with some extra content you can take away to work on if you wish.
+If you were not present at the meetup it is highly recommended that you read the slides and/or watch the recording before attempting the workshop.
+
+The [Workshop], with detailed explanations about the principles of operating an application in a Kubernetes environment, gives you a taste of deploying and scaling applications.
 
 - [Presentation]
 - [Workshop]

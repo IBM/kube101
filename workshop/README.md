@@ -160,6 +160,4 @@ IBM Cloud provides the capability to run applications in containers on Kubernete
 
 [Lab 3](Lab3): Builds on lab 2 by increasing the capabilities of the deployed Guestbook application. This lab covers basic distributed application design and how kubernetes helps you use standard design practices.
 
-[Lab 4](Lab4): How to enable your application so Kubernetes can automatically monitor and recover your applications with no user intervention.
-
 [Lab D](LabD): Debugging tips and tricks to help you along your Kubernetes journey. This lab is useful reference that does not follow in a specific sequence of the other labs.

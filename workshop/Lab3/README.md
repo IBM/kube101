@@ -16,8 +16,8 @@ $ git clone https://github.com/IBM/guestbook.git
 This repo contains multiple versions of the guestbook application
 as well as the configuration files we'll use to deploy the pieces of the application.
 
-Change directory by running the command `cd guestbook`. You will find all the
-configurations files for this exercise under the directory `v1`.
+Change directory by running the command `cd guestbook/v1`. You will find all the
+configurations files for this exercise under this directory `v1`.
 
 # 1. Scale apps natively
 
@@ -91,16 +91,16 @@ all times.
   the labels defined above in the yaml file in the
   `spec.template.metadata.labels` section.
 
-   ```console 
+   ```console
    $ kubectl get pods -l app=guestbook
    ```
 
 When you change the number of replicas in the configuration, Kubernetes will
-try to add, or remove, pods from the system to match your request. To can
+try to add, or remove, pods from the system to match your request. You can
 make these modifications by using the following command:
 
    ```console
-   $ kubectl edit deployment guestbook
+   $ kubectl edit deployment guestbook-v1
    ```
 
 This will retrieve the latest configuration for the Deployment from the
@@ -230,6 +230,8 @@ The image running in the container is 'redis:2.8.23' and exposes the standard re
 
     ` $ kubectl exec -it redis-master-q9zg7 redis-cli `
 
+    *Note: You will need to replace `redis-master-q9zg7` with the name of your pod*
+
     The kubectl exec command will start a secondary process in the specified
     container. In this case we're asking for the "redis-cli" command to be
     executed in the container named "redis-master-q9zg7".  When this process
@@ -246,7 +248,7 @@ The image running in the container is 'redis:2.8.23' and exposes the standard re
     ```
 
 Now we need to expose the `redis-master` Deployment as a Service so that the
-guestbook application can connect to it through DNS lookup. 
+guestbook application can connect to it through DNS lookup.
 
 **redis-master-service.yaml**
 
@@ -277,13 +279,13 @@ port 6379 on the pods selected by the selectors "app=redis" and "role=master".
 - Restart guestbook so that it will find the redis service to use database:
 
     ```console
-    $ kubectl delete deploy guestbook 
+    $ kubectl delete deploy guestbook-v1
     $ kubectl create -f guestbook-deployment.yaml
     ```
 
 - Test guestbook app using a browser of your choice using the url:
   `<your-cluster-ip>:<node-port>`
-  
+
 You can see now that if you open up multiple browsers and refresh the page
 to access the different copies of guestbook that they all have a consistent state.
 All instances write to the same backing persistent storage, and all instances
@@ -358,6 +360,8 @@ $ kubectl exec -it redis-slave-kd7vx  redis-cli
 127.0.0.1:6379> exit
 ```
 
+*Note: remember to replace `redis-slave-kd7vx` with the name of one of your pods*
+
 Deploy redis slave service so we can access it by DNS name. Once redeployed,
 the application will send "read" operations to the `redis-slave` pods while
 "write" operations will go to the `redis-master` pods.
@@ -386,19 +390,21 @@ spec:
 
 - Restart guestbook so that it will find the slave service to read from.
     ```console
-    $ kubectl delete deploy guestbook
+    $ kubectl delete deploy guestbook-v1
     $ kubectl create -f guestbook-deployment.yaml
     ```
-    
+
 - Test guestbook app using a browser of your choice using the url `<your-cluster-ip>:<node-port>`.
 
 That's the end of the lab. Now let's clean-up our environment:
 
 ```console
-$ kubectl delete -f guestbook-deployment.yaml
 $ kubectl delete -f guestbook-service.yaml
 $ kubectl delete -f redis-slave-service.yaml
-$ kubectl delete -f redis-slave-deployment.yaml 
-$ kubectl delete -f redis-master-service.yaml 
-$ kubectl delete -f redis-master-deployment.yaml
+$ kubectl delete -f redis-master-service.yaml
+$ kubectl delete deployment guestbook-v1
+$ kubectl delete deployment redis-master
+$ kubectl delete deployment redis-slave
 ```
+
+[Lab D](../LabD/README.md) has some useful tips and tricks for debugging applications on Kubernetes. If you have some time left, give it a read and see if you can apply any of those to the guestbook scenario.
