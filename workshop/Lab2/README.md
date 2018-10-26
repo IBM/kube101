@@ -147,7 +147,7 @@ To update and roll back:
 
    `$ kubectl describe service guestbook`
    and
-   `$ bx cs workers <name-of-cluster>`
+   `$ ibmcloud cs workers <name-of-cluster>`
 
    To verify that you're running "v2" of guestbook, look at the title of the page,
    it should now be `Guestbook - v2`
