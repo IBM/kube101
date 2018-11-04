@@ -20,7 +20,7 @@
 
 - Modify the `common.sh` file to make sure your cluster and registry
   namespace values are set properly
-- Run each `sh` file as instructed in the [presentation](../meetup.pptx)
+- Run each `sh` file as instructed in the [presentation](../Workshop.pptx)
 - As the scripts are running press `ENTER` or `space` when it pauses
 - If you press `f` it will remove the delay as it types
 - If you press `r` it will remove the pauses. So, if you want to do both
