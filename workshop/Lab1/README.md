@@ -17,6 +17,9 @@ configured to talk to the provisioned cluster.
 1. Run `$ bx cs cluster-config <name-of-cluster>`, and set the `KUBECONFIG`
    environment variable based on the output of the command. This will
    make your `kubectl` client point to your new Kubernetes cluster.
+   
+   (If you're running in a Windows PowerShell environment, the *SET* and/or *EXPORT* equivalent is
+   `$env:KUBECONFIG="<value of KUBECONFIG filename>"`; after setting, confirm the value is in the shell environment with `ls env:KUBECONFIG`)
 
 Once your client is configured, you are ready to deploy your first application, `guestbook`.
 
