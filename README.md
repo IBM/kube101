@@ -12,5 +12,5 @@ The [Workshop], with detailed explanations about the principles of operating an 
 - [Workshop]
 - [IBM Code London Meetup](https://www.meetup.com/IBM-Code-London/)
 
-[Presentation]: ./presentation/slides.pdf
+[Presentation]: ./presentation/Kubernetes_101.pdf
 [Workshop]: ./workshop/README.md
