@@ -100,7 +100,7 @@ try to add, or remove, pods from the system to match your request. To can
 make these modifications by using the following command:
 
    ```console
-   $ kubectl edit deployment guestbook
+   $ kubectl edit deployment guestbook-v1
    ```
 
 This will retrieve the latest configuration for the Deployment from the
@@ -221,7 +221,7 @@ The image running in the container is 'redis:2.8.23' and exposes the standard re
 - Check to see that redis server pod is running:
 
     ```console
-    $ kubectl get pods -lapp=redis,role=master
+    $ kubectl get pods -l app=redis,role=master
     NAME                 READY     STATUS    RESTARTS   AGE
     redis-master-q9zg7   1/1       Running   0          2d
     ```
@@ -277,7 +277,7 @@ port 6379 on the pods selected by the selectors "app=redis" and "role=master".
 - Restart guestbook so that it will find the redis service to use database:
 
     ```console
-    $ kubectl delete deploy guestbook 
+    $ kubectl delete deploy guestbook-v1
     $ kubectl create -f guestbook-deployment.yaml
     ```
 
@@ -339,7 +339,7 @@ spec:
 
  - Check if all the slave replicas are running
  ```console
-$ kubectl get pods -lapp=redis,role=slave
+$ kubectl get pods -l app=redis,role=slave
 NAME                READY     STATUS    RESTARTS   AGE
 redis-slave-kd7vx   1/1       Running   0          2d
 redis-slave-wwcxw   1/1       Running   0          2d
@@ -386,7 +386,7 @@ spec:
 
 - Restart guestbook so that it will find the slave service to read from.
     ```console
-    $ kubectl delete deploy guestbook
+    $ kubectl delete deploy guestbook-v1
     $ kubectl create -f guestbook-deployment.yaml
     ```
     
