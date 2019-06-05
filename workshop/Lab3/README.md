@@ -328,7 +328,7 @@ spec:
     spec:
       containers:
       - name: redis-slave
-        image: kubernetes/redis-slave:v2
+        image: k8s.gcr.io/redis-slave:v2
         ports:
         - name: redis-server
           containerPort: 6379
