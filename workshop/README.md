@@ -1,4 +1,4 @@
-# IBM Cloud Container Service Lab
+# IBM Cloud Kubernetes Service Lab
 
 <img src="https://kubernetes.io/images/favicon.png" width="200">
 
@@ -12,9 +12,9 @@ Watch this [video](https://www.youtube.com/watch?v=wlBhtc31I8c) to learn about p
 
 # Objectives
 
-This lab is an introduction to using Docker containers on Kubernetes in the IBM Cloud Container Service. By the end of the course, you'll achieve these objectives:
+This lab is an introduction to using Docker containers on Kubernetes in the IBM Cloud Kubernetes Service. By the end of the course, you'll achieve these objectives:
 * Understand core concepts of Kubernetes
-* Build a Docker image and deploy an application on Kubernetes in the IBM Cloud Container Service 
+* Build a Docker image and deploy an application on Kubernetes in the IBM Cloud Kubernetes Service 
 * Control application deployments, while minimizing your time with infrastructure management
 * Add AI services to extend your app 
 * Secure and monitor your cluster and app
@@ -150,7 +150,7 @@ Kubernetes provides us with a client interface through ‘kubectl’. Kubectl co
 
 # Lab information
 
-IBM Cloud provides the capability to run applications in containers on Kubernetes. The IBM Cloud Container Service runs Kubernetes clusters which deliver the following:
+IBM Cloud provides the capability to run applications in containers on Kubernetes. The IBM Cloud Kubernetes Service runs Kubernetes clusters which deliver the following:
 
 * Powerful tools
 * Intuitive user experience
@@ -165,7 +165,7 @@ IBM Cloud provides the capability to run applications in containers on Kubernete
 
 [Lab 1](Lab1): This lab walks through creating and deploying a simple "guestbook" app written in Go as a net/http Server and accessing it.
 
-[Lab 2](Lab2): Builds on lab 1 to expand to a more resilient setup which can survive having containers fail and recover. Lab 2 will also walk through basic services you need to get started with Kubernetes and the IBM Cloud Container Service
+[Lab 2](Lab2): Builds on lab 1 to expand to a more resilient setup which can survive having containers fail and recover. Lab 2 will also walk through basic services you need to get started with Kubernetes and the IBM Cloud Kubernetes Service
 
 [Lab 3](Lab3): Builds on lab 2 by increasing the capabilities of the deployed Guestbook application. This lab covers basic distributed application design and how kubernetes helps you use standard design practices.
 
