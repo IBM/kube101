@@ -1,34 +1,34 @@
-# Lab 0: Get the IBM Cloud Container Service
+# Lab 0: Get the IBM Cloud Kubernetes Service
 
 
-Before you begin learning, you need to install the required CLIs to create and manage your Kubernetes clusters in IBM Cloud Container Service and to deploy containerized apps to your cluster.
+Before you begin learning, you need to install the required CLIs to create and manage your Kubernetes clusters in IBM Cloud Kubernetes Service and to deploy containerized apps to your cluster.
 
 This lab includes the information for installing the following CLIs and plug-ins:
 
 * IBM Cloud CLI, Version 0.5.0 or later
-* IBM Cloud Container Service plug-in
+* IBM Cloud Kubernetes Service plug-in
 * Kubernetes CLI, Version 1.10.8 or later
 
 If you already have the CLIs and plug-ins, you can skip this lab and proceed to the next one.
 
 # Install the IBM Cloud command-line interface
 
-1. As a prerequisite for the IBM Cloud Container Service plug-in, install the [IBM Cloud command-line interface](https://clis.ng.bluemix.net/ui/home.html). Once installed, you can access IBM Cloud from your command-line with the prefix `bx`.
+1. As a prerequisite for the IBM Cloud Kubernetes Service plug-in, install the [IBM Cloud command-line interface](https://clis.ng.bluemix.net/ui/home.html). Once installed, you can access IBM Cloud from your command-line with the prefix `bx`.
 2. Log in to the IBM Cloud CLI: `ibmcloud login`.
 3. Enter your IBM Cloud credentials when prompted.
 
    **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the IBM Cloud CLI. Enter your user name, and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
-# Install the IBM Cloud Container Service plug-in
-1. To create Kubernetes clusters and manage worker nodes, install the IBM Cloud Container Service plug-in:
+# Install the IBM Cloud Kubernetes Service plug-in
+1. To create Kubernetes clusters and manage worker nodes, install the IBM Cloud Kubernetes Service plug-in:
    ```ibmcloud plugin install container-service -r Bluemix```
 
-   **Note:** The prefix for running commands by using the IBM Cloud Container Service plug-in is `bx cs`.
+   **Note:** The prefix for running commands by using the IBM Cloud Kubernetes Service plug-in is `bx cs`.
 
 2. To verify that the plug-in is installed properly, run the following command:
 ```ibmcloud plugin list```
 
-   The IBM Cloud Container Service plug-in is displayed in the results as `container-service`.
+   The IBM Cloud Kubernetes Service plug-in is displayed in the results as `container-service`.
 
 # Download the Kubernetes CLI
 
