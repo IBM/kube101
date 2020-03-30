@@ -10,6 +10,9 @@ If you haven't already:
 2. Provision a cluster:
 
    ```$ ibmcloud cs cluster-create --name <name-of-cluster>```
+   
+   If the above command doesn't work, please try the command below：
+   ```$ ibmcloud cs cluster create classic --name <name-of-cluseter>```
 
 Once the cluster is provisioned, the kubernetes client CLI `kubectl` needs to be
 configured to talk to the provisioned cluster.
