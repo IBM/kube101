@@ -10,15 +10,17 @@ If you haven't already:
 2. Provision a cluster:
 
    ```$ ibmcloud cs cluster-create --name <name-of-cluster>```
-   If the above command doesn't work, please try the below command:
-   ```$ ibmcloud cs cluster create classic --name <name-of-cluster>```
+   
+   (If the above command doesn't work, please try:`$ ibmcloud cs cluster create classic --name <name-of-cluster>`)
 
 Once the cluster is provisioned, the kubernetes client CLI `kubectl` needs to be
 configured to talk to the provisioned cluster.
 
-1. Run `$ ibmcloud cs cluster-config <name-of-cluster>` or `$ ibmcloud cs cluster config --cluster <name-of-cluster>`, and set the `KUBECONFIG`
+1. Run `$ ibmcloud cs cluster-config <name-of-cluster>`, and set the `KUBECONFIG`
    environment variable based on the output of the command. This will
    make your `kubectl` client point to your new Kubernetes cluster.
+   
+   (If the above command doesn't work, pls try `$ ibmcloud cs cluster config --cluster <name-of-cluster>`)
 
 Once your client is configured, you are ready to deploy your first application, `guestbook`.
 
@@ -58,14 +60,11 @@ that has already been built and uploaded to DockerHub under the name
    service so we can access it through the IP of the worker nodes.
    The `guestbook` application listens on port 3000.  Run:
 
-   ```console
-   $ kubectl expose deployment guestbook --type="NodePort" --port=3000
-   service "guestbook" exposed
-   ```
-   If the above command doesn't work, please try the command below:
-   ```$ kubectl expose pod <guestbook-name>  --type="NodePort" --port=3000
-      service <guestbook-name> exposed
-   ```
+   ```console```
+   ```$ kubectl expose deployment guestbook --type="NodePort" --port=3000```
+   ```service "guestbook" exposed```
+   
+   (If the above command doesn't work, please try:`$ kubectl expose pod <guestbook-name>  --type="NodePort" --port=3000`)
    
 4. To find the port used on that worker node, examine your new service:
 
@@ -81,7 +80,9 @@ that has already been built and uploaded to DockerHub under the name
 
 5. `guestbook` is now running on your cluster, and exposed to the internet. We need to find out where it is accessible.
    The worker nodes running in the container service get external IP addresses.
-   Run `$ ibmcloud cs workers <name-of-cluster>` or `$ ibmcloud cs workers --cluster <name-of-cluster>`, and note the public IP listed on the `<public-IP>` line.
+   Run `$ ibmcloud cs workers <name-of-cluster>`, and note the public IP listed on the `<public-IP>` line.
+  
+  (If the above command doesn't work, please try:`$ ibmcloud cs workers --cluster <name-of-cluster>`)
    
    ```console
    $ ibmcloud cs workers osscluster
