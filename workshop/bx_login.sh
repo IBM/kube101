@@ -25,7 +25,7 @@ fi
 echo "bx cs init"
 bx cs init
 if [ $? -ne 0 ]; then
-  echo "Failed to initialize to IBM Cloud Container Service"
+  echo "Failed to initialize to IBM Cloud Kubernetes Service"
   exit 1
 fi
 
