@@ -1,37 +1,28 @@
 # Lab 1. Deploy your first application
 
-Learn how to deploy an application to a Kubernetes cluster hosted within
-the IBM Container Service.
-
-## 0. Prerequisites
-
-Make sure you satisfy the prerequisites as outlined in [Lab 0](../Lab0/README.md)
-
 ## 1. Deploy the guestbook application
 
-In this part of the lab we will deploy an application called `guestbook`
-that has already been built and uploaded to DockerHub under the name
-`ibmcom/guestbook:v1`.
+In this part of the lab we will deploy an application called `guestbook` that has already been built and uploaded to DockerHub under the name `ibmcom/guestbook:v1`.
 
 1. Start by running `guestbook`:
 
    ```shell
-   kubectl create deployment guestbook --image=ibmcom/guestbook:v1
+   oc create deployment guestbook --image=ibmcom/guestbook:v1
    ```
 
    This action will take a bit of time. To check the status of the running application,
-   you can use `$ kubectl get pods`.
+   you can use `$ oc get pods`.
 
    You should see output similar to the following:
 
    ```shell
-   kubectl get pods
+   oc get pods
    ```
 
    Eventually, the status should show up as `Running`.
 
    ```shell
-   $ kubectl get pods
+   $ oc get pods
    NAME                          READY     STATUS              RESTARTS   AGE
    guestbook-59bd679fdc-bxdg7    1/1       Running             0          1m
    ```
@@ -44,13 +35,13 @@ that has already been built and uploaded to DockerHub under the name
    The `guestbook` application listens on port 3000.  Run:
 
    ```shell
-   kubectl expose deployment guestbook --type="NodePort" --port=3000
+   oc expose deployment guestbook --type="NodePort" --port=3000
    ```
 
 1. To find the port used on that worker node, examine your new service:
 
    ```shell
-   $ kubectl get service guestbook
+   $ oc get service guestbook
    NAME        TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
    guestbook   NodePort   10.10.10.253   <none>        3000:31208/TCP   1m
    ```
