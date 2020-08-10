@@ -1,6 +1,6 @@
 # Lab 3: Scale and update apps natively, building multi-tier applications.
 
-In this lab you'll learn how to deploy the same guestbook application we deployed in the previous labs, however, instead of using the `kubectl` command line helper functions we'll be deploying the application using configuration files. The configuration file mechanism allows you to have more fine-grained control over all of resources being created within the Kubernetes cluster.
+In this lab you'll learn how to deploy the same guestbook application we deployed in the previous labs, however, instead of using the `oc` command line helper functions we'll be deploying the application using configuration files. The configuration file mechanism allows you to have more fine-grained control over all of resources being created within the Kubernetes cluster.
 
 Before we work with the application we need to clone a github repo:
 
@@ -132,7 +132,7 @@ The above configuration creates a Service resource named guestbook. A Service ca
 - Test guestbook app using a browser of your choice using the url
   `<your-cluster-ip>:<node-port>`
 
-  Remember, to get the `nodeport` and `public-ip` use the following commands, replacing `$CLUSTER_NAME` with the name of your cluster if the environment variable is not already set.
+  Remember, to get the `nodeport` and `EXTERNAL-IP` use the following commands.
 
   ```shell
   oc describe service guestbook
@@ -140,7 +140,7 @@ The above configuration creates a Service resource named guestbook. A Service ca
   and
 
   ```shell 
-  ibmcloud ks workers --cluster $CLUSTER_NAME
+  oc get nodes -o wide
   ```
 
 # 2. Connect to a back-end service.
@@ -363,11 +363,11 @@ spec:
 
 That's the end of the lab. Now let's clean-up our environment:
 
-```shell
-oc delete -f guestbook-deployment.yaml
-oc delete -f guestbook-service.yaml
-oc delete -f redis-slave-service.yaml
-oc delete -f redis-slave-deployment.yaml 
-oc delete -f redis-master-service.yaml 
-oc delete -f redis-master-deployment.yaml
-```
+    ```shell
+    oc delete -f guestbook-deployment.yaml
+    oc delete -f guestbook-service.yaml
+    oc delete -f redis-slave-service.yaml
+    oc delete -f redis-slave-deployment.yaml 
+    oc delete -f redis-master-service.yaml 
+    oc delete -f redis-master-deployment.yaml
+    ```

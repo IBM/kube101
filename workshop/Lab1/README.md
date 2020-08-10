@@ -52,19 +52,18 @@ In this part of the lab we will deploy an application called `guestbook` that ha
 
 1. `guestbook` is now running on your cluster, and exposed to the internet. We need to find out where it is accessible.
    The worker nodes running in the container service get external IP addresses.
-   Get the workers for your cluster and note one (any one) of the public IPs listed on the `<public-IP>` line. Replace `$CLUSTER_NAME` with your cluster name unless you have this environment variable set.
-
+   
+   Get the workers for your cluster and note one (any one) of the public IPs listed in the `<EXTERNAL-IP>` column.
+   
    ```shell
-   $ ibmcloud ks workers --cluster $CLUSTER_NAME
-   OK
-   ID                                                 Public IP        Private IP     Machine Type   State    Status   Zone    Version  
-   kube-hou02-pa1e3ee39f549640aebea69a444f51fe55-w1   173.193.99.136   10.76.194.30   free           normal   Ready    hou02   1.5.6_1500*
+   $ oc get nodes -o wide
+   NAME            STATUS   ROLES           AGE   VERSION           INTERNAL-IP     EXTERNAL-IP      OS-IMAGE   KERNEL-VERSION                CONTAINER-RUNTIME
+   10.189.80.112   Ready    master,worker   10d   v1.16.2+283af84   10.189.80.112   169.60.111.167   Red Hat    3.10.0-1127.13.1.el7.x86_64   cri-o://1.16.6-17.rhaos4.3.git4936f44.el7
+   10.189.80.113   Ready    master,worker   10d   v1.16.2+283af84   10.189.80.113   169.60.111.164   Red Hat    3.10.0-1127.13.1.el7.x86_64   cri-o://1.16.6-17.rhaos4.3.git4936f44.el7
    ```
 
-   We can see that our `<public-IP>` is `173.193.99.136`.
-
-1. Now that you have both the address and the port, you can now access the application in the web browser
-   at `<public-IP>:<nodeport>`. In the example case this is `173.193.99.136:31208`.
+2. Now that you have both the address and the port, you can now access the application in the web browser
+   at `<EXTERNAL-IP>:<nodeport>`. In the example case this is `169.60.111.167:31208`.
 
 Congratulations, you've now deployed an application to Kubernetes!
 

@@ -152,14 +152,14 @@ To update and roll back:
 1. Test the application as before, by accessing `<public-IP>:<nodeport>`
    in the browser to confirm your new code is active.
 
-   Remember, to get the "nodeport" and "public-ip" use the following commands. Replace `$CLUSTER_NAME` with the name of your cluster if the environment variable is not set.:
+   Remember, to get the "nodeport" and "EXTERNAL-IP" use the following commands.:
 
    ```shell
    oc describe service guestbook
    ```
    and
    ```shell
-   ibmcloud ks workers --cluster $CLUSTER_NAME
+   oc get nodes -o wide
    ```
 
    To verify that you're running "v2" of guestbook, look at the title of the page,
