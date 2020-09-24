@@ -64,10 +64,10 @@ that has already been built and uploaded to DockerHub under the name
    Get the workers for your cluster and note one (any one) of the public IPs listed on the `<public-IP>` line. Replace `$CLUSTER_NAME` with your cluster name unless you have this environment variable set.
 
    ```shell
-   $ ibmcloud ks workers --cluster $CLUSTER_NAME
-   OK
-   ID                                                 Public IP        Private IP     Machine Type   State    Status   Zone    Version  
-   kube-hou02-pa1e3ee39f549640aebea69a444f51fe55-w1   173.193.99.136   10.76.194.30   free           normal   Ready    hou02   1.5.6_1500*
+   $ kubectl get nodes -o wide
+   NAME           STATUS   ROLES           AGE   VERSION           INTERNAL-IP    EXTERNAL-IP      OS-IMAGE   KERNEL-VERSION                CONTAINER-RUNTIME
+   10.185.199.3   Ready    master,worker   63d   v1.16.2+283af84   10.185.199.3   169.59.228.215   Red Hat    3.10.0-1127.13.1.el7.x86_64   cri-o://1.16.6-17.rhaos4.3.git4936f44.el7
+   10.185.199.6   Ready    master,worker   63d   v1.16.2+283af84   10.185.199.6   169.47.78.51     Red Hat    3.10.0-1127.13.1.el7.x86_64   cri-o://1.16.6-17.rhaos4.3.git4936f44.el7
    ```
 
    We can see that our `<public-IP>` is `173.193.99.136`.
