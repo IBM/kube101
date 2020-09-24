@@ -161,7 +161,7 @@ To update and roll back:
    ```
    and
    ```shell
-   ibmcloud ks workers --cluster $CLUSTER_NAME
+   kubectl get nodes -o wide
    ```
 
    To verify that you're running "v2" of guestbook, look at the title of the page,
