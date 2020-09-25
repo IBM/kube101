@@ -4,7 +4,7 @@ In this lab you'll learn how to deploy the same guestbook application we deploye
 
 Before we work with the application we need to clone a github repo:
 
-```shell
+```console
 git clone https://github.com/IBM/guestbook.git
 ```
 
@@ -13,9 +13,9 @@ as well as the configuration files we'll use to deploy the pieces of the applica
 
 Change directory by running the command 
 
-    ```shell
-    cd guestbook/v1
-    ```
+```console
+cd guestbook/v1
+```
 
 You will find all the
 configurations files for this exercise in this directory.
@@ -363,11 +363,11 @@ spec:
 
 That's the end of the lab. Now let's clean-up our environment:
 
-    ```shell
-    oc delete -f guestbook-deployment.yaml
-    oc delete -f guestbook-service.yaml
-    oc delete -f redis-slave-service.yaml
-    oc delete -f redis-slave-deployment.yaml 
-    oc delete -f redis-master-service.yaml 
-    oc delete -f redis-master-deployment.yaml
-    ```
+```console
+oc delete -f guestbook-deployment.yaml
+oc delete -f guestbook-service.yaml
+oc delete -f redis-slave-service.yaml
+oc delete -f redis-slave-deployment.yaml 
+oc delete -f redis-master-service.yaml 
+oc delete -f redis-master-deployment.yaml
+```
