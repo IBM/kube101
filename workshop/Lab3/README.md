@@ -174,7 +174,7 @@ Deployment container spec.
   and
 
   ```shell 
-  ibmcloud ks workers --cluster $CLUSTER_NAME
+  kubectl get nodes -o wide
   ```
 
 # 2. Connect to a back-end service.
