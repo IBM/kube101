@@ -4,6 +4,12 @@
 
 In this part of the lab we will deploy an application called `guestbook` that has already been built and uploaded to DockerHub under the name `ibmcom/guestbook:v1`.
 
+1. If your current project is the `default` project, create a new project
+
+   ```shell
+   oc new-project my-guestbook
+   ```
+
 1. Start by running `guestbook`:
 
    ```shell
