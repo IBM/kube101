@@ -257,117 +257,19 @@ You can see now that if you open up multiple browsers and refresh the page to ac
 
 All instances write to the same backing persistent storage, and all instances read from that storage to display the guestbook entries that have been stored.
 
-We have our simple 3-tier application running but we need to scale the application if traffic increases. Our main bottleneck is that we only have one database server to process each request coming though guestbook. One simple solution is to separate the reads and write such that they go to different databases that are replicated properly to achieve data consistency.
+We have our simple 3-tier application running but if traffic increases, we need to scale the application. Our main bottleneck is that we only have one database server instance to process each request coming though guestbook. One simple High Availability (HA) solution is to separate the reads and write such that they go to different databases, which are replicated properly to achieve data consistency. This model is called primary-secondary (sometimes still referred to as master-slave).
 
 ![rw_to_master](../images/Master.png)
 
-Create a deployment named 'redis-slave' that can talk to redis database to manage data reads. In order to scale the database we use the pattern where we can scale the reads using redis slave deployment which can run several instances to read. Redis slave deployments is configured to run two replicas.
+The secondary redis talks to the redis primary database to manage data reads. In order to scale the database we use the pattern where we can scale the reads using redis secondary deployments, which can run several instances to read. The Redis secondary deployment is configured to run two replicas.
 
 ![w_to_master-r_to_slave](../images/Master-Slave.png)
-
-**redis-slave-deployment.yaml**
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: redis-slave
-  labels:
-    app: redis
-    role: slave
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: redis
-      role: slave
-  template:
-    metadata:
-      labels:
-        app: redis
-        role: slave
-    spec:
-      containers:
-      - name: redis-slave
-        image: ibmcom/guestbook-redis-slave:v2
-        ports:
-        - name: redis-server
-          containerPort: 6379
-```
-
-- Create the pod  running redis slave deployment.
- 
-  ```shell
-  oc create -f redis-slave-deployment.yaml 
-  ```
-
- - Check if all the slave replicas are running
-
-  ```shell
-  $ oc get pods -lapp=redis,role=slave
-  NAME                READY     STATUS    RESTARTS   AGE
-  redis-slave-kd7vx   1/1       Running   0          2d
-  redis-slave-wwcxw   1/1       Running   0          2d
-  ```
-
-- And then go into one of those pods and look at the database to see
-  that everything looks right. Replace the pod name `redis-slave-kd7vx` with your own pod name. If you get the back `(empty list or set)` when you print the keys, go to the guestbook application and add an entry!
-
- ```shell
-$ oc exec -it redis-slave-kd7vx  redis-cli
-127.0.0.1:6379> keys *
-1) "guestbook"
-127.0.0.1:6379> lrange guestbook 0 10
-1) "hello world"
-2) "welcome to the Kube workshop"
-127.0.0.1:6379> exit
-```
-
-Deploy redis slave service so we can access it by DNS name. Once redeployed,
-the application will send "read" operations to the `redis-slave` pods while
-"write" operations will go to the `redis-master` pods.
-
-**redis-slave-service.yaml**
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: redis-slave
-  labels:
-    app: redis
-    role: slave
-spec:
-  ports:
-  - port: 6379
-    targetPort: redis-server
-  selector:
-    app: redis
-    role: slave
-```
-
-- Create the service to access redis slaves.
-
-    ```shell
-    oc create -f redis-slave-service.yaml
-    ```
-
-- Restart guestbook so that it will find the slave service to read from.
-
-    ```shell
-    oc delete deploy guestbook-v1
-    oc create -f guestbook-deployment.yaml
-    ```
-    
-- Test guestbook app using a browser of your choice using the url `<your-cluster-ip>:<node-port>`, or by refreshing the page if you have the app open in another window.
 
 That's the end of the lab. Now let's clean-up our environment:
 
     ```shell
     oc delete -f guestbook-deployment.yaml
     oc delete -f guestbook-service.yaml
-    oc delete -f redis-slave-service.yaml
-    oc delete -f redis-slave-deployment.yaml 
     oc delete -f redis-master-service.yaml 
     oc delete -f redis-master-deployment.yaml
     ```
