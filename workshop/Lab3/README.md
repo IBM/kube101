@@ -267,9 +267,9 @@ The secondary redis talks to the redis primary database to manage data reads. In
 
 That's the end of the lab. Now let's clean-up our environment:
 
-    ```shell
-    oc delete -f guestbook-deployment.yaml
-    oc delete -f guestbook-service.yaml
-    oc delete -f redis-master-service.yaml 
-    oc delete -f redis-master-deployment.yaml
-    ```
+```shell
+oc delete -f guestbook-deployment.yaml
+oc delete -f guestbook-service.yaml
+oc delete -f redis-master-service.yaml 
+oc delete -f redis-master-deployment.yaml
+```
