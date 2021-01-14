@@ -6,14 +6,14 @@ Advanced debugging techniques to reach your pods.
 
 You can look at the logs of any of the pods running under your deployments as follows
 
-```console
+```shell
 $ kubectl logs <podname>
 ```
 
 Remember that if you have multiple containers running in your pod, you
 have to specify the specific container you want to see logs from.
 
-```console
+```shell
 $ kubectl logs <pod-name> <container-name>
 ```
 
@@ -33,8 +33,8 @@ On Windows, a copy of `notepad.exe` will be opened with the contents of the file
 ## busybox pod
 
 For debugging live, this command frequently helps me:
-```console
-kubectl run bb --image busybox --restart=Never -it --rm
+```shell
+kubectl create deployment bb --image busybox --restart=Never -it --rm
 ```
 
 In the busybox image is a basic shell that contains useful utilities.
@@ -48,7 +48,7 @@ Utils I often use are `nslookup` and `wget`.
 ## Service Endpoints
 
 Endpoint resource can be used to see all the service endpoints.
-```console
+```shell
 $ kubectl get endpoints <service>
 ```
 

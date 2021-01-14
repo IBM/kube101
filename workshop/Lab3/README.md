@@ -9,17 +9,21 @@ Kubernetes cluster.
 
 Before we work with the application we need to clone a github repo:
 
-```
-$ git clone https://github.com/IBM/guestbook.git
+```shell
+git clone https://github.com/IBM/guestbook.git
 ```
 
 This repo contains multiple versions of the guestbook application
 as well as the configuration files we'll use to deploy the pieces of the application.
 
-Change directory by running the command `cd guestbook`. You will find all the
-configurations files for this exercise under the directory `v1`.
+Change directory by running the command 
+```shell
+cd guestbook/v1
+```
+You will find all the
+configurations files for this exercise in this directory.
 
-# 1. Scale apps natively
+## 1. Scale apps natively
 
 Kubernetes can deploy an individual pod to run an application but when you
 need to scale it to handle a large number of requests a `Deployment` is the
@@ -47,9 +51,10 @@ Consider the following deployment configuration for guestbook application
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: guestbook
+  name: guestbook-v1
   labels:
     app: guestbook
+    version: "1.0"
 spec:
   replicas: 3
   selector:
@@ -59,6 +64,7 @@ spec:
     metadata:
       labels:
         app: guestbook
+        version: "1.0"
     spec:
       containers:
       - name: guestbook
@@ -79,9 +85,8 @@ all times.
    To create a Deployment using this configuration file we use the
    following command:
 
-   ``` console
-   $ kubectl create -f guestbook-deployment.yaml
-   deployment "guestbook" created
+   ```shell
+   kubectl create -f guestbook-deployment.yaml
    ```
 
 - List the pod with label app=guestbook
@@ -91,16 +96,16 @@ all times.
   the labels defined above in the yaml file in the
   `spec.template.metadata.labels` section.
 
-   ```console 
-   $ kubectl get pods -l app=guestbook
+   ```shell 
+   kubectl get pods -l app=guestbook
    ```
 
 When you change the number of replicas in the configuration, Kubernetes will
 try to add, or remove, pods from the system to match your request. To can
 make these modifications by using the following command:
 
-   ```console
-   $ kubectl edit deployment guestbook-v1
+   ```shell
+   kubectl edit deployment guestbook-v1
    ```
 
 This will retrieve the latest configuration for the Deployment from the
@@ -111,12 +116,14 @@ Deployment that Kubernetes knows about, not just the ones we chose to
 specify when we create it. Also notice that it now contains the `status`
 section mentioned previously.
 
+To exit the `vi` editor, type `:q!`, of if you made changes that you want to see reflected, save them using `:wq`.
+
 You can also edit the deployment file we used to create the Deployment
 to make changes. You should use the following command to make the change
 effective when you edit the deployment locally.
 
-   ```console
-   $ kubectl apply -f guestbook-deployment.yaml
+   ```shell
+   kubectl apply -f guestbook-deployment.yaml
    ```
 
 This will ask Kubernetes to "diff" our yaml file with the current state
@@ -152,16 +159,23 @@ Deployment container spec.
 - Let us now create the guestbook service using the same type of command
   we used when we created the Deployment:
 
-  ` $ kubectl create -f guestbook-service.yaml `
+  ```shell
+  kubectl create -f guestbook-service.yaml
+  ```
 
 - Test guestbook app using a browser of your choice using the url
   `<your-cluster-ip>:<node-port>`
 
-  Remember, to get the `nodeport` and `public-ip` use:
+  Remember, to get the `nodeport` and `public-ip` use the following commands, replacing `$CLUSTER_NAME` with the name of your cluster if the environment variable is not already set.
 
-  `$ kubectl describe service guestbook`
+  ```shell
+  kubectl describe service guestbook
+  ```
   and
-  `$ ibmcloud cs workers <name-of-cluster>`
+
+  ```shell 
+  kubectl get nodes -o wide
+  ```
 
 # 2. Connect to a back-end service.
 
@@ -201,7 +215,7 @@ spec:
     spec:
       containers:
       - name: redis-master
-        image: redis:2.8.23
+        image: redis:3.2.9
         ports:
         - name: redis-server
           containerPort: 6379
@@ -210,25 +224,27 @@ spec:
 This yaml creates a redis database in a Deployment named 'redis-master'.
 It will create a single instance, with replicas set to 1, and the guestbook app instances
 will connect to it to persist data, as well as read the persisted data back.
-The image running in the container is 'redis:2.8.23' and exposes the standard redis port 6379.
+The image running in the container is 'redis:3.2.9' and exposes the standard redis port 6379.
 
 - Create a redis Deployment, like we did for guestbook:
 
-    ```console
-    $ kubectl create -f redis-master-deployment.yaml
+    ```shell
+    kubectl create -f redis-master-deployment.yaml
     ```
 
 - Check to see that redis server pod is running:
 
-    ```console
-    $ kubectl get pods -l app=redis,role=master
+    ```shell
+    $ kubectl get pods -lapp=redis,role=master
     NAME                 READY     STATUS    RESTARTS   AGE
     redis-master-q9zg7   1/1       Running   0          2d
     ```
 
-- Let us test the redis standalone:
+- Let us test the redis standalone. Replace the pod name `redis-master-q9zg7` with the name of your pod.
 
-    ` $ kubectl exec -it redis-master-q9zg7 redis-cli `
+    ```shell
+    kubectl exec -it redis-master-q9zg7 redis-cli
+    ```
 
     The kubectl exec command will start a secondary process in the specified
     container. In this case we're asking for the "redis-cli" command to be
@@ -239,7 +255,7 @@ The image running in the container is 'redis:2.8.23' and exposes the standard re
     Once in the container we can use the "redis-cli" command to make sure the
     redis database is running properly, or to configure it if needed.
 
-    ```console
+    ```shell
     redis-cli> ping
     PONG
     redis-cli> exit
@@ -272,17 +288,18 @@ port 6379 on the pods selected by the selectors "app=redis" and "role=master".
 
 - Create the service to access redis master:
 
-    ``` $ kubectl create -f redis-master-service.yaml ```
+    ```shell
+    kubectl create -f redis-master-service.yaml
+    ```
 
 - Restart guestbook so that it will find the redis service to use database:
 
-    ```console
-    $ kubectl delete deploy guestbook-v1
-    $ kubectl create -f guestbook-deployment.yaml
+    ```shell
+    kubectl delete deploy guestbook-v1
+    kubectl create -f guestbook-deployment.yaml
     ```
 
-- Test guestbook app using a browser of your choice using the url:
-  `<your-cluster-ip>:<node-port>`
+- Test guestbook app using a browser of your choice using the url `<your-cluster-ip>:<node-port>`, or by refreshing the page if you already have the app open in another window.
   
 You can see now that if you open up multiple browsers and refresh the page
 to access the different copies of guestbook that they all have a consistent state.
@@ -328,27 +345,31 @@ spec:
     spec:
       containers:
       - name: redis-slave
-        image: kubernetes/redis-slave:v2
+        image: ibmcom/guestbook-redis-slave:v2
         ports:
         - name: redis-server
           containerPort: 6379
 ```
 
 - Create the pod  running redis slave deployment.
- ``` $ kubectl create -f redis-slave-deployment.yaml ```
+ 
+  ```shell
+  kubectl create -f redis-slave-deployment.yaml 
+  ```
 
  - Check if all the slave replicas are running
- ```console
-$ kubectl get pods -l app=redis,role=slave
-NAME                READY     STATUS    RESTARTS   AGE
-redis-slave-kd7vx   1/1       Running   0          2d
-redis-slave-wwcxw   1/1       Running   0          2d
- ```
+
+  ```shell
+  $ kubectl get pods -lapp=redis,role=slave
+  NAME                READY     STATUS    RESTARTS   AGE
+  redis-slave-kd7vx   1/1       Running   0          2d
+  redis-slave-wwcxw   1/1       Running   0          2d
+  ```
 
 - And then go into one of those pods and look at the database to see
-  that everything looks right:
+  that everything looks right. Replace the pod name `redis-slave-kd7vx` with your own pod name. If you get the back `(empty list or set)` when you print the keys, go to the guestbook application and add an entry!
 
- ```console
+ ```shell
 $ kubectl exec -it redis-slave-kd7vx  redis-cli
 127.0.0.1:6379> keys *
 1) "guestbook"
@@ -382,23 +403,25 @@ spec:
 ```
 
 - Create the service to access redis slaves.
-    ``` $ kubectl create -f redis-slave-service.yaml ```
+    ```shell
+    kubectl create -f redis-slave-service.yaml
+    ```
 
 - Restart guestbook so that it will find the slave service to read from.
-    ```console
-    $ kubectl delete deploy guestbook-v1
-    $ kubectl create -f guestbook-deployment.yaml
+    ```shell
+    kubectl delete deploy guestbook-v1
+    kubectl create -f guestbook-deployment.yaml
     ```
     
-- Test guestbook app using a browser of your choice using the url `<your-cluster-ip>:<node-port>`.
+- Test guestbook app using a browser of your choice using the url `<your-cluster-ip>:<node-port>`, or by refreshing the page if you have the app open in another window.
 
 That's the end of the lab. Now let's clean-up our environment:
 
-```console
-$ kubectl delete -f guestbook-deployment.yaml
-$ kubectl delete -f guestbook-service.yaml
-$ kubectl delete -f redis-slave-service.yaml
-$ kubectl delete -f redis-slave-deployment.yaml 
-$ kubectl delete -f redis-master-service.yaml 
-$ kubectl delete -f redis-master-deployment.yaml
+```shell
+kubectl delete -f guestbook-deployment.yaml
+kubectl delete -f guestbook-service.yaml
+kubectl delete -f redis-slave-service.yaml
+kubectl delete -f redis-slave-deployment.yaml 
+kubectl delete -f redis-master-service.yaml 
+kubectl delete -f redis-master-deployment.yaml
 ```
