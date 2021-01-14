@@ -7,6 +7,21 @@ the IBM Container Service.
 
 Make sure you satisfy the prerequisites as outlined in [Lab 0](../Lab0/README.md)
 
+   ```$ ibmcloud cs cluster-create --name <name-of-cluster>```
+   
+   If the above command doesn't work, please try the command below：
+
+   ```$ ibmcloud cs cluster create classic --name <name-of-cluseter>```
+
+Once the cluster is provisioned, the kubernetes client CLI `kubectl` needs to be
+configured to talk to the provisioned cluster.
+
+1. Run `$ ibmcloud cs cluster-config <name-of-cluster>`, and set the `KUBECONFIG`
+   environment variable based on the output of the command. This will
+   make your `kubectl` client point to your new Kubernetes cluster.
+
+Once your client is configured, you are ready to deploy your first application, `guestbook`.
+
 ## 1. Deploy the guestbook application
 
 In this part of the lab we will deploy an application called `guestbook`
