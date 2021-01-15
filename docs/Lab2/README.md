@@ -30,6 +30,7 @@ resources to handle increasing load on your application.
    the first.
 
 1. To see your changes being rolled out, you can run:
+
    ```shell
    kubectl rollout status deployment guestbook
    ```
@@ -52,6 +53,7 @@ resources to handle increasing load on your application.
    ```
 
 1. Once the rollout has finished, ensure your pods are running by using:
+
    ```shell
    kubectl get pods
    ```
@@ -109,7 +111,7 @@ To update and roll back:
 
    ```shell
    kubectl rollout status deployment/guestbook
-   ```   
+   ```
 
   The rollout might occur so quickly that the following messages
    might _not_ display:
@@ -159,7 +161,9 @@ To update and roll back:
    ```shell
    kubectl describe service guestbook
    ```
+
    and
+
    ```shell
    kubectl get nodes -o wide
    ```
@@ -174,9 +178,10 @@ To update and roll back:
    ```
 
    You can then use this command to see the status:
+
    ```shell
    kubectl rollout status deployment/guestbook
-   ``` 
+   ```
 
 1. When doing a rollout, you see references to *old* replicas and *new* replicas.
    The *old* replicas are the original 10 pods deployed when we scaled the application.
@@ -195,16 +200,17 @@ To update and roll back:
 Before we continue, let's delete the application so we can learn about
 a different way to achieve the same results:
 
- To remove the deployment, use 
+ To remove the deployment, use
+
  ```shell
  kubectl delete deployment guestbook
  ```
 
  To remove the service, use:
+
  ```shell
  kubectl delete service guestbook
  ```
-
 
 Congratulations! You deployed the second version of the app. Lab 2
 is now complete. Continue to the [next lab of this course](../Lab3/README.md).

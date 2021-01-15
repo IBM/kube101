@@ -8,7 +8,7 @@ the IBM Container Service.
 Make sure you satisfy the prerequisites as outlined in [Lab 0](../Lab0/README.md)
 
    ```$ ibmcloud cs cluster-create --name <name-of-cluster>```
-   
+
    If the above command doesn't work, please try the command below：
 
    ```$ ibmcloud cs cluster create classic --name <name-of-cluseter>```

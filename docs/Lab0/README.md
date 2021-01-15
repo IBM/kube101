@@ -28,7 +28,7 @@ If you would like to configure kubernetes to run on your local workstation for n
 
 * [Microk8s](https://microk8s.io/docs/) Installable kubernetes packaged as an Ubuntu `snap` image.
 
-# Install the IBM Cloud command-line interface
+## Install the IBM Cloud command-line interface
 
 1. As a prerequisite for the IBM Cloud Kubernetes Service plug-in, install the [IBM Cloud command-line interface](https://clis.ng.bluemix.net/ui/home.html). Once installed, you can access IBM Cloud from your command-line with the prefix `bx`.
 2. Log in to the IBM Cloud CLI: `ibmcloud login`.
@@ -36,18 +36,25 @@ If you would like to configure kubernetes to run on your local workstation for n
 
    **Note:** If you have a federated ID, use `ibmcloud login --sso` to log in to the IBM Cloud CLI. Enter your user name, and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
 
-# Install the IBM Cloud Kubernetes Service plug-in
+## Install the IBM Cloud Kubernetes Service plug-in
+
 1. To create Kubernetes clusters and manage worker nodes, install the IBM Cloud Kubernetes Service plug-in:
-   ```ibmcloud plugin install container-service -r Bluemix```
+
+   ```bash
+   ibmcloud plugin install container-service -r Bluemix
+   ```
 
    **Note:** The prefix for running commands by using the IBM Cloud Kubernetes Service plug-in is `bx cs`.
 
 2. To verify that the plug-in is installed properly, run the following command:
-```ibmcloud plugin list```
+
+   ```bash
+   ibmcloud plugin list
+   ```
 
    The IBM Cloud Kubernetes Service plug-in is displayed in the results as `container-service`.
 
-# Download the Kubernetes CLI
+## Download the Kubernetes CLI
 
 To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, you will need to install the Kubernetes CLI that corresponds with your operating system:
 
@@ -61,50 +68,55 @@ To view a local version of the Kubernetes dashboard and to deploy apps into your
 
 1. Move the executable file to the `/usr/local/bin` directory using the command `mv /<path_to_file>/kubectl /usr/local/bin/kubectl` .
 
-2. Make sure that `/usr/local/bin` is listed in your PATH system variable.
-```shell
-$ echo $PATH
-/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-```
+1. Make sure that `/usr/local/bin` is listed in your PATH system variable.
 
-3. Convert the binary file to an executable: `chmod +x /usr/local/bin/kubectl`
+   ```shell
+   $ echo $PATH
+   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+   ```
 
-# Configure Kubectl to point to IBM Cloud Kubernetes Service
+1. Convert the binary file to an executable: `chmod +x /usr/local/bin/kubectl`
+
+## Configure Kubectl to point to IBM Cloud Kubernetes Service
+
 1. List the clusters in your account:
 
-```shell
-ibmcloud ks clusters
-```
+   ```shell
+   ibmcloud ks clusters
+   ```
 
-2. Set an environment variable that will be used in subsequent commands in this lab.
+1. Set an environment variable that will be used in subsequent commands in this lab.
 
-```shell
-export CLUSTER_NAME=<your_cluster_name>
-```
+   ```shell
+   export CLUSTER_NAME=<your_cluster_name>
+   ```
 
-3. Configure `kubectl` to point to your cluster
-```shell
-ibmcloud ks cluster config --cluster $CLUSTER_NAME
-```
+1. Configure `kubectl` to point to your cluster
 
-3. Validate proper configuration
-```shell
-kubectl get namespace
-```
+   ```shell
+   ibmcloud ks cluster config --cluster $CLUSTER_NAME
+   ```
 
-4. You should see output similar to the following, if so, then your're ready to continue.
+1. Validate proper configuration
 
-```shell
-NAME              STATUS   AGE
-default           Active   125m
-ibm-cert-store    Active   121m
-ibm-system        Active   124m
-kube-node-lease   Active   125m
-kube-public       Active   125m
-kube-system       Active   125m
-```
+   ```shell
+   kubectl get namespace
+   ```
 
-# Download the Workshop Source Code
+1. You should see output similar to the following, if so, then your're ready to continue.
+
+   ```shell
+   NAME              STATUS   AGE
+   default           Active   125m
+   ibm-cert-store    Active   121m
+   ibm-system        Active   124m
+   kube-node-lease   Active   125m
+   kube-public       Active   125m
+   kube-system       Active   125m
+   ```
+
+## Download the Workshop Source Code
+
 Repo `guestbook` has the application that we'll be deploying.
 While we're not going to build it we will use the deployment configuration files from that repo.
 Guestbook application has two versions v1 and v2 which we will use to demonstrate some rollout
@@ -116,4 +128,3 @@ Repo `kube101` contains the step by step instructions to run the workshop.
 git clone https://github.com/IBM/guestbook.git
 git clone https://github.com/IBM/kube101.git
 ```
-

@@ -1,4 +1,4 @@
-# Lab 3: Scale and update apps natively, building multi-tier applications.
+# Lab 3: Scale and update apps natively, building multi-tier applications
 
 In this lab you'll learn how to deploy the same guestbook application we
 deployed in the previous labs, however, instead of using the `kubectl`
@@ -16,10 +16,12 @@ git clone https://github.com/IBM/guestbook.git
 This repo contains multiple versions of the guestbook application
 as well as the configuration files we'll use to deploy the pieces of the application.
 
-Change directory by running the command 
+Change directory by running the command
+
 ```shell
 cd guestbook/v1
 ```
+
 You will find all the
 configurations files for this exercise in this directory.
 
@@ -45,7 +47,7 @@ that this object should belong.
 
 Consider the following deployment configuration for guestbook application
 
-**guestbook-deployment.yaml**
+> **guestbook-deployment.yaml**
 
 ```yaml
 apiVersion: apps/v1
@@ -96,7 +98,7 @@ all times.
   the labels defined above in the yaml file in the
   `spec.template.metadata.labels` section.
 
-   ```shell 
+   ```shell
    kubectl get pods -l app=guestbook
    ```
 
@@ -132,7 +134,7 @@ of the Deployment and apply just those changes.
 We can now define a Service object to expose the deployment to external
 clients.
 
-**guestbook-service.yaml**
+> **guestbook-service.yaml**
 
 ```yaml
 apiVersion: v1
@@ -171,13 +173,14 @@ Deployment container spec.
   ```shell
   kubectl describe service guestbook
   ```
+
   and
 
-  ```shell 
+  ```shell
   kubectl get nodes -o wide
   ```
 
-# 2. Connect to a back-end service.
+## 2. Connect to a back-end service
 
 If you look at the guestbook source code, under the `guestbook/v1/guestbook`
 directory, you'll notice that it is written to support a variety of data
@@ -191,7 +194,7 @@ To solve this we need to have all instances of our app share the same data
 store - in this case we're going to use a redis database that we deploy to our
 cluster. This instance of redis will be defined in a similar manner to the guestbook.
 
-**redis-master-deployment.yaml**
+> **redis-master-deployment.yaml**
 
 ```yaml
 apiVersion: apps/v1
@@ -262,9 +265,9 @@ The image running in the container is 'redis:3.2.9' and exposes the standard red
     ```
 
 Now we need to expose the `redis-master` Deployment as a Service so that the
-guestbook application can connect to it through DNS lookup. 
+guestbook application can connect to it through DNS lookup.
 
-**redis-master-service.yaml**
+> **redis-master-service.yaml**
 
 ```yaml
 apiVersion: v1
@@ -300,7 +303,7 @@ port 6379 on the pods selected by the selectors "app=redis" and "role=master".
     ```
 
 - Test guestbook app using a browser of your choice using the url `<your-cluster-ip>:<node-port>`, or by refreshing the page if you already have the app open in another window.
-  
+
 You can see now that if you open up multiple browsers and refresh the page
 to access the different copies of guestbook that they all have a consistent state.
 All instances write to the same backing persistent storage, and all instances
@@ -319,9 +322,9 @@ manage data reads. In order to scale the database we use the pattern where
 we can scale the reads using redis slave deployment which can run several
 instances to read. Redis slave deployments is configured to run two replicas.
 
-![w_to_master-r_to_slave](../images/Master-Slave.png)
+![master-slave](../images/Master-Slave.png)
 
-**redis-slave-deployment.yaml**
+> **redis-slave-deployment.yaml**
 
 ```yaml
 apiVersion: apps/v1
@@ -352,12 +355,12 @@ spec:
 ```
 
 - Create the pod  running redis slave deployment.
- 
+
   ```shell
-  kubectl create -f redis-slave-deployment.yaml 
+  kubectl create -f redis-slave-deployment.yaml
   ```
 
- - Check if all the slave replicas are running
+- Check if all the slave replicas are running
 
   ```shell
   $ kubectl get pods -lapp=redis,role=slave
@@ -383,7 +386,7 @@ Deploy redis slave service so we can access it by DNS name. Once redeployed,
 the application will send "read" operations to the `redis-slave` pods while
 "write" operations will go to the `redis-master` pods.
 
-**redis-slave-service.yaml**
+> **redis-slave-service.yaml**
 
 ```yaml
 apiVersion: v1
@@ -403,16 +406,18 @@ spec:
 ```
 
 - Create the service to access redis slaves.
+
     ```shell
     kubectl create -f redis-slave-service.yaml
     ```
 
 - Restart guestbook so that it will find the slave service to read from.
+
     ```shell
     kubectl delete deploy guestbook-v1
     kubectl create -f guestbook-deployment.yaml
     ```
-    
+
 - Test guestbook app using a browser of your choice using the url `<your-cluster-ip>:<node-port>`, or by refreshing the page if you have the app open in another window.
 
 That's the end of the lab. Now let's clean-up our environment:
@@ -421,7 +426,7 @@ That's the end of the lab. Now let's clean-up our environment:
 kubectl delete -f guestbook-deployment.yaml
 kubectl delete -f guestbook-service.yaml
 kubectl delete -f redis-slave-service.yaml
-kubectl delete -f redis-slave-deployment.yaml 
-kubectl delete -f redis-master-service.yaml 
+kubectl delete -f redis-slave-deployment.yaml
+kubectl delete -f redis-master-service.yaml
 kubectl delete -f redis-master-deployment.yaml
 ```

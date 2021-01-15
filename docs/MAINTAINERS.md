@@ -1,6 +1,6 @@
-## Maintainers Guide
+# Maintainers Guide
 
-This guide is intended for maintainers — anybody with commit access to one or more Developer Technology repositories.
+This guide is intended for maintainers - anybody with commit access to one or more Developer Technology repositories.
 
 ## Maintainers
 
@@ -9,7 +9,7 @@ This guide is intended for maintainers — anybody with commit access to one or 
 | Nathan Fritze  | nfritze | nfritz@us.ibm.com |
 | Nathan LeViere | nathanleviere | njlevier@gmail.com |
 
-## Methodoology:
+## Methodoology
 
 A master branch. This branch MUST be releasable at all times. Commits and merges against this branch MUST contain only bugfixes and/or security fixes. Maintenance releases are tagged against master.
 
@@ -43,7 +43,7 @@ If you do not understand what the changes are or what they accomplish, ask the a
 
 At times, such clarification will reveal that the author may not be using the code correctly, or is unaware of features that accommodate their needs. If you feel this is the case, work up a code sample that would address the issue for them, and feel free to close the issue once they confirm.
 
-## Is this a new feature? If so:
+## Is this a new feature? If so
 
 Does the issue contain narrative indicating the need for the feature? If not, ask them to provide that information. Since the issue will be linked in the changelog, this will often be a user's first introduction to it.
 
