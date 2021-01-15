@@ -1,4 +1,4 @@
-# Lab 0. 
+# Lab 0. Access a Kubernetes cluster
 
 ## Set up your kubernetes environment
 

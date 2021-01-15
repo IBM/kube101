@@ -8,7 +8,7 @@
 
 * [Lab 0: Get the IBM Cloud Container Service](Lab0/README.md)
 
-### Labs 
+### Labs
 
 * [Lab 1. Set up and deploy your first application](Lab1/README.md)
 * [Lab 2: Scale and Update Deployments](Lab2/README.md)
