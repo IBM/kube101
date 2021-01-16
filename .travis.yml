@@ -5,5 +5,5 @@ node_js: 10
 before_script:
   - npm install markdownlint-cli
 script:
-  # - markdownlint -c .markdownlint.json docs --ignore docs/SUMMARY.md
+  - markdownlint -c .markdownlint.json docs --ignore docs/SUMMARY.md
   # - ./.verify-links.sh -v docs

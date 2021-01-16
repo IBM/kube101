@@ -1,6 +1,6 @@
-# *** UNDER CONSTRUCTION ***
+# ***UNDER CONSTRUCTION***
 
-# 1. Check the health of apps
+## 1. Check the health of apps
 
 Kubernetes uses availability checks (liveness probes) to know when to restart a container. For example, liveness probes could catch a deadlock, where an application is running, but unable to make progress. Restarting a container in such a state can help to make the application more available despite bugs.
 
@@ -12,13 +12,13 @@ In this example, we have defined a HTTP liveness probe to check health of the co
 
    1. Update the details for the image in your private registry namespace:
 
-      ```
+      ```yaml
       image: "ibmcom/guestbook:v2"
       ```
 
    2. Note the HTTP liveness probe that checks the health of the container every five seconds.
 
-      ```
+      ```yaml
       livenessProbe:
                   httpGet:
                     path: /healthz
@@ -31,15 +31,15 @@ In this example, we have defined a HTTP liveness probe to check health of the co
 
 2. Run the configuration script in the cluster. When the deployment and the service are created, the app is available for anyone to see:
 
-   ```
+   ```bash
    kubectl apply -f healthcheck.yml
    ```
-   
+
    Now that all the deployment work is done, check how everything turned out. You might notice that because more instances are running, things might run a bit slower.
 
 3. Open a browser and check out the app. To form the URL, combine the IP with the NodePort that was specified in the configuration script. To get the public IP address for the worker node:
 
-   ```
+   ```bash
    ibmcloud cs workers <cluster-name>
    ```
 
@@ -50,37 +50,37 @@ In this example, we have defined a HTTP liveness probe to check health of the co
 4. Launch your Kubernetes dashboard:
 
    1. Get your credentials for Kubernetes.
-      
-      ```
+
+      ```bash
       kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
       ```
 
-   2. Copy the **id-token** value that is shown in the output.     
-   
+   2. Copy the **id-token** value that is shown in the output.
+
    3. Set the proxy with the default port number.
 
-      ```
+      ```bash
       kubectl proxy
       ```
 
       Output:
 
-      ```
+      ```bash
       Starting to serve on 127.0.0.1:8001
       ```
-   
+
    4. Sign in to the dashboard.
-      
+
       1. Open the following URL in a web browser.
-         
-         ```
+
+         ```bash
          http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
          ```
-      
+
       2. In the sign-on page, select the **Token** authentication method.
- 
+
       3. Then, paste the **id-token** value that you previously copied into the **Token** field and click **SIGN IN**.
-  
+
    In the **Workloads** tab, you can see the resources that you created. From this tab, you can continually refresh and see that the health check is working. In the **Pods** section, you can see how many times the pods are restarted when the containers in them are re-created. You might happen to catch errors in the dashboard, indicating that the health check caught a problem. Give it a few minutes and refresh again. You see the number of restarts changes for each pod.
 
 5. Ready to delete what you created before you continue? This time, you can use the same configuration script to delete both of the resources you created.
