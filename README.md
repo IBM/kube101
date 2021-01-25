@@ -8,6 +8,6 @@ There is a presenter-run [meetup], including [automated scripts] for running a d
 
 There is a self-guided or host-guided [workshop], with detailed explanations about the principles of operating an application in a Kubernetes environment. Including some time for setup, this should take between 2-4 hours.
 
-[meetup]: ./presentation/meetup.pptx
+[meetup]: ./presentation/IntroductionToKube.pptx
 [automated scripts]: ./presentation/scripts
 [workshop]: https://ibm.github.io/kube101/
