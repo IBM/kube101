@@ -10,4 +10,4 @@ There is a self-guided or host-guided [workshop], with detailed explanations abo
 
 [meetup]: ./presentation/meetup.pptx
 [automated scripts]: ./presentation/scripts
-[workshop]: ./workshop/README.md
+[workshop]: https://ibm.github.io/kube101/
