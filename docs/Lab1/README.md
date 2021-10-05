@@ -7,21 +7,6 @@ the IBM Container Service.
 
 Make sure you satisfy the prerequisites as outlined in [Lab 0](../Lab0/README.md)
 
-   ```$ ibmcloud cs cluster-create --name <name-of-cluster>```
-
-   If the above command doesn't work, please try the command below：
-
-   ```$ ibmcloud cs cluster create classic --name <name-of-cluseter>```
-
-Once the cluster is provisioned, the kubernetes client CLI `kubectl` needs to be
-configured to talk to the provisioned cluster.
-
-1. Run `$ ibmcloud cs cluster-config <name-of-cluster>`, and set the `KUBECONFIG`
-   environment variable based on the output of the command. This will
-   make your `kubectl` client point to your new Kubernetes cluster.
-
-Once your client is configured, you are ready to deploy your first application, `guestbook`.
-
 ## 1. Deploy the guestbook application
 
 In this part of the lab we will deploy an application called `guestbook`
@@ -85,7 +70,7 @@ that has already been built and uploaded to DockerHub under the name
    10.185.199.6   Ready    master,worker   63d   v1.16.2+283af84   10.185.199.6   169.47.78.51     Red Hat    3.10.0-1127.13.1.el7.x86_64   cri-o://1.16.6-17.rhaos4.3.git4936f44.el7
    ```
 
-   We can see that our `<public-IP>` is `173.193.99.136`.
+   We can see that our `<EXTERNAL-IP>` is `169.59.228.215`.
 
 1. Now that you have both the address and the port, you can now access the application in the web browser
    at `<public-IP>:<nodeport>`. In the example case this is `173.193.99.136:31208`.
