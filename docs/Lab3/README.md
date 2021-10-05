@@ -372,15 +372,15 @@ spec:
 - And then go into one of those pods and look at the database to see
   that everything looks right. Replace the pod name `redis-slave-kd7vx` with your own pod name. If you get the back `(empty list or set)` when you print the keys, go to the guestbook application and add an entry!
 
- ```shell
-$ kubectl exec -it redis-slave-kd7vx  redis-cli
-127.0.0.1:6379> keys *
-1) "guestbook"
-127.0.0.1:6379> lrange guestbook 0 10
-1) "hello world"
-2) "welcome to the Kube workshop"
-127.0.0.1:6379> exit
-```
+  ```shell
+  $ kubectl exec -it redis-slave-kd7vx  redis-cli
+  127.0.0.1:6379> keys *
+  1) "guestbook"
+  127.0.0.1:6379> lrange guestbook 0 10
+  1) "hello world"
+  2) "welcome to the Kube workshop"
+  127.0.0.1:6379> exit
+  ```
 
 Deploy redis slave service so we can access it by DNS name. Once redeployed,
 the application will send "read" operations to the `redis-slave` pods while
