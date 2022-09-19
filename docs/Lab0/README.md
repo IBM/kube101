@@ -12,8 +12,6 @@ You will need either a paid IBM Cloud account or an IBM Cloud account which is a
 
 There are a few services that are accessible over the Internet for temporary use. As these are free services, they can sometimes experience periods of limited availablity/quality. On the other hand, they can be a quick way to get started!
 
-* [Kubernetes playground on Katacoda](https://www.katacoda.com/courses/kubernetes/playground) This environment starts with a master and worker node pre-configured. You can run the steps from Labs 1 and onward from the master node.
-
 * [Play with Kubernetes](https://labs.play-with-k8s.com/) After signing in with your github or docker hub id, click on **Start**, then **Add New Instance** and follow steps shown in terminal to spin up the cluster and add workers.
 
 ### Set up on your own workstation
